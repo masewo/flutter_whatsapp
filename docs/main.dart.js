@@ -26730,7 +26730,7 @@ s.f.eW(B.nP)},
 a3m(){var s=0,r=A.E(t.Is),q,p
 var $async$a3m=A.A(function(a,b){if(a===1)return A.B(b,r)
 while(true)switch(s){case 0:s=3
-return A.z(A.a1F(A.ff("/api/calls",0,null)),$async$a3m)
+return A.z(A.a1F(A.ff("/flutter_whatsapp/api/calls",0,null)),$async$a3m)
 case 3:p=b
 q=A.aTB(B.aT.cJ(0,A.Jg(A.J6(p.e).c.a.h(0,"charset")).cJ(0,p.w)))
 s=1
@@ -26740,7 +26740,7 @@ return A.D($async$a3m,r)},
 a4u(){var s=0,r=A.E(t.tB),q,p
 var $async$a4u=A.A(function(a,b){if(a===1)return A.B(b,r)
 while(true)switch(s){case 0:s=3
-return A.z(A.a1F(A.ff("/api/chats",0,null)),$async$a4u)
+return A.z(A.a1F(A.ff("/flutter_whatsapp/api/chats",0,null)),$async$a4u)
 case 3:p=b
 q=A.aTK(B.aT.cJ(0,A.Jg(A.J6(p.e).c.a.h(0,"charset")).cJ(0,p.w)))
 s=1
@@ -26750,7 +26750,7 @@ return A.D($async$a4u,r)},
 a4t(a){var s=0,r=A.E(t.D_),q,p
 var $async$a4t=A.A(function(b,c){if(b===1)return A.B(c,r)
 while(true)switch(s){case 0:s=3
-return A.z(A.a1F(A.ff("/api/chats/"+A.e(a),0,null)),$async$a4t)
+return A.z(A.a1F(A.ff("/flutter_whatsapp/api/chats/"+A.e(a),0,null)),$async$a4t)
 case 3:p=c
 q=A.aJ0(B.aT.cJ(0,A.Jg(A.J6(p.e).c.a.h(0,"charset")).cJ(0,p.w)))
 s=1
@@ -26761,7 +26761,7 @@ a4v(a,b){var s=0,r=A.E(t.D_),q,p,o
 var $async$a4v=A.A(function(c,d){if(c===1)return A.B(d,r)
 while(true)switch(s){case 0:p=t.bD
 s=3
-return A.z(A.b2Q(A.ff("/api/chats/"+A.e(a),0,null),A.ax(["message",b],p,p)),$async$a4v)
+return A.z(A.b2Q(A.ff("/flutter_whatsapp/api/chats/"+A.e(a),0,null),A.ax(["message",b],p,p)),$async$a4v)
 case 3:o=d
 q=A.aJ0(B.aT.cJ(0,A.Jg(A.J6(o.e).c.a.h(0,"charset")).cJ(0,o.w)))
 s=1
@@ -26771,7 +26771,7 @@ return A.D($async$a4v,r)},
 amC(){var s=0,r=A.E(t.n_),q,p
 var $async$amC=A.A(function(a,b){if(a===1)return A.B(b,r)
 while(true)switch(s){case 0:s=3
-return A.z(A.a1F(A.ff("/api/status",0,null)),$async$amC)
+return A.z(A.a1F(A.ff("/flutter_whatsapp/api/status",0,null)),$async$amC)
 case 3:p=b
 q=A.aYj(B.aT.cJ(0,A.Jg(A.J6(p.e).c.a.h(0,"charset")).cJ(0,p.w)))
 s=1
@@ -26781,7 +26781,7 @@ return A.D($async$amC,r)},
 amB(a){var s=0,r=A.E(t.q6),q,p
 var $async$amB=A.A(function(b,c){if(b===1)return A.B(c,r)
 while(true)switch(s){case 0:s=3
-return A.z(A.a1F(A.ff("/api/status/"+A.e(a),0,null)),$async$amB)
+return A.z(A.a1F(A.ff("/flutter_whatsapp/api/status/"+A.e(a),0,null)),$async$amB)
 case 3:p=c
 q=A.aYk(B.aT.cJ(0,A.Jg(A.J6(p.e).c.a.h(0,"charset")).cJ(0,p.w)))
 s=1

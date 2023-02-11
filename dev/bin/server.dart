@@ -34,7 +34,7 @@ class Api {
   }
 
   Future<Response> _handler(Request request) async {
-    var file = File('responses/${request.url}.json');
+    var file = File('../web/api/${request.url}/index.json');
     if (file.existsSync()) {
       return Response.ok(file.readAsStringSync(), headers: _headers);
     } else {
