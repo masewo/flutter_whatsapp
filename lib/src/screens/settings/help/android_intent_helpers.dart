@@ -18,7 +18,7 @@ class AndroidIntentHelpers {
       intent.launch();
     }
     else {
-      Scaffold.of(context).showSnackBar(
+      ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(content: Text('Sorry, this only works in Android.'))
       );
     }
@@ -33,7 +33,7 @@ class AndroidIntentHelpers {
       intent.launch();
     }
     else {
-      Scaffold.of(context).showSnackBar(
+      ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(content: Text('Sorry, this only works in Android.'))
       );
     }
@@ -48,7 +48,7 @@ class AndroidIntentHelpers {
       intent.launch();
     }
     else {
-      Scaffold.of(context).showSnackBar(
+      ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(content: Text('Sorry, this only works in Android.'))
       );
     }

@@ -6,6 +6,7 @@ import 'package:flutter_whatsapp/src/helpers/dialog_helpers.dart';
 import 'package:flutter_whatsapp/src/models/call_list.dart';
 import 'package:flutter_whatsapp/src/services/call_service.dart';
 import 'package:flutter_whatsapp/src/widgets/call_item.dart';
+import 'package:flutter_whatsapp/src/widgets/deprecated/raised_button.dart';
 
 class CallsTab extends StatelessWidget {
 
@@ -104,7 +105,7 @@ class CallsTab extends StatelessWidget {
                     );
                   },
                   onLeadingTap: () {
-                    Scaffold.of(context).showSnackBar(
+                    ScaffoldMessenger.of(context).showSnackBar(
                       new SnackBar(content: Text('Calling ${_callList.calls[i].name}...'))
                     );
                   },

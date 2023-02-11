@@ -8,6 +8,7 @@ import 'package:flutter_whatsapp/src/config/shared_preferences_helpers.dart';
 import 'package:flutter_whatsapp/src/models/chat.dart';
 import 'package:flutter_whatsapp/src/services/chat_service.dart';
 import 'package:flutter_whatsapp/src/values/colors.dart';
+import 'package:flutter_whatsapp/src/widgets/deprecated/flat_button.dart';
 import 'package:flutter_whatsapp/src/widgets/message_item.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -192,7 +193,7 @@ class _DetailChatScreen extends State<DetailChatScreen> {
               return IconButton(
                 icon: Icon(Icons.videocam),
                 onPressed: () {
-                  Scaffold.of(context).showSnackBar(
+                  ScaffoldMessenger.of(context).showSnackBar(
                       SnackBar(content: Text('Video Call Button tapped'))
                   );
                 },
@@ -204,7 +205,7 @@ class _DetailChatScreen extends State<DetailChatScreen> {
               return IconButton(
                 icon: Icon(Icons.call),
                 onPressed: () {
-                  Scaffold.of(context).showSnackBar(
+                  ScaffoldMessenger.of(context).showSnackBar(
                       SnackBar(content: Text('Call Button tapped'))
                   );
                 },

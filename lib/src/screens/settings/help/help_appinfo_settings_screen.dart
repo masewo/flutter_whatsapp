@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_whatsapp/src/config/application.dart';
 import 'package:flutter_whatsapp/src/config/routes.dart';
 import 'package:flutter_whatsapp/src/values/colors.dart';
+import 'package:flutter_whatsapp/src/widgets/deprecated/flat_button.dart';
 
 class HelpAppInfoSettingsScreen extends StatelessWidget {
   @override

@@ -6,6 +6,7 @@ import 'package:flutter_whatsapp/src/models/chat_list.dart';
 import 'package:flutter_whatsapp/src/models/chat.dart';
 import 'package:flutter_whatsapp/src/values/colors.dart';
 import 'package:flutter_whatsapp/src/widgets/chat_item.dart';
+import 'package:flutter_whatsapp/src/widgets/deprecated/raised_button.dart';
 
 class ChatsTab extends StatelessWidget {
   final String searchKeyword;

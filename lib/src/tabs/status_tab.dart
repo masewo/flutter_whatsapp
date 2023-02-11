@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_whatsapp/src/config/application.dart';
 import 'package:flutter_whatsapp/src/config/routes.dart';
 import 'package:flutter_whatsapp/src/models/status_list.dart';
+import 'package:flutter_whatsapp/src/widgets/deprecated/raised_button.dart';
 import 'package:flutter_whatsapp/src/widgets/status_item.dart';
 
 class StatusTab extends StatelessWidget {

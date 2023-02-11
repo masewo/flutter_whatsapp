@@ -573,7 +573,7 @@ class _HomeState extends State<Home> with TickerProviderStateMixin {
       // Either the permission was already granted before or the user just granted it.
       goToNewChatScreen();
     } else {
-      _scaffoldKey.currentState.showSnackBar(
+      ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
           content: Text('Permission not granted'),
           duration: Duration(seconds: 1),

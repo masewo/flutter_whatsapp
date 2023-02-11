@@ -39,6 +39,7 @@ import 'package:flutter_whatsapp/src/screens/status_privacy_screen.dart';
 import 'package:flutter_whatsapp/src/screens/whatsapp_web_scan_screen.dart';
 import 'package:flutter_whatsapp/src/screens/whatsapp_web_screen.dart';
 import 'package:flutter_whatsapp/src/values/colors.dart';
+import 'package:flutter_whatsapp/src/widgets/deprecated/flat_button.dart';
 
 var rootHandler = new Handler(
   handlerFunc: (BuildContext context, Map<String, List<String>> params) {

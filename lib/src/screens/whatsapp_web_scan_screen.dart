@@ -191,7 +191,7 @@ class _WhatsappWebScanScreenState extends State<WhatsappWebScanScreen>
   }
 
   void showInSnackBar(String message) {
-    _scaffoldKey.currentState
+    ScaffoldMessenger.of(context)
         .showSnackBar(new SnackBar(content: new Text(message)));
   }
 }

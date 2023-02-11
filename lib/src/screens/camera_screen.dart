@@ -82,7 +82,7 @@ class _CameraHomeState extends State<CameraHome> {
       });
       startCamera();
     } else {
-      _scaffoldKey.currentState.showSnackBar(
+      ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
           content: Text('Permission not granted'),
           duration: Duration(seconds: 1),
@@ -367,7 +367,7 @@ class _CameraHomeState extends State<CameraHome> {
 
   Future<String> _takePicture() async {
     if (!controller.value.isInitialized) {
-      Scaffold.of(context).showSnackBar(
+      ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(content: Text('Error: camera is not initialized')));
     }
 //    final Directory extDir = await getApplicationDocumentsDirectory();
@@ -384,7 +384,7 @@ class _CameraHomeState extends State<CameraHome> {
       await controller.takePicture(filePath);
     } on CameraException catch (e) {
       // TODO: Can't use this here.
-      Scaffold.of(context)
+      ScaffoldMessenger.of(context)
           .showSnackBar(SnackBar(content: Text('Error: ${e.description}')));
     }
     return filePath;
@@ -392,7 +392,7 @@ class _CameraHomeState extends State<CameraHome> {
 
   Future<String> startVideoRecording() async {
     if (!controller.value.isInitialized) {
-      Scaffold.of(context).showSnackBar(
+      ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(content: Text('Error: camera is not initialized')));
       return null;
     }
@@ -410,7 +410,7 @@ class _CameraHomeState extends State<CameraHome> {
       videoPath = filePath;
       await controller.startVideoRecording(filePath);
     } on CameraException catch (e) {
-      Scaffold.of(context)
+      ScaffoldMessenger.of(context)
           .showSnackBar(SnackBar(content: Text('Error: ${e.description}')));
       return null;
     }
@@ -425,7 +425,7 @@ class _CameraHomeState extends State<CameraHome> {
     try {
       await controller.stopVideoRecording();
     } on CameraException catch (e) {
-      Scaffold.of(context)
+      ScaffoldMessenger.of(context)
           .showSnackBar(SnackBar(content: Text('Error: ${e.description}')));
       return null;
     }
@@ -438,7 +438,7 @@ class _CameraHomeState extends State<CameraHome> {
       if (mounted) {
         setState(() {});
         if (filePath != null) {
-          Scaffold.of(context).showSnackBar(
+          ScaffoldMessenger.of(context).showSnackBar(
               SnackBar(content: Text('Picture saved to $filePath')));
           refreshGallery();
         }
@@ -462,7 +462,7 @@ class _CameraHomeState extends State<CameraHome> {
       if (mounted) {
         setState(() {});
       }
-      Scaffold.of(context).showSnackBar(
+      ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(content: Text('Video recorded to $videoPath')));
     });
   }

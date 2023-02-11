@@ -189,7 +189,7 @@ class DialogHelpers {
   }
 
   static _defOnTapCall(BuildContext context) {
-    Scaffold.of(context).showSnackBar(
+    ScaffoldMessenger.of(context).showSnackBar(
       SnackBar(
           content: Text('Call Button tapped'),
         duration: Duration(seconds: 1),
@@ -198,7 +198,7 @@ class DialogHelpers {
   }
 
   static _defOnTapVideoCall(BuildContext context) {
-    Scaffold.of(context).showSnackBar(
+    ScaffoldMessenger.of(context).showSnackBar(
       SnackBar(
           content: Text('Video Call Button tapped'),
           duration: Duration(seconds: 1),
