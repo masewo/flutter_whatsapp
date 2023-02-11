@@ -2,9 +2,10 @@ import 'dart:async';
 
 import 'package:flutter_whatsapp/src/models/chat.dart';
 import 'package:flutter_whatsapp/src/models/chat_list.dart';
+import 'package:flutter_whatsapp/src/services/api.dart';
 import 'package:http/http.dart' as http;
 
-String url = 'http://localhost/api/chats';
+String url = '$apiEndpoint/api/chats';
 
 class ChatService {
   static Future<ChatList> getChats() async {

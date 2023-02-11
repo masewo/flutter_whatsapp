@@ -54,3 +54,11 @@ Integration testing in action (Credit to [@karinamuraya](https://github.com/kari
   * Scan a QR code (Still buggy).
   * Make an intent to open Contacts app on Android.
   * Make an intent to open an email app to invite friends.
+
+## Build
+
+### Web
+
+```shell
+flutter build web --base-href "/flutter_whatsapp/" --dart-define=API_ENDPOINT=
+```
