@@ -13,7 +13,6 @@ import 'package:flutter_whatsapp/src/tabs/status_tab.dart';
 import 'package:flutter_whatsapp/src/values/colors.dart';
 import 'package:flutter/services.dart';
 import 'package:permission_handler/permission_handler.dart';
-import 'dart:ui';
 
 enum HomeOptions {
   settings,

@@ -7,7 +7,6 @@ import 'package:flutter_whatsapp/src/helpers/dialog_helpers.dart';
 import 'package:flutter_whatsapp/src/screens/settings/help/android_intent_helpers.dart';
 import 'package:flutter_whatsapp/src/values/colors.dart';
 import 'package:flutter_whatsapp/src/widgets/contact_item.dart';
-import 'dart:ui';
 
 enum NewChatOptions {
   inviteAFriend,
@@ -138,7 +137,7 @@ class _SelectContact extends State<SelectContact> {
                   child: Text('Error: ${snapshot.error}'),
                 );
               }
-              List<dynamic> data = List<dynamic>();
+              List<dynamic> data = <dynamic>[];
               data.add(ListTile(
                 leading: Container(
                   decoration: BoxDecoration(

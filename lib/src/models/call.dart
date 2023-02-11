@@ -16,7 +16,7 @@ class Call {
   });
 
   factory Call.fromJson(Map<String, dynamic> json) {
-    List<CallDetail> callDetails = new List<CallDetail>();
+    List<CallDetail> callDetails = <CallDetail>[];
     callDetails = json['calls'].map<CallDetail>((i) => CallDetail.fromJson(i)).toList();
 
     return Call(

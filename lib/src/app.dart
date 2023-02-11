@@ -19,11 +19,11 @@ class _FlutteredAppState extends State<FlutteredApp> {
   /// Default theme.
   static final ThemeData _defaultTheme = new ThemeData(
     primaryColor: primaryColor,
-    accentColor: Colors.white,
     scaffoldBackgroundColor: scaffoldBgColor,
     appBarTheme: AppBarTheme(
       backgroundColor: primaryColor,
     ),
+    colorScheme: ColorScheme.fromSwatch().copyWith(secondary: Colors.white),
   );
 
   @override

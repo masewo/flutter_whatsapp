@@ -54,7 +54,7 @@ class StatusTab extends StatelessWidget {
             }
             bool isFound = false;
             StatusList _statusList = snapshot.data;
-            List<dynamic> data = new List<dynamic>();
+            List<dynamic> data = <dynamic>[];
             data.add(StatusItem(
               title: 'My Status',
               subtitle: 'Tap to add status update',

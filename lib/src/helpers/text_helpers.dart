@@ -6,7 +6,7 @@ class TextHelpers {
 
     int index = text.toLowerCase().indexOf(keyword.toLowerCase());
 
-    List<TextSpan> texts = new List<TextSpan>();
+    List<TextSpan> texts = <TextSpan>[];
     if (index > 0) {
       texts.add(TextSpan(
         text: text.substring(0, index),

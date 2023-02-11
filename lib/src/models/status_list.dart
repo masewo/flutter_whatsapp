@@ -15,7 +15,7 @@ class StatusList {
   });
 
   factory StatusList.fromJson(List<dynamic> json) {
-    List<Status> statuses = new List<Status>();
+    List<Status> statuses = <Status>[];
     statuses = json.map<Status>((i) => Status.fromJson(i)).toList();
 
     return new StatusList(

@@ -147,7 +147,7 @@ class _DetailCallScreen extends State<DetailCallScreen> {
   }
 
   Widget _buildCallDetails(Call call) {
-    List<Widget> callDetails = new List<Widget>();
+    List<Widget> callDetails = <Widget>[];
 
     for(CallDetail detail in call.callDetails.reversed.toList()) {
       callDetails.add(new Padding(

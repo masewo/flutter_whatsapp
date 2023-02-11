@@ -23,7 +23,7 @@ class ChatList {
   });
 
   factory ChatList.fromJson(List<dynamic> json) {
-    List<Chat> chats = new List<Chat>();
+    List<Chat> chats = <Chat>[];
     chats = json.map<Chat>((i) => Chat.fromJson(i)).toList();
 
     return new ChatList(

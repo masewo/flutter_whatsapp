@@ -43,7 +43,7 @@ class _CameraHomeState extends State<CameraHome> {
 
   @override
   void initState() {
-    SystemChrome.setEnabledSystemUIOverlays([]);
+    SystemChrome.setEnabledSystemUIMode(SystemUiMode.manual, overlays: []);
     super.initState();
 
     initScreen();
@@ -99,7 +99,7 @@ class _CameraHomeState extends State<CameraHome> {
     _images =
         ExtStorage.getExternalStoragePublicDirectory(ExtStorage.DIRECTORY_DCIM)
             .then((path) {
-      List<String> paths = new List<String>();
+      List<String> paths = <String>[];
       Directory dir2 = new Directory(path);
       // execute an action on each entry
       dir2.listSync(recursive: true).forEach((f) {
@@ -120,7 +120,8 @@ class _CameraHomeState extends State<CameraHome> {
 
   @override
   void dispose() {
-    SystemChrome.setEnabledSystemUIOverlays(SystemUiOverlay.values);
+    SystemChrome.setEnabledSystemUIMode(SystemUiMode.manual,
+        overlays: SystemUiOverlay.values);
     _disposeCamera();
     super.dispose();
   }

@@ -16,7 +16,7 @@ class CallList {
   });
 
   factory CallList.fromJson(List<dynamic> json) {
-    List<Call> calls = new List<Call>();
+    List<Call> calls = <Call>[];
     calls = json.map<Call>((i) => Call.fromJson(i)).toList();
 
     return new CallList(

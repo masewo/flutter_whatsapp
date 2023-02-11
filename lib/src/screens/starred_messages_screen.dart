@@ -17,7 +17,7 @@ class _StarredMessagesScreenState extends State<StarredMessagesScreen> {
   void initState() {
     super.initState();
 
-    messages = new List<String>();
+    messages = <String>[];
   }
 
   @override

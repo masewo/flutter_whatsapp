@@ -4,7 +4,6 @@ import 'package:flutter_whatsapp/src/app.dart';
 import 'package:camera/camera.dart';
 import 'package:flutter_whatsapp/src/screens/camera_screen.dart';
 // import 'package:fast_qr_reader_view/fast_qr_reader_view.dart' as qr;
-import 'package:flutter_whatsapp/src/screens/whatsapp_web_scan_screen.dart';
 
 //void main() {
 //  runApp(FlutteredApp());

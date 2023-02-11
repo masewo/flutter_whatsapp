@@ -28,10 +28,7 @@ class _DetailStatusScreenState extends State<DetailStatusScreen> {
       setState(() {
         count = status.numImages;
         imageList = status.imagesUrl;
-        _width = new List<double>(count);
-        for (int i = 0; i < count; i++) {
-          _width[i] = 0.0;
-        }
+        _width = List<double>.filled(count, 0.0);
       });
       Future.delayed(Duration(milliseconds: 100), () {
         _playStatus();
@@ -140,7 +137,7 @@ class _DetailStatusScreenState extends State<DetailStatusScreen> {
                         if (snapshot.hasError) {
                           print(snapshot.error);
                         }
-                        List<Widget> children = List<Widget>();
+                        List<Widget> children = <Widget>[];
                         for (dynamic _ in snapshot.data.imagesUrl) {
                           children.add(Padding(
                             padding: const EdgeInsets.symmetric(
@@ -174,7 +171,7 @@ class _DetailStatusScreenState extends State<DetailStatusScreen> {
                         if (snapshot.hasError) {
                           print(snapshot.error);
                         }
-                        List<Widget> children = List<Widget>();
+                        List<Widget> children = <Widget>[];
                         int i = 0;
                         for (dynamic _ in snapshot.data.imagesUrl) {
                           children.add(Padding(

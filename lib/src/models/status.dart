@@ -41,7 +41,7 @@ class Status {
   }
 
   factory Status.fromJsonFull(Map<String, dynamic> jsonData) {
-    List<String> imagesUrl = new List<String>();
+    List<String> imagesUrl = <String>[];
     for (dynamic img in jsonData["images"]) {
       imagesUrl.add(img["path"]);
     }
