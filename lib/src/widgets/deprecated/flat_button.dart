@@ -18,8 +18,8 @@ class FlatButton extends StatelessWidget {
   Widget build(BuildContext context) {
     final ButtonStyle flatButtonStyle = TextButton.styleFrom(
       foregroundColor: Colors.black87,
-      minimumSize: Size(88, 36),
-      padding: padding ?? EdgeInsets.symmetric(horizontal: 16.0),
+      minimumSize: const Size(88, 36),
+      padding: padding ?? const EdgeInsets.symmetric(horizontal: 16.0),
       shape: shape ?? const RoundedRectangleBorder(
         borderRadius: BorderRadius.all(Radius.circular(2.0)),
       ),

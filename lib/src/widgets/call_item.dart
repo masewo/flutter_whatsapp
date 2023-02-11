@@ -12,13 +12,13 @@ class CallItem extends StatelessWidget {
   final Function onTap;
   final Function onLeadingTap;
 
-  CallItem({
+  const CallItem({Key key,
     this.call,
     this.searchKeyword,
     this.onProfileTap,
     this.onTap,
     this.onLeadingTap,
-  });
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -38,7 +38,7 @@ class CallItem extends StatelessWidget {
             ? Text(
                 call.name,
                 maxLines: 1,
-                style: TextStyle(
+                style: const TextStyle(
                   fontSize: 18.0,
                   fontWeight: FontWeight.bold,
                 ),
@@ -46,12 +46,12 @@ class CallItem extends StatelessWidget {
             : TextHelpers.getHighlightedText(
                 call.name,
                 searchKeyword,
-                TextStyle(
+                const TextStyle(
                   fontSize: 18.0,
                   fontWeight: FontWeight.bold,
                   color: Colors.black,
                 ),
-                TextStyle(
+                const TextStyle(
                   fontSize: 18.0,
                   fontWeight: FontWeight.bold,
                   color: Colors.blue,
@@ -73,7 +73,7 @@ class CallItem extends StatelessWidget {
             call.callDetails.length > 1
                 ? Text(
                     '(${call.callDetails.length})',
-                    style: TextStyle(
+                    style: const TextStyle(
                       fontSize: 12.0,
                       color: Colors.grey,
                     ),
@@ -81,7 +81,7 @@ class CallItem extends StatelessWidget {
                 : Container(),
             Text(
               DateFormat('dd/MM/yy, HH:mm').format(call.lastCall.timestamp),
-              style: TextStyle(
+              style: const TextStyle(
                 fontSize: 12.0,
                 color: Colors.grey,
               ),

@@ -1,14 +1,17 @@
 import 'dart:async';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_whatsapp/src/helpers/logger.dart';
 import 'package:flutter_whatsapp/src/config/shared_preferences_helpers.dart';
 import 'package:flutter_whatsapp/src/values/colors.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class AccountSecuritySettingsScreen extends StatefulWidget {
+  const AccountSecuritySettingsScreen({Key key}) : super(key: key);
+
   @override
-  _AccountSecuritySettingsScreenState createState() => _AccountSecuritySettingsScreenState();
+  State<AccountSecuritySettingsScreen> createState() => _AccountSecuritySettingsScreenState();
 
 }
 
@@ -16,7 +19,7 @@ class _AccountSecuritySettingsScreenState extends State<AccountSecuritySettingsS
 
   Future<bool> _showSecurityNotifications;
 
-  Future<SharedPreferences> _prefs = SharedPreferences.getInstance();
+  final Future<SharedPreferences> _prefs = SharedPreferences.getInstance();
 
   @override
   void initState() {
@@ -30,18 +33,18 @@ class _AccountSecuritySettingsScreenState extends State<AccountSecuritySettingsS
 
   @override
   Widget build(BuildContext context) {
-    final String _firstText = 'Your messages and calls are secured with '
+    const String firstText = 'Your messages and calls are secured with '
       'end-to-end encryption, which means '
       'WhatzApp and third parties can\'t read or '
       'listen to them. ';
-    final String _lastText = 'Turn on this setting to receive '
+    const String lastText = 'Turn on this setting to receive '
       'notifications when a contact\'s security '
       'code has changed. Your messages and '
       'calls are encrypted regardless of this '
       'setting.';
     return Scaffold(
       appBar: AppBar(
-        title: Text('Security'),
+        title: const Text('Security'),
       ),
       body: Column(
         children: <Widget>[
@@ -63,8 +66,8 @@ class _AccountSecuritySettingsScreenState extends State<AccountSecuritySettingsS
             child: RichText(
               text: TextSpan(
                 children: <TextSpan>[
-                  TextSpan(
-                      text: _firstText,
+                  const TextSpan(
+                      text: firstText,
                     style: TextStyle(
                         color: Colors.black,
                       fontSize: 16.0,
@@ -72,7 +75,7 @@ class _AccountSecuritySettingsScreenState extends State<AccountSecuritySettingsS
                   ),
                   TextSpan(
                       text: 'Learn more',
-                    style: TextStyle(
+                    style: const TextStyle(
                       color: Colors.blue,
                       fontSize: 16.0,
                     ),
@@ -86,14 +89,14 @@ class _AccountSecuritySettingsScreenState extends State<AccountSecuritySettingsS
               ),
             ),
           ),
-          Divider(
+          const Divider(
             height: 16.0,
           ),
           FutureBuilder(
             future: _showSecurityNotifications,
-            key: Key('Security_notifications'),
+            key: const Key('Security_notifications'),
             builder: (context, snapshot) {
-              var onChanged;
+              Null Function(bool value) onChanged;
               bool showSecurityNotifications = SharedPreferencesHelpers.defaultShowSecurityNotifications;
               switch (snapshot.connectionState) {
                 case ConnectionState.none:
@@ -102,7 +105,7 @@ class _AccountSecuritySettingsScreenState extends State<AccountSecuritySettingsS
                   break;
                 case ConnectionState.done:
                   if (snapshot.hasError) {
-                    print(snapshot.error);
+                    logger.d(snapshot.error);
                   }
                   else {
                     showSecurityNotifications = snapshot.data;
@@ -112,16 +115,16 @@ class _AccountSecuritySettingsScreenState extends State<AccountSecuritySettingsS
                   }
               }
               return ListTileTheme(
-                contentPadding: EdgeInsets.symmetric(vertical: 16.0, horizontal: 24.0),
+                contentPadding: const EdgeInsets.symmetric(vertical: 16.0, horizontal: 24.0),
                 child: SwitchListTile(
-                  title: Padding(
-                    padding: const EdgeInsets.only(bottom: 8.0),
+                  title: const Padding(
+                    padding: EdgeInsets.only(bottom: 8.0),
                     child: Text(
                       'Show security notifications',
                     ),
                   ),
-                  subtitle: Text(
-                    _lastText,
+                  subtitle: const Text(
+                    lastText,
                   ),
                   value: showSecurityNotifications,
                   activeColor: secondaryColor,

@@ -10,14 +10,14 @@ class MessageItem extends StatelessWidget {
   final bool isSent;
   final double fontSize;
 
-  MessageItem({
+  const MessageItem({Key key,
     this.content,
     this.timestamp,
     this.isYou,
     this.isRead = false,
     this.isSent = true,
     this.fontSize,
-  });
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -34,15 +34,15 @@ class MessageItem extends StatelessWidget {
           padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 4.0),
           child: Container(
               decoration: BoxDecoration(
-                  boxShadow: [
-                    new BoxShadow(
+                  boxShadow: const [
+                    BoxShadow(
                         color: Colors.grey,
-                        offset: new Offset(1.0, 1.0),
+offset: Offset(1.0, 1.0),
                         blurRadius: 1.0)
                   ],
                   color: isYou ? messageBubbleColor : Colors.white,
-                  borderRadius: BorderRadius.all(Radius.circular(5.0))),
-              constraints: BoxConstraints(
+                  borderRadius: const BorderRadius.all(Radius.circular(5.0))),
+              constraints: const BoxConstraints(
                 minWidth: 100.0,
                 maxWidth: 280.0,
               ),
@@ -53,7 +53,7 @@ class MessageItem extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.end,
                 children: <Widget>[
                   Container(
-                    constraints: BoxConstraints(
+                    constraints: const BoxConstraints(
                       minWidth: 100.0,
                     ),
                     child: Text(
@@ -68,20 +68,20 @@ class MessageItem extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.end,
                     mainAxisSize: MainAxisSize.min,
                     children: <Widget>[
-                      Container(
+                      SizedBox(
                         width: 100.0,
                         child: Row(
                           mainAxisSize: MainAxisSize.min,
                           mainAxisAlignment: MainAxisAlignment.end,
                           children: <Widget>[
                             Text(
-                              new DateFormat('HH:mm').format(timestamp),
-                              style: TextStyle(
+                              DateFormat('HH:mm').format(timestamp),
+                              style: const TextStyle(
                                 color: Colors.grey,
                                 fontSize: 12.0,
                               ),
                             ),
-                            SizedBox(
+                            const SizedBox(
                               width: 4.0,
                             ),
                             isYou
@@ -101,7 +101,7 @@ class MessageItem extends StatelessWidget {
 
   Widget _getIcon() {
     if(!isSent) {
-      return Icon(
+      return const Icon(
         Icons.check,
         size: 18.0,
         color: Colors.grey,

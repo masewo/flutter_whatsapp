@@ -33,12 +33,13 @@ class DetailChatScreen extends StatefulWidget {
   final Chat chat;
   final int id;
 
-  DetailChatScreen({
+  const DetailChatScreen({Key key,
     this.chat,
     this.id,
-  });
+  }) : super(key: key);
 
-  _DetailChatScreen createState() => _DetailChatScreen();
+  @override
+  State<DetailChatScreen> createState() => _DetailChatScreen();
 }
 
 class _DetailChatScreen extends State<DetailChatScreen> {
@@ -52,7 +53,7 @@ class _DetailChatScreen extends State<DetailChatScreen> {
   double _fontSize = 15.0; // default = medium
   TextInputAction _textInputAction = TextInputAction.newline;
 
-  Future<SharedPreferences> _prefs = SharedPreferences.getInstance();
+  final Future<SharedPreferences> _prefs = SharedPreferences.getInstance();
 
   @override
   void initState() {
@@ -118,7 +119,7 @@ class _DetailChatScreen extends State<DetailChatScreen> {
     //     ];
     //   },
     // );
-    textFieldController = new TextEditingController()
+    textFieldController = TextEditingController()
       ..addListener(() {
         setState(() {
           _message = textFieldController.text;
@@ -132,14 +133,14 @@ class _DetailChatScreen extends State<DetailChatScreen> {
       backgroundColor: chatDetailScaffoldBgColor,
       appBar: AppBar(
         leading: FlatButton(
-          shape: CircleBorder(),
+          shape: const CircleBorder(),
           padding: const EdgeInsets.only(left: 1.0),
           onPressed: () {
             Navigator.of(context).pop();
           },
           child: Row(
             children: <Widget>[
-              Icon(
+              const Icon(
                 Icons.arrow_back,
                 size: 24.0,
                 color: Colors.white,
@@ -175,7 +176,7 @@ class _DetailChatScreen extends State<DetailChatScreen> {
                       padding: const EdgeInsets.symmetric(horizontal: 2.0),
                       child: Text(
                         _chat == null ? '' : _chat.name,
-                        style: TextStyle(
+                        style: const TextStyle(
                           color: Colors.white,
                           fontSize: 18.0,
                         ),
@@ -191,10 +192,10 @@ class _DetailChatScreen extends State<DetailChatScreen> {
           Builder(
             builder: (BuildContext context) {
               return IconButton(
-                icon: Icon(Icons.videocam),
+                icon: const Icon(Icons.videocam),
                 onPressed: () {
                   ScaffoldMessenger.of(context).showSnackBar(
-                      SnackBar(content: Text('Video Call Button tapped'))
+                      const SnackBar(content: Text('Video Call Button tapped'))
                   );
                 },
               );
@@ -203,10 +204,10 @@ class _DetailChatScreen extends State<DetailChatScreen> {
           Builder(
             builder: (BuildContext context) {
               return IconButton(
-                icon: Icon(Icons.call),
+                icon: const Icon(Icons.call),
                 onPressed: () {
                   ScaffoldMessenger.of(context).showSnackBar(
-                      SnackBar(content: Text('Call Button tapped'))
+                      const SnackBar(content: Text('Call Button tapped'))
                   );
                 },
               );
@@ -217,33 +218,33 @@ class _DetailChatScreen extends State<DetailChatScreen> {
             onSelected: _onSelectMenuOption,
             itemBuilder: (BuildContext context) {
               return [
-                PopupMenuItem<ChatDetailMenuOptions>(
-                  child: Text("View contact"),
+                const PopupMenuItem<ChatDetailMenuOptions>(
                   value: ChatDetailMenuOptions.viewContact,
+                  child: Text("View contact"),
                 ),
-                PopupMenuItem<ChatDetailMenuOptions>(
-                  child: Text("Media"),
+                const PopupMenuItem<ChatDetailMenuOptions>(
                   value: ChatDetailMenuOptions.media,
+                  child: Text("Media"),
                 ),
-                PopupMenuItem<ChatDetailMenuOptions>(
-                  child: Text("Search"),
+                const PopupMenuItem<ChatDetailMenuOptions>(
                   value: ChatDetailMenuOptions.search,
+                  child: Text("Search"),
                 ),
-                PopupMenuItem<ChatDetailMenuOptions>(
-                  child: Text("Mute notifications"),
+                const PopupMenuItem<ChatDetailMenuOptions>(
                   value: ChatDetailMenuOptions.muteNotifications,
+                  child: Text("Mute notifications"),
                 ),
-                PopupMenuItem<ChatDetailMenuOptions>(
-                  child: Text("Wallpaper"),
+                const PopupMenuItem<ChatDetailMenuOptions>(
                   value: ChatDetailMenuOptions.wallpaper,
+                  child: Text("Wallpaper"),
                 ),
-                PopupMenuItem<ChatDetailMenuOptions>(
+                const PopupMenuItem<ChatDetailMenuOptions>(
+                  value: ChatDetailMenuOptions.more,
                   child: ListTile(
-                    contentPadding: const EdgeInsets.all(0.0),
+                    contentPadding: EdgeInsets.all(0.0),
                     title: Text("More"),
                     trailing: Icon(Icons.arrow_right),
                   ),
-                  value: ChatDetailMenuOptions.more,
                 ),
               ];
             },
@@ -260,18 +261,18 @@ class _DetailChatScreen extends State<DetailChatScreen> {
                 builder: (context, snapshot) {
                   switch (snapshot.connectionState) {
                     case ConnectionState.none:
-                      return Center(
-                        child: CircularProgressIndicator(
+                      return const Center(
+child: CircularProgressIndicator(
                           valueColor:
-                              new AlwaysStoppedAnimation<Color>(Colors.grey),
+AlwaysStoppedAnimation<Color>(Colors.grey),
                         ),
                       );
                     case ConnectionState.active:
                     case ConnectionState.waiting:
-                      return Center(
-                        child: CircularProgressIndicator(
+                      return const Center(
+child: CircularProgressIndicator(
                           valueColor:
-                              new AlwaysStoppedAnimation<Color>(Colors.grey),
+AlwaysStoppedAnimation<Color>(Colors.grey),
                         ),
                       );
                     case ConnectionState.done:
@@ -305,9 +306,9 @@ class _DetailChatScreen extends State<DetailChatScreen> {
                 Flexible(
                   flex: 1,
                   child: Container(
-                    decoration: BoxDecoration(
+                    decoration: const BoxDecoration(
                       borderRadius:
-                          BorderRadius.all(const Radius.circular(30.0)),
+                          BorderRadius.all(Radius.circular(30.0)),
                       color: Colors.white,
                     ),
                     child: Row(
@@ -316,7 +317,7 @@ class _DetailChatScreen extends State<DetailChatScreen> {
                           padding: const EdgeInsets.all(0.0),
                           disabledColor: iconColor,
                           color: iconColor,
-                          icon: Icon(Icons.insert_emoticon),
+                          icon: const Icon(Icons.insert_emoticon),
                           onPressed: () {},
                         ),
                         Flexible(
@@ -324,11 +325,11 @@ class _DetailChatScreen extends State<DetailChatScreen> {
                             controller: textFieldController,
                             textCapitalization: TextCapitalization.sentences,
                             textInputAction: _textInputAction,
-                            decoration: InputDecoration(
+                            decoration: const InputDecoration(
                               border: InputBorder.none,
-                              contentPadding: const EdgeInsets.all(0.0),
+contentPadding: EdgeInsets.all(0.0),
                               hintText: 'Type a message',
-                              hintStyle: TextStyle(
+hintStyle: TextStyle(
                                 color: textFieldHintColor,
                                 fontSize: 16.0,
                               ),
@@ -346,13 +347,13 @@ class _DetailChatScreen extends State<DetailChatScreen> {
                         ),
                         IconButton(
                           color: iconColor,
-                          icon: Icon(Icons.attach_file),
+                          icon: const Icon(Icons.attach_file),
                           onPressed: () {},
                         ),
                         _message.isEmpty || _message == null
                             ? IconButton(
                                 color: iconColor,
-                                icon: Icon(Icons.camera_alt),
+                                icon: const Icon(Icons.camera_alt),
                                 onPressed: () {},
                               )
                             : Container(),
@@ -366,10 +367,10 @@ class _DetailChatScreen extends State<DetailChatScreen> {
                     elevation: 2.0,
                     backgroundColor: secondaryColor,
                     foregroundColor: Colors.white,
-                    child: _message.isEmpty || _message == null
-                        ? Icon(Icons.settings_voice)
-                        : Icon(Icons.send),
                     onPressed: _sendMessage,
+                    child: _message.isEmpty || _message == null
+                        ? const Icon(Icons.settings_voice)
+                        : const Icon(Icons.send),
                   ),
                 )
               ],
@@ -426,7 +427,7 @@ class _DetailChatScreen extends State<DetailChatScreen> {
     setState(() {
       _messages.insert(
         0,
-          new Message(
+          Message(
             content: _message,
             timestamp: DateTime.now(),
             isRead: false,

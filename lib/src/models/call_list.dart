@@ -19,7 +19,7 @@ class CallList {
     List<Call> calls = <Call>[];
     calls = json.map<Call>((i) => Call.fromJson(i)).toList();
 
-    return new CallList(
+    return CallList(
       calls: calls,
     );
   }

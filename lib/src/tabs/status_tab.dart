@@ -9,13 +9,13 @@ import 'package:flutter_whatsapp/src/widgets/status_item.dart';
 class StatusTab extends StatelessWidget {
   final String searchKeyword;
   final Future<dynamic> statusList;
-  final refresh;
+  final VoidCallback refresh;
 
-  StatusTab({
+  const StatusTab({Key key,
     this.statusList,
     this.searchKeyword,
     this.refresh,
-  });
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -24,16 +24,16 @@ class StatusTab extends StatelessWidget {
       builder: (context, snapshot) {
         switch (snapshot.connectionState) {
           case ConnectionState.none:
-            return Center(
-              child: CircularProgressIndicator(
-                valueColor: new AlwaysStoppedAnimation<Color>(Colors.grey),
+            return const Center(
+child: CircularProgressIndicator(
+valueColor: AlwaysStoppedAnimation<Color>(Colors.grey),
               ),
             );
           case ConnectionState.active:
           case ConnectionState.waiting:
-            return Center(
-              child: CircularProgressIndicator(
-                valueColor: new AlwaysStoppedAnimation<Color>(Colors.grey),
+            return const Center(
+child: CircularProgressIndicator(
+valueColor: AlwaysStoppedAnimation<Color>(Colors.grey),
               ),
             );
           case ConnectionState.done:
@@ -47,13 +47,13 @@ class StatusTab extends StatelessWidget {
                       textAlign: TextAlign.center,
                     ),
                     RaisedButton(
-                      child: Text('Refresh'),
                       onPressed: refresh,
+                      child: const Text('Refresh'),
                     )
                   ]);
             }
             bool isFound = false;
-            StatusList _statusList = snapshot.data;
+            StatusList statusList = snapshot.data;
             List<dynamic> data = <dynamic>[];
             data.add(StatusItem(
               title: 'My Status',
@@ -67,7 +67,7 @@ class StatusTab extends StatelessWidget {
                 );
               },
             ));
-            data.addAll(_statusList.statuses);
+            data.addAll(statusList.statuses);
             return ListView.builder(
               itemCount: data.length,
               itemBuilder: (context, i) {
@@ -87,7 +87,7 @@ class StatusTab extends StatelessWidget {
                                 Text('No results found for \'$searchKeyword\''),
                           ));
                     }
-                    return SizedBox(
+                    return const SizedBox(
                       height: 0.0,
                     );
                   }

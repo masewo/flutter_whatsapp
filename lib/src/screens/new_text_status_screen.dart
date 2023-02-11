@@ -4,15 +4,17 @@ import 'package:flutter_whatsapp/src/values/colors.dart';
 
 import 'dart:math';
 
-final _random = new Random();
+final _random = Random();
 
 // Generates a positive random integer uniformly distributed on the range
 // from [min], inclusive, to [max], exclusive.
 int getRandomInt(int min, int max) => min + _random.nextInt(max - min);
 
 class NewTextStatusScreen extends StatefulWidget {
+  const NewTextStatusScreen({Key key}) : super(key: key);
+
   @override
-  _NewTextStatusScreenState createState() => _NewTextStatusScreenState();
+  State<NewTextStatusScreen> createState() => _NewTextStatusScreenState();
 
 }
 
@@ -53,7 +55,7 @@ class _NewTextStatusScreenState extends State<NewTextStatusScreen> {
                     minHeight: 40.0,
                     maxHeight: 240.0,
                   ),
-                  child: TextField(
+                  child: const TextField(
                     maxLines: null,
                     textAlign: TextAlign.center,
                     maxLength: 100,
@@ -85,12 +87,14 @@ class _NewTextStatusScreenState extends State<NewTextStatusScreen> {
                   children: <Widget>[
                     IconButton(
                       color: Colors.white,
-                      icon: Icon(Icons.insert_emoticon),
+                      icon: const Icon(Icons.insert_emoticon),
                       onPressed: (){},
                     ),
                     RawMaterialButton(
                       onPressed: () {},
-                      child: Text(
+                      shape: const CircleBorder(),
+                      padding: const EdgeInsets.all(18.0),
+                      child: const Text(
                           'T',
                         style: TextStyle(
                           fontSize: 24.0,
@@ -98,12 +102,10 @@ class _NewTextStatusScreenState extends State<NewTextStatusScreen> {
                           fontWeight: FontWeight.bold,
                         )
                       ),
-                      shape: new CircleBorder(),
-                      padding: const EdgeInsets.all(18.0),
                     ),
                     IconButton(
                       color: Colors.white,
-                      icon: Icon(Icons.color_lens),
+                      icon: const Icon(Icons.color_lens),
                       onPressed: (){
                         _changeBgColor();
                       },
@@ -116,7 +118,7 @@ class _NewTextStatusScreenState extends State<NewTextStatusScreen> {
                 child: FloatingActionButton(
                   backgroundColor: secondaryColor,
                   foregroundColor: Colors.white,
-                  child: Icon(Icons.send),
+                  child: const Icon(Icons.send),
                   onPressed: (){},
                 ),
               )

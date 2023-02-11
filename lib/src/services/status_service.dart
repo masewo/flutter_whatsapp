@@ -8,7 +8,7 @@ String url = 'http://localhost/api/status';
 
 class StatusService {
   static Future<StatusList> getStatuses() async {
-    final response = await http.get(Uri.parse('$url'));
+    final response = await http.get(Uri.parse(url));
     return statusListFromJson(response.body);
   }
 

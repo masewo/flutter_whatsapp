@@ -9,23 +9,23 @@ class ContactItem extends StatelessWidget {
   final Function onProfileTap;
   final Function onTap;
 
-  ContactItem({
+  const ContactItem({Key key,
     this.contact,
     this.searchKeyword,
     this.onProfileTap,
     this.onTap
-  });
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return ListTile(
-      contentPadding: EdgeInsets.symmetric(vertical: 2.0, horizontal: 16.0),
+      contentPadding: const EdgeInsets.symmetric(vertical: 2.0, horizontal: 16.0),
       leading: SizedBox(
         width: 45.0,
         height: 45.0,
         child: IconButton(
             padding: const EdgeInsets.all(0.0),
-            icon: Icon(
+            icon: const Icon(
               Icons.account_circle,
               size: 45.0,
             ),
@@ -37,7 +37,7 @@ class ContactItem extends StatelessWidget {
           ? Text(
               contact.displayName,
               maxLines: 1,
-              style: TextStyle(
+              style: const TextStyle(
                 fontSize: 18.0,
                 fontWeight: FontWeight.bold,
               ),
@@ -45,12 +45,12 @@ class ContactItem extends StatelessWidget {
           : TextHelpers.getHighlightedText(
               contact.displayName,
               searchKeyword,
-              TextStyle(
+              const TextStyle(
                 fontSize: 18.0,
                 fontWeight: FontWeight.bold,
                 color: Colors.black,
               ),
-              TextStyle(
+              const TextStyle(
                 fontSize: 18.0,
                 fontWeight: FontWeight.bold,
                 color: Colors.blue,

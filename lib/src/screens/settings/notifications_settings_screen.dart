@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_whatsapp/src/helpers/logger.dart';
 import 'package:flutter_whatsapp/src/config/shared_preferences_helpers.dart';
 import 'package:flutter_whatsapp/src/helpers/dialog_helpers.dart';
 import 'package:flutter_whatsapp/src/widgets/setting_item.dart';
@@ -179,19 +180,25 @@ var ringtoneOptionsList = [
 ];
 
 class NotificationsSettingsScreen extends StatefulWidget {
+  const NotificationsSettingsScreen({Key key}) : super(key: key);
+
   @override
-  _NotificationsSettingsScreenState createState() => _NotificationsSettingsScreenState();
+  State<NotificationsSettingsScreen> createState() =>
+      _NotificationsSettingsScreenState();
 }
 
-class _NotificationsSettingsScreenState extends State<NotificationsSettingsScreen> {
+class _NotificationsSettingsScreenState
+    extends State<NotificationsSettingsScreen> {
   NotificationToneOptions defaultNotificationTone;
   VibrateOptions defaultVibrate = VibrateOptions.off;
-  PopupNotificationOptions defaultPopupNotification = PopupNotificationOptions.noPopup;
+  PopupNotificationOptions defaultPopupNotification =
+      PopupNotificationOptions.noPopup;
   LightOptions defaultLight = LightOptions.white;
 
   NotificationToneOptions defaultGroupNotificationTone;
   VibrateOptions defaultGroupVibrate = VibrateOptions.off;
-  PopupNotificationOptions defaultGroupPopupNotification = PopupNotificationOptions.noPopup;
+  PopupNotificationOptions defaultGroupPopupNotification =
+      PopupNotificationOptions.noPopup;
   LightOptions defaultGroupLight = LightOptions.white;
 
   RingtoneOptions defaultCallsRingtone;
@@ -213,7 +220,7 @@ class _NotificationsSettingsScreenState extends State<NotificationsSettingsScree
   Future<RingtoneOptions> _callsRingtone;
   Future<VibrateOptions> _callsVibrate;
 
-  Future<SharedPreferences> _prefs = SharedPreferences.getInstance();
+  final Future<SharedPreferences> _prefs = SharedPreferences.getInstance();
 
   @override
   void initState() {
@@ -221,45 +228,79 @@ class _NotificationsSettingsScreenState extends State<NotificationsSettingsScree
 
     // initialize variables
     _conversationTones = _prefs.then((SharedPreferences prefs) {
-      return (prefs.getBool(SharedPreferencesHelpers.conversationTones) ?? SharedPreferencesHelpers.defaultConversationTones);
+      return (prefs.getBool(SharedPreferencesHelpers.conversationTones) ??
+          SharedPreferencesHelpers.defaultConversationTones);
     });
     _notificationTone = _prefs.then((SharedPreferences prefs) {
-      return (prefs.getInt(SharedPreferencesHelpers.notificationTone) != null ? notificationToneOptionsList[prefs.getInt(SharedPreferencesHelpers.notificationTone)] : defaultNotificationTone);
+      return (prefs.getInt(SharedPreferencesHelpers.notificationTone) != null
+          ? notificationToneOptionsList[
+              prefs.getInt(SharedPreferencesHelpers.notificationTone)]
+          : defaultNotificationTone);
     });
     _vibrate = _prefs.then((SharedPreferences prefs) {
-      return (prefs.getInt(SharedPreferencesHelpers.vibrate) != null ? vibrateOptionsList[prefs.getInt(SharedPreferencesHelpers.vibrate)] : defaultVibrate);
+      return (prefs.getInt(SharedPreferencesHelpers.vibrate) != null
+          ? vibrateOptionsList[prefs.getInt(SharedPreferencesHelpers.vibrate)]
+          : defaultVibrate);
     });
     _popupNotification = _prefs.then((SharedPreferences prefs) {
-      return (prefs.getInt(SharedPreferencesHelpers.popupNotification) != null ? popupNotificationOptionsList[prefs.getInt(SharedPreferencesHelpers.popupNotification)] : defaultPopupNotification);
+      return (prefs.getInt(SharedPreferencesHelpers.popupNotification) != null
+          ? popupNotificationOptionsList[
+              prefs.getInt(SharedPreferencesHelpers.popupNotification)]
+          : defaultPopupNotification);
     });
     _light = _prefs.then((SharedPreferences prefs) {
-      return (prefs.getInt(SharedPreferencesHelpers.light) != null ? lightOptionsList[prefs.getInt(SharedPreferencesHelpers.light)] : defaultLight);
+      return (prefs.getInt(SharedPreferencesHelpers.light) != null
+          ? lightOptionsList[prefs.getInt(SharedPreferencesHelpers.light)]
+          : defaultLight);
     });
     _useHighPriorityNotifications = _prefs.then((SharedPreferences prefs) {
-      return (prefs.getBool(SharedPreferencesHelpers.useHighPriorityNotifications) ?? SharedPreferencesHelpers.defaultUseHighPriorityNotifications);
+      return (prefs
+              .getBool(SharedPreferencesHelpers.useHighPriorityNotifications) ??
+          SharedPreferencesHelpers.defaultUseHighPriorityNotifications);
     });
 
     _groupNotificationTone = _prefs.then((SharedPreferences prefs) {
-      return (prefs.getInt(SharedPreferencesHelpers.groupNotificationTone) != null ? notificationToneOptionsList[prefs.getInt(SharedPreferencesHelpers.groupNotificationTone)] : defaultGroupNotificationTone);
+      return (prefs.getInt(SharedPreferencesHelpers.groupNotificationTone) !=
+              null
+          ? notificationToneOptionsList[
+              prefs.getInt(SharedPreferencesHelpers.groupNotificationTone)]
+          : defaultGroupNotificationTone);
     });
     _groupVibrate = _prefs.then((SharedPreferences prefs) {
-      return (prefs.getInt(SharedPreferencesHelpers.groupVibrate) != null ? vibrateOptionsList[prefs.getInt(SharedPreferencesHelpers.groupVibrate)] : defaultGroupVibrate);
+      return (prefs.getInt(SharedPreferencesHelpers.groupVibrate) != null
+          ? vibrateOptionsList[
+              prefs.getInt(SharedPreferencesHelpers.groupVibrate)]
+          : defaultGroupVibrate);
     });
     _groupPopupNotification = _prefs.then((SharedPreferences prefs) {
-      return (prefs.getInt(SharedPreferencesHelpers.groupPopupNotification) != null ? popupNotificationOptionsList[prefs.getInt(SharedPreferencesHelpers.groupPopupNotification)] : defaultGroupPopupNotification);
+      return (prefs.getInt(SharedPreferencesHelpers.groupPopupNotification) !=
+              null
+          ? popupNotificationOptionsList[
+              prefs.getInt(SharedPreferencesHelpers.groupPopupNotification)]
+          : defaultGroupPopupNotification);
     });
     _groupLight = _prefs.then((SharedPreferences prefs) {
-      return (prefs.getInt(SharedPreferencesHelpers.groupLight) != null ? lightOptionsList[prefs.getInt(SharedPreferencesHelpers.groupLight)] : defaultGroupLight);
+      return (prefs.getInt(SharedPreferencesHelpers.groupLight) != null
+          ? lightOptionsList[prefs.getInt(SharedPreferencesHelpers.groupLight)]
+          : defaultGroupLight);
     });
     _groupUseHighPriorityNotifications = _prefs.then((SharedPreferences prefs) {
-      return (prefs.getBool(SharedPreferencesHelpers.groupUseHighPriorityNotifications) ?? SharedPreferencesHelpers.defaultGroupUseHighPriorityNotifications);
+      return (prefs.getBool(
+              SharedPreferencesHelpers.groupUseHighPriorityNotifications) ??
+          SharedPreferencesHelpers.defaultGroupUseHighPriorityNotifications);
     });
 
     _callsRingtone = _prefs.then((SharedPreferences prefs) {
-      return (prefs.getInt(SharedPreferencesHelpers.callsRingtone) != null ? ringtoneOptionsList[prefs.getInt(SharedPreferencesHelpers.callsRingtone)] : defaultCallsRingtone);
+      return (prefs.getInt(SharedPreferencesHelpers.callsRingtone) != null
+          ? ringtoneOptionsList[
+              prefs.getInt(SharedPreferencesHelpers.callsRingtone)]
+          : defaultCallsRingtone);
     });
     _callsVibrate = _prefs.then((SharedPreferences prefs) {
-      return (prefs.getInt(SharedPreferencesHelpers.callsVibrate) != null ? vibrateOptionsList[prefs.getInt(SharedPreferencesHelpers.callsVibrate)] : defaultCallsVibrate);
+      return (prefs.getInt(SharedPreferencesHelpers.callsVibrate) != null
+          ? vibrateOptionsList[
+              prefs.getInt(SharedPreferencesHelpers.callsVibrate)]
+          : defaultCallsVibrate);
     });
   }
 
@@ -267,15 +308,15 @@ class _NotificationsSettingsScreenState extends State<NotificationsSettingsScree
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Notifications'),
+        title: const Text('Notifications'),
         actions: <Widget>[
           PopupMenuButton<NotificationsOptions>(
-            key: Key('popupMenu'),
+            key: const Key('popupMenu'),
             tooltip: 'More options',
             onSelected: _selectOption,
             itemBuilder: (BuildContext context) {
               return [
-                PopupMenuItem(
+                const PopupMenuItem(
                   key: Key('RNS'),
                   value: NotificationsOptions.resetNotificationSettings,
                   child: Text('Reset notification settings'),
@@ -286,14 +327,15 @@ class _NotificationsSettingsScreenState extends State<NotificationsSettingsScree
         ],
       ),
       body: ListView(
-        key: Key('ListView'),
+        key: const Key('ListView'),
         children: <Widget>[
           FutureBuilder(
-            key: Key('Conversation tones'),
+            key: const Key('Conversation tones'),
             future: _conversationTones,
             builder: (context, snapshot) {
-              var onChanged;
-              bool conversationTones = SharedPreferencesHelpers.defaultConversationTones;
+              Null Function(bool value) onChanged;
+              bool conversationTones =
+                  SharedPreferencesHelpers.defaultConversationTones;
               switch (snapshot.connectionState) {
                 case ConnectionState.none:
                 case ConnectionState.active:
@@ -301,9 +343,8 @@ class _NotificationsSettingsScreenState extends State<NotificationsSettingsScree
                   break;
                 case ConnectionState.done:
                   if (snapshot.hasError) {
-                    print(snapshot.error);
-                  }
-                  else {
+                    logger.d(snapshot.error);
+                  } else {
                     conversationTones = snapshot.data;
                     onChanged = (bool value) {
                       _setConversationTones(value);
@@ -318,29 +359,46 @@ class _NotificationsSettingsScreenState extends State<NotificationsSettingsScree
               );
             },
           ),
-          Divider(),
-          SettingItemHeader(
+          const Divider(),
+          const SettingItemHeader(
             title: 'Messages',
-            padding: EdgeInsets.only(top: 16.0, left: 24.0, right: 24.0, bottom: 4.0),
+            padding: EdgeInsets.only(
+                top: 16.0, left: 24.0, right: 24.0, bottom: 4.0),
           ),
-          _buildFutureSettingItem(context, 'Notification tone', notificationToneOptionsList, _notificationTone, _getNotificationToneText, true, (NotificationToneOptions value) {
+          _buildFutureSettingItem(
+              context,
+              'Notification tone',
+              notificationToneOptionsList,
+              _notificationTone,
+              _getNotificationToneText,
+              true, (NotificationToneOptions value) {
             _setNotificationTone(value.index);
           }),
-          _buildFutureSettingItem(context,'Vibrate', vibrateOptionsList, _vibrate, _getVibrateText, false, (VibrateOptions value) {
+          _buildFutureSettingItem(context, 'Vibrate', vibrateOptionsList,
+              _vibrate, _getVibrateText, false, (VibrateOptions value) {
             _setVibrate(value.index);
           }),
-          _buildFutureSettingItem(context, 'Popup notification', popupNotificationOptionsList, _popupNotification, _getPopupNotificationText, false, (PopupNotificationOptions value) {
+          _buildFutureSettingItem(
+              context,
+              'Popup notification',
+              popupNotificationOptionsList,
+              _popupNotification,
+              _getPopupNotificationText,
+              false, (PopupNotificationOptions value) {
             _setPopupNotification(value.index);
           }),
-          _buildFutureSettingItem(context, 'Light', lightOptionsList, _light, _getLightText, false, (LightOptions value) {
+          _buildFutureSettingItem(
+              context, 'Light', lightOptionsList, _light, _getLightText, false,
+              (LightOptions value) {
             _setLight(value.index);
           }),
           FutureBuilder(
-            key: Key('High_priority_notifications'),
+            key: const Key('High_priority_notifications'),
             future: _useHighPriorityNotifications,
             builder: (context, snapshot) {
-              var onChanged;
-              bool useHighPriorityNotifications = SharedPreferencesHelpers.defaultUseHighPriorityNotifications;
+              Null Function(bool value) onChanged;
+              bool useHighPriorityNotifications =
+                  SharedPreferencesHelpers.defaultUseHighPriorityNotifications;
               switch (snapshot.connectionState) {
                 case ConnectionState.none:
                 case ConnectionState.active:
@@ -348,9 +406,8 @@ class _NotificationsSettingsScreenState extends State<NotificationsSettingsScree
                   break;
                 case ConnectionState.done:
                   if (snapshot.hasError) {
-                    print(snapshot.error);
-                  }
-                  else {
+                    logger.d(snapshot.error);
+                  } else {
                     useHighPriorityNotifications = snapshot.data;
                     onChanged = (bool value) {
                       _setUseHighPriorityNotifications(value);
@@ -359,35 +416,52 @@ class _NotificationsSettingsScreenState extends State<NotificationsSettingsScree
               }
               return SwitchSettingItem(
                 title: 'Use high priority notifications',
-                subtitle: 'Show previews of notifications at the top of the screen.',
+                subtitle:
+                    'Show previews of notifications at the top of the screen.',
                 value: useHighPriorityNotifications,
                 onChanged: onChanged,
               );
             },
           ),
-          Divider(),
-          SettingItemHeader(
+          const Divider(),
+          const SettingItemHeader(
             title: 'Groups',
-            padding: EdgeInsets.only(top: 16.0, left: 24.0, right: 24.0, bottom: 4.0),
+            padding: EdgeInsets.only(
+                top: 16.0, left: 24.0, right: 24.0, bottom: 4.0),
           ),
-          _buildFutureSettingItem(context, 'Notification tone', notificationToneOptionsList, _groupNotificationTone, _getNotificationToneText, true, (NotificationToneOptions value) {
+          _buildFutureSettingItem(
+              context,
+              'Notification tone',
+              notificationToneOptionsList,
+              _groupNotificationTone,
+              _getNotificationToneText,
+              true, (NotificationToneOptions value) {
             _setGroupNotificationTone(value.index);
           }),
-          _buildFutureSettingItem(context, 'Vibrate', vibrateOptionsList, _groupVibrate, _getVibrateText, false, (VibrateOptions value) {
+          _buildFutureSettingItem(context, 'Vibrate', vibrateOptionsList,
+              _groupVibrate, _getVibrateText, false, (VibrateOptions value) {
             _setGroupVibrate(value.index);
           }),
-          _buildFutureSettingItem(context, 'Popup notification', popupNotificationOptionsList, _groupPopupNotification, _getPopupNotificationText, false, (PopupNotificationOptions value) {
+          _buildFutureSettingItem(
+              context,
+              'Popup notification',
+              popupNotificationOptionsList,
+              _groupPopupNotification,
+              _getPopupNotificationText,
+              false, (PopupNotificationOptions value) {
             _setGroupPopupNotification(value.index);
           }),
-          _buildFutureSettingItem(context, 'Light', lightOptionsList, _groupLight, _getLightText, false, (LightOptions value) {
+          _buildFutureSettingItem(context, 'Light', lightOptionsList,
+              _groupLight, _getLightText, false, (LightOptions value) {
             _setGroupLight(value.index);
           }),
           FutureBuilder(
-            key: Key('Group_high_priority_notifications'),
+            key: const Key('Group_high_priority_notifications'),
             future: _groupUseHighPriorityNotifications,
             builder: (context, snapshot) {
-              var onChanged;
-              bool groupUseHighPriorityNotifications = SharedPreferencesHelpers.defaultGroupUseHighPriorityNotifications;
+              Null Function(bool value) onChanged;
+              bool groupUseHighPriorityNotifications = SharedPreferencesHelpers
+                  .defaultGroupUseHighPriorityNotifications;
               switch (snapshot.connectionState) {
                 case ConnectionState.none:
                 case ConnectionState.active:
@@ -395,9 +469,8 @@ class _NotificationsSettingsScreenState extends State<NotificationsSettingsScree
                   break;
                 case ConnectionState.done:
                   if (snapshot.hasError) {
-                    print(snapshot.error);
-                  }
-                  else {
+                    logger.d(snapshot.error);
+                  } else {
                     groupUseHighPriorityNotifications = snapshot.data;
                     onChanged = (bool value) {
                       _setGroupUseHighPriorityNotifications(value);
@@ -406,24 +479,28 @@ class _NotificationsSettingsScreenState extends State<NotificationsSettingsScree
               }
               return SwitchSettingItem(
                 title: 'Use high priority notifications',
-                subtitle: 'Show previews of notifications at the top of the screen.',
+                subtitle:
+                    'Show previews of notifications at the top of the screen.',
                 value: groupUseHighPriorityNotifications,
                 onChanged: onChanged,
               );
             },
           ),
-          Divider(),
-          SettingItemHeader(
+          const Divider(),
+          const SettingItemHeader(
             title: 'Calls',
-            padding: EdgeInsets.only(top: 16.0, left: 24.0, right: 24.0, bottom: 4.0),
+            padding: EdgeInsets.only(
+                top: 16.0, left: 24.0, right: 24.0, bottom: 4.0),
           ),
-          _buildFutureSettingItem(context, 'Ringtone', ringtoneOptionsList, _callsRingtone, _getRingtoneText, true, (RingtoneOptions value) {
+          _buildFutureSettingItem(context, 'Ringtone', ringtoneOptionsList,
+              _callsRingtone, _getRingtoneText, true, (RingtoneOptions value) {
             _setCallsRingtone(value.index);
           }),
-          _buildFutureSettingItem(context, 'Vibrate', vibrateOptionsList, _callsVibrate, _getVibrateText, false, (VibrateOptions value) {
+          _buildFutureSettingItem(context, 'Vibrate', vibrateOptionsList,
+              _callsVibrate, _getVibrateText, false, (VibrateOptions value) {
             _setCallsVibrate(value.index);
           }),
-          SizedBox(
+          const SizedBox(
             height: 8.0,
           )
         ],
@@ -431,12 +508,13 @@ class _NotificationsSettingsScreenState extends State<NotificationsSettingsScree
     );
   }
 
-  _buildFutureSettingItem(BuildContext context, String title, allOptions, future, getText, bool isActions, onChanged) {
+  _buildFutureSettingItem(BuildContext context, String title, allOptions,
+      future, getText, bool isActions, onChanged) {
     return FutureBuilder(
       future: future,
       builder: (context, snapshot) {
         String subtitle = '-';
-        var onTap;
+        Null Function() onTap;
         switch (snapshot.connectionState) {
           case ConnectionState.none:
           case ConnectionState.active:
@@ -446,27 +524,27 @@ class _NotificationsSettingsScreenState extends State<NotificationsSettingsScree
           case ConnectionState.done:
             if (snapshot.hasError) {
               subtitle = 'Error: ${snapshot.error}';
-              print(snapshot.error);
-            }
-            else {
+              logger.d(snapshot.error);
+            } else {
               subtitle = getText(snapshot.data);
-              onTap = (){
-                DialogHelpers.showRadioDialog(allOptions, title, getText, context, snapshot.data, isActions, onChanged);
+              onTap = () {
+                DialogHelpers.showRadioDialog(allOptions, title, getText,
+                    context, snapshot.data, isActions, onChanged);
               };
             }
         }
         return SettingItem(
-            title: title,
-            subtitle: subtitle,
-            onTap: onTap,
-            padding: EdgeInsets.symmetric(vertical: 0.0, horizontal: 24.0),
+          title: title,
+          subtitle: subtitle,
+          onTap: onTap,
+          padding: const EdgeInsets.symmetric(vertical: 0.0, horizontal: 24.0),
         );
       },
     );
   }
 
   _selectOption(NotificationsOptions option) {
-    switch(option) {
+    switch (option) {
       case NotificationsOptions.resetNotificationSettings:
         _resetSettings();
         break;
@@ -474,7 +552,7 @@ class _NotificationsSettingsScreenState extends State<NotificationsSettingsScree
   }
 
   String _getNotificationToneText(NotificationToneOptions option) {
-    switch(option) {
+    switch (option) {
       case NotificationToneOptions.defaultNotificationSound:
         return 'Default notification sound';
       case NotificationToneOptions.none:
@@ -527,7 +605,7 @@ class _NotificationsSettingsScreenState extends State<NotificationsSettingsScree
   }
 
   String _getVibrateText(VibrateOptions option) {
-    switch(option) {
+    switch (option) {
       case VibrateOptions.off:
         return 'Off';
       case VibrateOptions.ddefault:
@@ -541,7 +619,7 @@ class _NotificationsSettingsScreenState extends State<NotificationsSettingsScree
   }
 
   String _getPopupNotificationText(PopupNotificationOptions option) {
-    switch(option) {
+    switch (option) {
       case PopupNotificationOptions.noPopup:
         return 'No popup';
       case PopupNotificationOptions.onlyScreenOn:
@@ -555,7 +633,7 @@ class _NotificationsSettingsScreenState extends State<NotificationsSettingsScree
   }
 
   String _getLightText(LightOptions option) {
-    switch(option) {
+    switch (option) {
       case LightOptions.none:
         return 'None';
       case LightOptions.white:
@@ -577,7 +655,7 @@ class _NotificationsSettingsScreenState extends State<NotificationsSettingsScree
   }
 
   String _getRingtoneText(RingtoneOptions option) {
-    switch(option) {
+    switch (option) {
       case RingtoneOptions.defaultRingtone:
         return 'Default ringtone';
       case RingtoneOptions.none:
@@ -645,42 +723,75 @@ class _NotificationsSettingsScreenState extends State<NotificationsSettingsScree
     final SharedPreferences prefs = await _prefs;
 
     setState(() {
-      _conversationTones = prefs.setBool(SharedPreferencesHelpers.conversationTones, SharedPreferencesHelpers.defaultConversationTones).then((bool success) {
+      _conversationTones = prefs
+          .setBool(SharedPreferencesHelpers.conversationTones,
+              SharedPreferencesHelpers.defaultConversationTones)
+          .then((bool success) {
         return SharedPreferencesHelpers.defaultConversationTones;
       });
-      _notificationTone = prefs.setInt(SharedPreferencesHelpers.notificationTone, null).then((bool success) {
+      _notificationTone = prefs
+          .setInt(SharedPreferencesHelpers.notificationTone, null)
+          .then((bool success) {
         return null;
       });
-      _popupNotification = prefs.setInt(SharedPreferencesHelpers.popupNotification, defaultPopupNotification.index).then((bool success) {
+      _popupNotification = prefs
+          .setInt(SharedPreferencesHelpers.popupNotification,
+              defaultPopupNotification.index)
+          .then((bool success) {
         return defaultPopupNotification;
       });
-      _light = prefs.setInt(SharedPreferencesHelpers.light, defaultLight.index).then((bool success) {
+      _light = prefs
+          .setInt(SharedPreferencesHelpers.light, defaultLight.index)
+          .then((bool success) {
         return defaultLight;
       });
-      _useHighPriorityNotifications = prefs.setBool(SharedPreferencesHelpers.useHighPriorityNotifications, SharedPreferencesHelpers.defaultGroupUseHighPriorityNotifications).then((bool success) {
-        return SharedPreferencesHelpers.defaultGroupUseHighPriorityNotifications;
+      _useHighPriorityNotifications = prefs
+          .setBool(SharedPreferencesHelpers.useHighPriorityNotifications,
+              SharedPreferencesHelpers.defaultGroupUseHighPriorityNotifications)
+          .then((bool success) {
+        return SharedPreferencesHelpers
+            .defaultGroupUseHighPriorityNotifications;
       });
 
-      _groupNotificationTone = prefs.setInt(SharedPreferencesHelpers.groupNotificationTone, null).then((bool success) {
+      _groupNotificationTone = prefs
+          .setInt(SharedPreferencesHelpers.groupNotificationTone, null)
+          .then((bool success) {
         return null;
       });
-      _groupVibrate = prefs.setInt(SharedPreferencesHelpers.groupVibrate, defaultGroupVibrate.index).then((bool success) {
+      _groupVibrate = prefs
+          .setInt(
+              SharedPreferencesHelpers.groupVibrate, defaultGroupVibrate.index)
+          .then((bool success) {
         return defaultGroupVibrate;
       });
-      _groupPopupNotification = prefs.setInt(SharedPreferencesHelpers.groupPopupNotification, defaultGroupPopupNotification.index).then((bool success) {
+      _groupPopupNotification = prefs
+          .setInt(SharedPreferencesHelpers.groupPopupNotification,
+              defaultGroupPopupNotification.index)
+          .then((bool success) {
         return defaultGroupPopupNotification;
       });
-      _groupLight = prefs.setInt(SharedPreferencesHelpers.groupLight, defaultGroupLight.index).then((bool success) {
+      _groupLight = prefs
+          .setInt(SharedPreferencesHelpers.groupLight, defaultGroupLight.index)
+          .then((bool success) {
         return defaultGroupLight;
       });
-      _groupUseHighPriorityNotifications = prefs.setBool(SharedPreferencesHelpers.groupUseHighPriorityNotifications, SharedPreferencesHelpers.defaultGroupUseHighPriorityNotifications).then((bool success) {
-        return SharedPreferencesHelpers.defaultGroupUseHighPriorityNotifications;
+      _groupUseHighPriorityNotifications = prefs
+          .setBool(SharedPreferencesHelpers.groupUseHighPriorityNotifications,
+              SharedPreferencesHelpers.defaultGroupUseHighPriorityNotifications)
+          .then((bool success) {
+        return SharedPreferencesHelpers
+            .defaultGroupUseHighPriorityNotifications;
       });
 
-      _callsRingtone = prefs.setInt(SharedPreferencesHelpers.callsRingtone, null).then((bool success) {
+      _callsRingtone = prefs
+          .setInt(SharedPreferencesHelpers.callsRingtone, null)
+          .then((bool success) {
         return null;
       });
-      _callsVibrate = prefs.setInt(SharedPreferencesHelpers.callsVibrate, defaultCallsVibrate.index).then((bool success) {
+      _callsVibrate = prefs
+          .setInt(
+              SharedPreferencesHelpers.callsVibrate, defaultCallsVibrate.index)
+          .then((bool success) {
         return defaultCallsVibrate;
       });
     });
@@ -690,7 +801,9 @@ class _NotificationsSettingsScreenState extends State<NotificationsSettingsScree
     final SharedPreferences prefs = await _prefs;
 
     setState(() {
-      _conversationTones = prefs.setBool(SharedPreferencesHelpers.conversationTones, value).then((bool success) {
+      _conversationTones = prefs
+          .setBool(SharedPreferencesHelpers.conversationTones, value)
+          .then((bool success) {
         return value;
       });
     });
@@ -700,7 +813,9 @@ class _NotificationsSettingsScreenState extends State<NotificationsSettingsScree
     final SharedPreferences prefs = await _prefs;
 
     setState(() {
-      _notificationTone = prefs.setInt(SharedPreferencesHelpers.notificationTone, value).then((bool success) {
+      _notificationTone = prefs
+          .setInt(SharedPreferencesHelpers.notificationTone, value)
+          .then((bool success) {
         return notificationToneOptionsList[value];
       });
     });
@@ -710,7 +825,9 @@ class _NotificationsSettingsScreenState extends State<NotificationsSettingsScree
     final SharedPreferences prefs = await _prefs;
 
     setState(() {
-      _vibrate = prefs.setInt(SharedPreferencesHelpers.vibrate, value).then((bool success) {
+      _vibrate = prefs
+          .setInt(SharedPreferencesHelpers.vibrate, value)
+          .then((bool success) {
         return vibrateOptionsList[value];
       });
     });
@@ -720,7 +837,9 @@ class _NotificationsSettingsScreenState extends State<NotificationsSettingsScree
     final SharedPreferences prefs = await _prefs;
 
     setState(() {
-      _popupNotification = prefs.setInt(SharedPreferencesHelpers.popupNotification, value).then((bool success) {
+      _popupNotification = prefs
+          .setInt(SharedPreferencesHelpers.popupNotification, value)
+          .then((bool success) {
         return popupNotificationOptionsList[value];
       });
     });
@@ -730,7 +849,9 @@ class _NotificationsSettingsScreenState extends State<NotificationsSettingsScree
     final SharedPreferences prefs = await _prefs;
 
     setState(() {
-      _light = prefs.setInt(SharedPreferencesHelpers.light, value).then((bool success) {
+      _light = prefs
+          .setInt(SharedPreferencesHelpers.light, value)
+          .then((bool success) {
         return lightOptionsList[value];
       });
     });
@@ -740,7 +861,9 @@ class _NotificationsSettingsScreenState extends State<NotificationsSettingsScree
     final SharedPreferences prefs = await _prefs;
 
     setState(() {
-      _useHighPriorityNotifications = prefs.setBool(SharedPreferencesHelpers.useHighPriorityNotifications, value).then((bool success) {
+      _useHighPriorityNotifications = prefs
+          .setBool(SharedPreferencesHelpers.useHighPriorityNotifications, value)
+          .then((bool success) {
         return value;
       });
     });
@@ -750,7 +873,9 @@ class _NotificationsSettingsScreenState extends State<NotificationsSettingsScree
     final SharedPreferences prefs = await _prefs;
 
     setState(() {
-      _groupNotificationTone = prefs.setInt(SharedPreferencesHelpers.groupNotificationTone, value).then((bool success) {
+      _groupNotificationTone = prefs
+          .setInt(SharedPreferencesHelpers.groupNotificationTone, value)
+          .then((bool success) {
         return notificationToneOptionsList[value];
       });
     });
@@ -760,7 +885,9 @@ class _NotificationsSettingsScreenState extends State<NotificationsSettingsScree
     final SharedPreferences prefs = await _prefs;
 
     setState(() {
-      _groupVibrate = prefs.setInt(SharedPreferencesHelpers.groupVibrate, value).then((bool success) {
+      _groupVibrate = prefs
+          .setInt(SharedPreferencesHelpers.groupVibrate, value)
+          .then((bool success) {
         return vibrateOptionsList[value];
       });
     });
@@ -770,7 +897,9 @@ class _NotificationsSettingsScreenState extends State<NotificationsSettingsScree
     final SharedPreferences prefs = await _prefs;
 
     setState(() {
-      _groupPopupNotification = prefs.setInt(SharedPreferencesHelpers.groupPopupNotification, value).then((bool success) {
+      _groupPopupNotification = prefs
+          .setInt(SharedPreferencesHelpers.groupPopupNotification, value)
+          .then((bool success) {
         return popupNotificationOptionsList[value];
       });
     });
@@ -780,7 +909,9 @@ class _NotificationsSettingsScreenState extends State<NotificationsSettingsScree
     final SharedPreferences prefs = await _prefs;
 
     setState(() {
-      _groupLight = prefs.setInt(SharedPreferencesHelpers.groupLight, value).then((bool success) {
+      _groupLight = prefs
+          .setInt(SharedPreferencesHelpers.groupLight, value)
+          .then((bool success) {
         return lightOptionsList[value];
       });
     });
@@ -790,7 +921,10 @@ class _NotificationsSettingsScreenState extends State<NotificationsSettingsScree
     final SharedPreferences prefs = await _prefs;
 
     setState(() {
-      _groupUseHighPriorityNotifications = prefs.setBool(SharedPreferencesHelpers.groupUseHighPriorityNotifications, value).then((bool success) {
+      _groupUseHighPriorityNotifications = prefs
+          .setBool(
+              SharedPreferencesHelpers.groupUseHighPriorityNotifications, value)
+          .then((bool success) {
         return value;
       });
     });
@@ -800,7 +934,9 @@ class _NotificationsSettingsScreenState extends State<NotificationsSettingsScree
     final SharedPreferences prefs = await _prefs;
 
     setState(() {
-      _callsRingtone = prefs.setInt(SharedPreferencesHelpers.callsRingtone, value).then((bool success) {
+      _callsRingtone = prefs
+          .setInt(SharedPreferencesHelpers.callsRingtone, value)
+          .then((bool success) {
         return ringtoneOptionsList[value];
       });
     });
@@ -810,7 +946,9 @@ class _NotificationsSettingsScreenState extends State<NotificationsSettingsScree
     final SharedPreferences prefs = await _prefs;
 
     setState(() {
-      _callsVibrate = prefs.setInt(SharedPreferencesHelpers.callsVibrate, value).then((bool success) {
+      _callsVibrate = prefs
+          .setInt(SharedPreferencesHelpers.callsVibrate, value)
+          .then((bool success) {
         return vibrateOptionsList[value];
       });
     });

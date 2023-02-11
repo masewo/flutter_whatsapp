@@ -5,22 +5,24 @@ import 'package:flutter_whatsapp/src/config/routes.dart';
 import 'package:flutter_whatsapp/src/values/colors.dart';
 
 class FlutteredApp extends StatefulWidget {
+  const FlutteredApp({Key key}) : super(key: key);
+
   @override
-  _FlutteredAppState createState() => _FlutteredAppState();
+  State<FlutteredApp> createState() => _FlutteredAppState();
 }
 
 class _FlutteredAppState extends State<FlutteredApp> {
   _FlutteredAppState() {
-    final router = new FluroRouter();
+    final router =FluroRouter();
     Routes.configureRoutes(router);
     Application.router = router;
   }
 
   /// Default theme.
-  static final ThemeData _defaultTheme = new ThemeData(
+  static final ThemeData _defaultTheme = ThemeData(
     primaryColor: primaryColor,
     scaffoldBackgroundColor: scaffoldBgColor,
-    appBarTheme: AppBarTheme(
+    appBarTheme: const AppBarTheme(
       backgroundColor: primaryColor,
     ),
     colorScheme: ColorScheme.fromSwatch().copyWith(secondary: Colors.white),

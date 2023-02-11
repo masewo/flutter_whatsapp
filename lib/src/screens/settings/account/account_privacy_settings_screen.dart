@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:fluro/fluro.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_whatsapp/src/helpers/logger.dart';
 import 'package:flutter_whatsapp/src/config/application.dart';
 import 'package:flutter_whatsapp/src/config/routes.dart';
 import 'package:flutter_whatsapp/src/config/shared_preferences_helpers.dart';
@@ -24,8 +25,10 @@ var privacyOptionList = [
 ];
 
 class AccountPrivacySettingsScreen extends StatefulWidget {
+  const AccountPrivacySettingsScreen({Key key}) : super(key: key);
+
   @override
-  _AccountPrivacySettingsScreenState createState() => _AccountPrivacySettingsScreenState();
+  State<AccountPrivacySettingsScreen> createState() => _AccountPrivacySettingsScreenState();
 }
 
 class _AccountPrivacySettingsScreenState extends State<AccountPrivacySettingsScreen> {
@@ -40,7 +43,7 @@ class _AccountPrivacySettingsScreenState extends State<AccountPrivacySettingsScr
   Future<PrivacyOptions> _about;
   Future<bool> _readReceipts;
 
-  Future<SharedPreferences> _prefs = SharedPreferences.getInstance();
+  final Future<SharedPreferences> _prefs = SharedPreferences.getInstance();
 
   @override
   void initState() {
@@ -65,14 +68,14 @@ class _AccountPrivacySettingsScreenState extends State<AccountPrivacySettingsScr
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Privacy'),
+        title: const Text('Privacy'),
       ),
       body: ListView(
         children: <Widget>[
-          SettingItemHeader(
+          const SettingItemHeader(
             title: 'Who can see my personal info',
             subtitle: 'If you don\'t share your Last Seen, you won\'t be able to see other people\'s Last Seen',
-            padding: EdgeInsets.only(top: 16.0, left: 24.0, right: 24.0, bottom: 4.0),
+padding: EdgeInsets.only(top: 16.0, left: 24.0, right: 24.0, bottom: 4.0),
           ),
           _buildFutureSettingItem(context, 'Last seen', _lastSeen, _getPrivacyText, (PrivacyOptions value) {
             _setLastSeen(value.index);
@@ -94,13 +97,13 @@ class _AccountPrivacySettingsScreenState extends State<AccountPrivacySettingsScr
                 transition: TransitionType.inFromRight,
               );
             },
-            padding: EdgeInsets.symmetric(vertical: 2.0, horizontal: 24.0)
+            padding: const EdgeInsets.symmetric(vertical: 2.0, horizontal: 24.0)
           ),
           FutureBuilder(
             future: _readReceipts,
-            key: Key('Receipts'),
+            key: const Key('Receipts'),
             builder: (context, snapshot) {
-              var onChanged;
+              Null Function(bool value) onChanged;
               bool readReceipts = false;
               switch (snapshot.connectionState) {
                 case ConnectionState.none:
@@ -109,7 +112,7 @@ class _AccountPrivacySettingsScreenState extends State<AccountPrivacySettingsScr
                   break;
                 case ConnectionState.done:
                   if (snapshot.hasError) {
-                    print(snapshot.error);
+                    logger.d(snapshot.error);
                   }
                   else {
                     readReceipts = snapshot.data;
@@ -126,7 +129,7 @@ class _AccountPrivacySettingsScreenState extends State<AccountPrivacySettingsScr
               );
             },
           ),
-          Divider(),
+          const Divider(),
           SettingItem(
             title: 'Live location',
             subtitle: 'None',
@@ -138,7 +141,7 @@ class _AccountPrivacySettingsScreenState extends State<AccountPrivacySettingsScr
                 transition: TransitionType.inFromRight,
               );
             },
-              padding: EdgeInsets.symmetric(vertical: 2.0, horizontal: 24.0)
+              padding: const EdgeInsets.symmetric(vertical: 2.0, horizontal: 24.0)
           ),
           SettingItem(
             title: 'Blocked contacts',
@@ -151,7 +154,7 @@ class _AccountPrivacySettingsScreenState extends State<AccountPrivacySettingsScr
                 transition: TransitionType.inFromRight,
               );
             },
-              padding: EdgeInsets.symmetric(vertical: 2.0, horizontal: 24.0)
+              padding: const EdgeInsets.symmetric(vertical: 2.0, horizontal: 24.0)
           ),
         ]
       ),
@@ -176,7 +179,7 @@ class _AccountPrivacySettingsScreenState extends State<AccountPrivacySettingsScr
       future: future,
       builder: (context, snapshot) {
         String subtitle = '-';
-        var onTap;
+        Null Function() onTap;
         switch (snapshot.connectionState) {
           case ConnectionState.none:
           case ConnectionState.active:
@@ -186,7 +189,7 @@ class _AccountPrivacySettingsScreenState extends State<AccountPrivacySettingsScr
           case ConnectionState.done:
             if (snapshot.hasError) {
               subtitle = 'Error: ${snapshot.error}';
-              print(snapshot.error);
+              logger.d(snapshot.error);
             }
             else {
               subtitle = getText(snapshot.data);
@@ -199,7 +202,7 @@ class _AccountPrivacySettingsScreenState extends State<AccountPrivacySettingsScr
             title: title,
             subtitle: subtitle,
             onTap: onTap,
-            padding: EdgeInsets.symmetric(vertical: 2.0, horizontal: 24.0)
+            padding: const EdgeInsets.symmetric(vertical: 2.0, horizontal: 24.0)
         );
       },
     );

@@ -14,21 +14,22 @@ class DetailCallScreen extends StatefulWidget {
 
   final int id;
 
-  DetailCallScreen({
+  const DetailCallScreen({Key key,
     this.id,
-  });
+  }) : super(key: key);
 
-    _DetailCallScreen createState() => _DetailCallScreen();
+    @override
+  State<DetailCallScreen> createState() => _DetailCallScreen();
 }
 
 class _DetailCallScreen extends State<DetailCallScreen> {
   @override
   Widget build(BuildContext context) {
-    Call call = new Call(
+    Call call = Call(
       name: 'NAME',
       avatarUrl: 'https://dummyimage.com/100x100',
       callDetails: <CallDetail>[
-        new CallDetail(
+        CallDetail(
           timestamp: DateTime.now(),
           isMissed: true,
           isIncoming: true,
@@ -38,11 +39,11 @@ class _DetailCallScreen extends State<DetailCallScreen> {
 
     return Scaffold(
       appBar: AppBar(
-        title: Text('Call info'),
+        title: const Text('Call info'),
         actions: <Widget>[
           IconButton(
             tooltip: 'New chat',
-            icon: Icon(Icons.message),
+            icon: const Icon(Icons.message),
             onPressed: (){},
           ),
           PopupMenuButton<CallDetailOptions>(
@@ -50,13 +51,13 @@ class _DetailCallScreen extends State<DetailCallScreen> {
             onSelected: _onSelectedOption,
             itemBuilder: (BuildContext context) {
               return [
-                PopupMenuItem<CallDetailOptions>(
-                  child: Text('Remove from call log'),
+                const PopupMenuItem<CallDetailOptions>(
                   value: CallDetailOptions.removeLog,
+                  child: Text('Remove from call log'),
                 ),
-                PopupMenuItem<CallDetailOptions>(
-                  child: Text('Block'),
+                const PopupMenuItem<CallDetailOptions>(
                   value: CallDetailOptions.block,
+                  child: Text('Block'),
                 ),
               ];
             },
@@ -66,8 +67,8 @@ class _DetailCallScreen extends State<DetailCallScreen> {
       body: Column(
         children: <Widget>[
           Card(
-            margin: EdgeInsets.all(0.0),
-            shape: RoundedRectangleBorder(),
+            margin: const EdgeInsets.all(0.0),
+            shape: const RoundedRectangleBorder(),
             child: Padding(
               padding: const EdgeInsets.symmetric(vertical: 16.0, horizontal: 8.0),
               child: Row(
@@ -100,7 +101,7 @@ class _DetailCallScreen extends State<DetailCallScreen> {
                       padding: const EdgeInsets.all(8.0),
                       child: Text(
                         call.name,
-                        style: TextStyle(
+                        style: const TextStyle(
                           fontSize: 22.0,
                           fontWeight: FontWeight.bold,
                         ),
@@ -108,12 +109,12 @@ class _DetailCallScreen extends State<DetailCallScreen> {
                     ),
                   ),
                   IconButton(
-                    icon: Icon(Icons.call),
+                    icon: const Icon(Icons.call),
                     color: Theme.of(context).primaryColor,
                     onPressed: (){},
                   ),
                   IconButton(
-                    icon: Icon(Icons.videocam),
+                    icon: const Icon(Icons.videocam),
                     color: Theme.of(context).primaryColor,
                     onPressed: (){},
                   ),
@@ -122,21 +123,21 @@ class _DetailCallScreen extends State<DetailCallScreen> {
             ),
           ),
           Card(
-            margin: EdgeInsets.symmetric(horizontal: 14.0, vertical: 14.0),
+            margin: const EdgeInsets.symmetric(horizontal: 14.0, vertical: 14.0),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: <Widget>[
                 Padding(
                   padding: const EdgeInsets.only(right: 14.0, left: 14.0, top: 16.0),
                   child: Text(
-                    new DateFormat('MMMM dd').format(call.lastCall.timestamp),
-                    style: TextStyle(
+                    DateFormat('MMMM dd').format(call.lastCall.timestamp),
+                    style: const TextStyle(
                       fontSize: 16.0,
                       color: secondaryColor,
                     ),
                   ),
                 ),
-                Divider(),
+                const Divider(),
                 _buildCallDetails(call),
               ],
             ),
@@ -150,7 +151,7 @@ class _DetailCallScreen extends State<DetailCallScreen> {
     List<Widget> callDetails = <Widget>[];
 
     for(CallDetail detail in call.callDetails.reversed.toList()) {
-      callDetails.add(new Padding(
+      callDetails.add(Padding(
         padding: const EdgeInsets.all(14.0),
         child: Row(
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -160,7 +161,7 @@ class _DetailCallScreen extends State<DetailCallScreen> {
               color: detail.isMissed ? Colors.red : Colors.green,
               size: 20.0,
             ),
-            SizedBox(
+            const SizedBox(
               width: 5.0,
             ),
             Column(
@@ -168,14 +169,14 @@ class _DetailCallScreen extends State<DetailCallScreen> {
               children: <Widget>[
                 Text(
                   detail.isMissed ? 'Missed' : (detail.isIncoming ? 'Incoming' : 'Outgoing'),
-                  style: TextStyle(
+                  style: const TextStyle(
                     fontSize: 18.0,
                     fontWeight: FontWeight.bold,
                   ),
                 ),
                 Text(
-                  new DateFormat('HH:mm').format(detail.timestamp),
-                  style: TextStyle(
+                  DateFormat('HH:mm').format(detail.timestamp),
+                  style: const TextStyle(
                     fontSize: 16.0,
                     color: Colors.grey,
                   ),

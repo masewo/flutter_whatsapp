@@ -6,16 +6,18 @@ import 'package:flutter_whatsapp/src/values/colors.dart';
 import 'package:flutter_whatsapp/src/widgets/deprecated/raised_button.dart';
 
 class AccountTwoStepSettingsScreen extends StatelessWidget {
+  const AccountTwoStepSettingsScreen({Key key}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
-    final String text = 'For added security, enable two-step '
+    const String text = 'For added security, enable two-step '
       'verfication, which will require a PIN when '
       'registering your phone number with '
       'WhatzApp again.';
 
     return Scaffold(
       appBar: AppBar(
-        title: Text('Two-step verification'),
+        title: const Text('Two-step verification'),
       ),
       body: Column(
         children: <Widget>[
@@ -35,8 +37,8 @@ class AccountTwoStepSettingsScreen extends StatelessWidget {
                     ),
                   ),
                 ),
-                Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 32.0),
+                const Padding(
+                  padding: EdgeInsets.symmetric(horizontal: 32.0),
                   child: Text(
                     text,
                     textAlign: TextAlign.center,
@@ -53,7 +55,7 @@ class AccountTwoStepSettingsScreen extends StatelessWidget {
             padding: const EdgeInsets.all(16.0),
             child: RaisedButton(
               color: fabBgColor,
-              child: Text(
+              child: const Text(
                   'ENABLE',
                 style: TextStyle(
                   color: Colors.white,

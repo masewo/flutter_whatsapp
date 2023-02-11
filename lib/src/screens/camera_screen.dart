@@ -6,6 +6,7 @@ import 'package:fluro/fluro.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_whatsapp/src/helpers/logger.dart';
 import 'package:flutter_whatsapp/src/config/application.dart';
 import 'package:flutter_whatsapp/src/values/colors.dart';
 import 'package:permission_handler/permission_handler.dart';
@@ -14,19 +15,23 @@ import 'package:sliding_up_panel/sliding_up_panel.dart';
 List<CameraDescription> cameras;
 
 class CameraScreen extends StatelessWidget {
+  const CameraScreen({Key key}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
-    return CameraHome();
+    return const CameraHome();
   }
 }
 
 class CameraHome extends StatefulWidget {
+  const CameraHome({Key key}) : super(key: key);
+
   @override
-  _CameraHomeState createState() => _CameraHomeState();
+  State<CameraHome> createState() => _CameraHomeState();
 }
 
 class _CameraHomeState extends State<CameraHome> {
-  final GlobalKey<ScaffoldState> _scaffoldKey = new GlobalKey<ScaffoldState>();
+  final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
   CameraController controller;
   int _cameraIndex = 0;
   bool isShowGallery = true;
@@ -48,7 +53,7 @@ class _CameraHomeState extends State<CameraHome> {
     super.initState();
 
     initScreen();
-    _panelController = new PanelController();
+    _panelController = PanelController();
   }
 
   void initScreen() async {
@@ -84,8 +89,9 @@ class _CameraHomeState extends State<CameraHome> {
       });
       startCamera();
     } else {
+      if (!mounted) return;
       ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(
+        const SnackBar(
           content: Text('Permission not granted'),
           duration: Duration(seconds: 1),
         ),
@@ -107,7 +113,7 @@ class _CameraHomeState extends State<CameraHome> {
         ExternalPath.getExternalStoragePublicDirectory(ExternalPath.DIRECTORY_DCIM)
             .then((path) {
       List<String> paths = <String>[];
-      Directory dir2 = new Directory(path);
+      Directory dir2 = Directory(path);
       // execute an action on each entry
       dir2.listSync(recursive: true).forEach((f) {
         if (f.path.contains('.jpg')) {
@@ -149,14 +155,14 @@ class _CameraHomeState extends State<CameraHome> {
     controller.addListener(() {
       if (mounted) setState(() {});
       if (controller.value.hasError) {
-        print('Camera error ${controller.value.errorDescription}');
+        logger.d('Camera error ${controller.value.errorDescription}');
       }
     });
 
     try {
       await controller.initialize();
     } on CameraException catch (e) {
-      print(e);
+      logger.d(e);
     }
 
     if (mounted) {
@@ -166,7 +172,7 @@ class _CameraHomeState extends State<CameraHome> {
 
   Widget _cameraPreviewWidget() {
     if (controller == null || !controller.value.isInitialized) {
-      return Center(
+      return const Center(
         child: Text(
           '',
           style: TextStyle(
@@ -191,7 +197,7 @@ class _CameraHomeState extends State<CameraHome> {
   }
 
   double _opacity = 0.0;
-  double _minHeight = 210.0;
+  final double _minHeight = 210.0;
 
   @override
   Widget build(BuildContext context) {
@@ -214,7 +220,7 @@ class _CameraHomeState extends State<CameraHome> {
                     backgroundColor: Colors.white,
                     leading: IconButton(
                       color: secondaryColor,
-                      icon: Icon(Icons.arrow_back),
+                      icon: const Icon(Icons.arrow_back),
                       onPressed: () {
                         _panelController.close();
                       },
@@ -222,7 +228,7 @@ class _CameraHomeState extends State<CameraHome> {
                     actions: <Widget>[
                       IconButton(
                         color: secondaryColor,
-                        icon: Icon(Icons.check_box),
+                        icon: const Icon(Icons.check_box),
                         onPressed: () {},
                       ),
                     ],
@@ -234,23 +240,23 @@ class _CameraHomeState extends State<CameraHome> {
                         builder: (BuildContext context,
                             AsyncSnapshot<List<String>> snapshot) {
                           if (!isPermissionsGranted) {
-                            return Center(
+                            return const Center(
                               child: Text('Permission not granted'),
                             );
                           }
                           switch (snapshot.connectionState) {
                             case ConnectionState.none:
-                              return Center(
-                                child: CircularProgressIndicator(
-                                  valueColor: new AlwaysStoppedAnimation<Color>(
+                              return const Center(
+child: CircularProgressIndicator(
+valueColor: AlwaysStoppedAnimation<Color>(
                                       Colors.grey),
                                 ),
                               );
                             case ConnectionState.active:
                             case ConnectionState.waiting:
-                              return Center(
-                                child: CircularProgressIndicator(
-                                  valueColor: new AlwaysStoppedAnimation<Color>(
+                              return const Center(
+child: CircularProgressIndicator(
+valueColor: AlwaysStoppedAnimation<Color>(
                                       Colors.grey),
                                 ),
                               );
@@ -260,7 +266,7 @@ class _CameraHomeState extends State<CameraHome> {
                                   child: Text('Error: ${snapshot.error}'),
                                 );
                               }
-                              if (snapshot.data.length <= 0) return Container();
+                              if (snapshot.data.isEmpty) return Container();
                               return CustomScrollView(
                                 slivers: <Widget>[
                                   SliverPersistentHeader(
@@ -271,7 +277,7 @@ class _CameraHomeState extends State<CameraHome> {
                                   ),
                                   SliverGrid(
                                     gridDelegate:
-                                        SliverGridDelegateWithFixedCrossAxisCount(
+                                        const SliverGridDelegateWithFixedCrossAxisCount(
                                       crossAxisCount: 3,
                                       mainAxisSpacing: 2.0,
                                       crossAxisSpacing: 2.0,
@@ -302,7 +308,7 @@ class _CameraHomeState extends State<CameraHome> {
                   ),
                 ),
               ),
-              color: Color.fromARGB(0, 0, 0, 0),
+              color: const Color.fromARGB(0, 0, 0, 0),
               collapsed: isShowGallery ? _buildCollapsedPanel() : Container(),
               body: Container(
                 decoration: BoxDecoration(
@@ -330,14 +336,13 @@ class _CameraHomeState extends State<CameraHome> {
                   child: Column(
                     children: <Widget>[
                       _buildCameraControls(),
-                      Container(
-                          child: Text(
+                      const Text(
                         'Hold for video, tap for photo',
                         style: TextStyle(
-                          color: Colors.white,
+                      color: Colors.white,
                         ),
                         textAlign: TextAlign.center,
-                      ))
+                      )
                     ],
                   )),
             )
@@ -349,25 +354,24 @@ class _CameraHomeState extends State<CameraHome> {
 
   void _toggleCamera() {
     setState(() {
-      if (_cameraIndex == 0)
+      if (_cameraIndex == 0) {
         _cameraIndex = 1;
-      else
+      } else {
         _cameraIndex = 0;
+      }
     });
     _initCamera(_cameraIndex);
   }
 
   Widget _buildCollapsedPanel() {
-    return Container(
-      child: Column(
-        children: <Widget>[
-          Icon(
-            Icons.keyboard_arrow_up,
-            color: Colors.white,
-          ),
-          _buildGalleryItems(),
-        ],
-      ),
+    return Column(
+      children: <Widget>[
+        const Icon(
+          Icons.keyboard_arrow_up,
+          color: Colors.white,
+        ),
+        _buildGalleryItems(),
+      ],
     );
   }
 
@@ -376,7 +380,7 @@ class _CameraHomeState extends State<CameraHome> {
   Future<String> _takePicture() async {
     if (!controller.value.isInitialized) {
       ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(content: Text('Error: camera is not initialized')));
+          const SnackBar(content: Text('Error: camera is not initialized')));
     }
 //    final Directory extDir = await getApplicationDocumentsDirectory();
 //     final String dirPath = await ExtStorage.getExternalStoragePublicDirectory(
@@ -401,8 +405,8 @@ class _CameraHomeState extends State<CameraHome> {
   Future<void> startVideoRecording() async {
     if (!controller.value.isInitialized) {
       ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(content: Text('Error: camera is not initialized')));
-      return null;
+          const SnackBar(content: Text('Error: camera is not initialized')));
+      return;
     }
 
     // final String dirPath = await ExtStorage.getExternalStoragePublicDirectory(
@@ -411,7 +415,7 @@ class _CameraHomeState extends State<CameraHome> {
     //final String filePath = '$dirPath/${timestamp()}.mp4';
 
     if (controller.value.isRecordingVideo) {
-      return null;
+      return;
     }
 
     try {
@@ -419,7 +423,7 @@ class _CameraHomeState extends State<CameraHome> {
     } on CameraException catch (e) {
       ScaffoldMessenger.of(context)
           .showSnackBar(SnackBar(content: Text('Error: ${e.description}')));
-      return null;
+      return;
     }
   }
 
@@ -478,23 +482,18 @@ class _CameraHomeState extends State<CameraHome> {
   }
 
   Widget _buildCameraControls() {
-    return Container(
+    return SizedBox(
       width: MediaQuery.of(context).size.width,
       child: Row(
         mainAxisSize: MainAxisSize.max,
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: <Widget>[
           IconButton(
-            icon: Icon(Icons.flash_off),
+            icon: const Icon(Icons.flash_off),
             color: Colors.white,
             onPressed: isPermissionsGranted ? () {} : null,
           ),
           GestureDetector(
-              child: Icon(
-                Icons.panorama_fish_eye,
-                size: 70.0,
-                color: Colors.white,
-              ),
               onTap: isPermissionsGranted
                   ? () {
                       if (controller == null ||
@@ -518,9 +517,14 @@ class _CameraHomeState extends State<CameraHome> {
                           !controller.value.isRecordingVideo) return;
                       onStopButtonPressed();
                     }
-                  : null),
+                  : null,
+              child: const Icon(
+                Icons.panorama_fish_eye,
+                size: 70.0,
+                color: Colors.white,
+              )),
           IconButton(
-            icon: Icon(Icons.switch_camera),
+            icon: const Icon(Icons.switch_camera),
             color: Colors.white,
             highlightColor: Colors.green,
             splashColor: Colors.red,
@@ -532,14 +536,14 @@ class _CameraHomeState extends State<CameraHome> {
   }
 
   Widget _buildGalleryItems() {
-    return Container(
+    return SizedBox(
       height: 80.0,
       child: FutureBuilder<List<String>>(
           future: _images,
           builder:
               (BuildContext context, AsyncSnapshot<List<String>> snapshot) {
             if (!isPermissionsGranted) {
-              return Center(
+              return const Center(
                 child: Text(
                   'Permission not granted',
                   style: TextStyle(
@@ -550,16 +554,16 @@ class _CameraHomeState extends State<CameraHome> {
             }
             switch (snapshot.connectionState) {
               case ConnectionState.none:
-                return Center(
-                  child: CircularProgressIndicator(
-                    valueColor: new AlwaysStoppedAnimation<Color>(Colors.grey),
+                return const Center(
+child: CircularProgressIndicator(
+valueColor: AlwaysStoppedAnimation<Color>(Colors.grey),
                   ),
                 );
               case ConnectionState.active:
               case ConnectionState.waiting:
-                return Center(
-                  child: CircularProgressIndicator(
-                    valueColor: new AlwaysStoppedAnimation<Color>(Colors.grey),
+                return const Center(
+child: CircularProgressIndicator(
+valueColor: AlwaysStoppedAnimation<Color>(Colors.grey),
                   ),
                 );
               case ConnectionState.done:
@@ -568,14 +572,14 @@ class _CameraHomeState extends State<CameraHome> {
                     child: Text('Error: ${snapshot.error}'),
                   );
                 }
-                if (snapshot.data.length <= 0) return Container();
+                if (snapshot.data.isEmpty) return Container();
                 List<String> displayedData = snapshot.data.sublist(0, 10);
                 return ListView.builder(
                   padding: const EdgeInsets.symmetric(horizontal: 1.0),
                   itemCount: displayedData.length,
                   scrollDirection: Axis.horizontal,
                   itemBuilder: (context, i) {
-                    //print(snapshot.data[i]);
+                    //logger.d(snapshot.data[i]);
                     return GalleryItemThumbnail(
                       heroId: 'item-$i',
                       margin: const EdgeInsets.symmetric(horizontal: 1.0),
@@ -599,26 +603,26 @@ class _CameraHomeState extends State<CameraHome> {
 }
 
 class GalleryItemThumbnail extends StatelessWidget {
-  GalleryItemThumbnail({
+  const GalleryItemThumbnail({Key key,
     this.heroId,
     this.resource,
     this.onTap,
     this.height,
     this.margin,
-  });
+  }) : super(key: key);
 
   final String heroId;
   final double height;
   final String resource;
   final GestureTapCallback onTap;
-  final margin;
+  final EdgeInsets margin;
 
   @override
   Widget build(BuildContext context) {
-    //print('gallery: img-$id');
+    //logger.d('gallery: img-$id');
     return Container(
       margin: margin,
-      color: Color.fromRGBO(255, 255, 255, 0.05),
+      color: const Color.fromRGBO(255, 255, 255, 0.05),
       child: GestureDetector(
         onTap: onTap,
         child: ClipRect(
@@ -627,7 +631,7 @@ class GalleryItemThumbnail extends StatelessWidget {
             child: Hero(
               tag: heroId,
               child: Image.file(
-                new File(resource),
+                File(resource),
                 width: height,
                 height: height,
                 cacheWidth: height.ceil(),
@@ -652,12 +656,12 @@ class _SliverAppBarDelegate extends SliverPersistentHeaderDelegate {
   @override
   Widget build(
       BuildContext context, double shrinkOffset, bool overlapsContent) {
-    return new Container(
+    return Container(
         padding: const EdgeInsets.symmetric(horizontal: 8.0, vertical: 16.0),
         color: Colors.white,
         child: Text(
           text,
-          style: TextStyle(
+          style: const TextStyle(
               fontSize: 14.0, color: Colors.grey, fontWeight: FontWeight.bold),
         ));
   }

@@ -6,25 +6,25 @@ class SettingItem extends StatelessWidget {
   final String title;
   final String subtitle;
   final Function onTap;
-  final padding;
+  final EdgeInsets padding;
 
-  SettingItem({this.icon, this.title, this.subtitle, this.onTap, this.padding});
+  const SettingItem({Key key, this.icon, this.title, this.subtitle, this.onTap, this.padding}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     if(subtitle == null) {
       return ListTile(
-        contentPadding: padding ?? EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
+        contentPadding: padding ?? const EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
         leading: icon == null ? null : Container(
-          padding: EdgeInsets.all(8.0),
+          padding: const EdgeInsets.all(8.0),
           child: Icon(
             icon,
-            color: Color.fromRGBO(7, 94, 84, 0.7),
+            color: const Color.fromRGBO(7, 94, 84, 0.7),
           ),
         ),
         title: Text(
           title,
-          style: TextStyle(
+          style: const TextStyle(
             fontWeight: FontWeight.w500,
           ),
         ),
@@ -32,17 +32,17 @@ class SettingItem extends StatelessWidget {
       );
     }
     return ListTile(
-      contentPadding: padding ?? null,
+      contentPadding: padding,
       leading: icon == null ? null : Container(
-        padding: EdgeInsets.all(8.0),
+        padding: const EdgeInsets.all(8.0),
         child: Icon(
           icon,
-          color: Color.fromRGBO(7, 94, 84, 0.7),
+          color: const Color.fromRGBO(7, 94, 84, 0.7),
         ),
       ),
       title: Text(
         title,
-        style: TextStyle(
+        style: const TextStyle(
           fontWeight: FontWeight.w500,
         ),
       ),

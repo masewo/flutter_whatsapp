@@ -1,16 +1,18 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_whatsapp/src/helpers/logger.dart';
 import 'package:flutter_whatsapp/src/models/status.dart';
 import 'package:flutter_whatsapp/src/services/status_service.dart';
 
 class DetailStatusScreen extends StatefulWidget {
   final int id;
 
-  DetailStatusScreen({
+  const DetailStatusScreen({Key key,
     this.id,
-  });
+  }) : super(key: key);
 
-  _DetailStatusScreenState createState() => _DetailStatusScreenState();
+  @override
+  State<DetailStatusScreen> createState() => _DetailStatusScreenState();
 }
 
 class _DetailStatusScreenState extends State<DetailStatusScreen> {
@@ -30,7 +32,7 @@ class _DetailStatusScreenState extends State<DetailStatusScreen> {
         imageList = status.imagesUrl;
         _width = List<double>.filled(count, 0.0);
       });
-      Future.delayed(Duration(milliseconds: 100), () {
+      Future.delayed(const Duration(milliseconds: 100), () {
         _playStatus();
       });
       Future.delayed(Duration(seconds: status.numImages * 5, milliseconds: 100),
@@ -52,7 +54,7 @@ class _DetailStatusScreenState extends State<DetailStatusScreen> {
         _image = CachedNetworkImageProvider(imageList[index]);
         index++;
       });
-      Future.delayed(Duration(seconds: 5), () {
+      Future.delayed(const Duration(seconds: 5), () {
         _playStatus();
       });
     }
@@ -72,17 +74,17 @@ class _DetailStatusScreenState extends State<DetailStatusScreen> {
                     builder: (context, AsyncSnapshot<Status> snapshot) {
                       switch (snapshot.connectionState) {
                         case ConnectionState.none:
-                          return Center(
-                            child: CircularProgressIndicator(
-                              valueColor: new AlwaysStoppedAnimation<Color>(
+                          return const Center(
+child: CircularProgressIndicator(
+valueColor: AlwaysStoppedAnimation<Color>(
                                   Colors.grey),
                             ),
                           );
                         case ConnectionState.active:
                         case ConnectionState.waiting:
-                          return Center(
-                            child: CircularProgressIndicator(
-                              valueColor: new AlwaysStoppedAnimation<Color>(
+                          return const Center(
+child: CircularProgressIndicator(
+valueColor: AlwaysStoppedAnimation<Color>(
                                   Colors.grey),
                             ),
                           );
@@ -90,7 +92,7 @@ class _DetailStatusScreenState extends State<DetailStatusScreen> {
                           if (snapshot.hasError) {
                             return Center(
                               child: Text('Error: ${snapshot.error}',
-                                  style: TextStyle(color: Colors.white)),
+                                  style: const TextStyle(color: Colors.white)),
                             );
                           }
                           if (_image == null) {
@@ -109,7 +111,7 @@ class _DetailStatusScreenState extends State<DetailStatusScreen> {
                     Navigator.of(context).pop();
                   },
                   child: Row(
-                    children: <Widget>[
+                    children: const <Widget>[
                       Icon(
                         Icons.arrow_back,
                         size: 24.0,
@@ -135,7 +137,7 @@ class _DetailStatusScreenState extends State<DetailStatusScreen> {
                         return Container();
                       case ConnectionState.done:
                         if (snapshot.hasError) {
-                          print(snapshot.error);
+                          logger.d(snapshot.error);
                         }
                         List<Widget> children = <Widget>[];
                         for (dynamic _ in snapshot.data.imagesUrl) {
@@ -148,7 +150,7 @@ class _DetailStatusScreenState extends State<DetailStatusScreen> {
                                       4.0 -
                                       (snapshot.data.numImages - 1) * 4.0) /
                                   snapshot.data.numImages,
-                              color: Color.fromRGBO(255, 255, 255, 0.4),
+                              color: const Color.fromRGBO(255, 255, 255, 0.4),
                             ),
                           ));
                         }
@@ -169,7 +171,7 @@ class _DetailStatusScreenState extends State<DetailStatusScreen> {
                         return Container();
                       case ConnectionState.done:
                         if (snapshot.hasError) {
-                          print(snapshot.error);
+                          logger.d(snapshot.error);
                         }
                         List<Widget> children = <Widget>[];
                         int i = 0;
@@ -178,7 +180,7 @@ class _DetailStatusScreenState extends State<DetailStatusScreen> {
                             padding: const EdgeInsets.symmetric(
                                 horizontal: 2.0, vertical: 4.0),
                             child: AnimatedContainer(
-                              duration: Duration(seconds: 5),
+                              duration: const Duration(seconds: 5),
                               height: 2.5,
                               width: _width[i],
                               color: Colors.white,

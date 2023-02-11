@@ -5,14 +5,16 @@ import 'package:flutter_whatsapp/src/config/routes.dart';
 import 'package:flutter_whatsapp/src/values/colors.dart';
 
 class WhatsappWebScreen extends StatelessWidget {
+  const WhatsappWebScreen({Key key}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Whatzapp Web'),
+        title: const Text('Whatzapp Web'),
         actions: <Widget>[
           IconButton(
-            icon: Icon(Icons.add),
+            icon: const Icon(Icons.add),
             tooltip: 'Scan QR code',
             onPressed: (){
               Application.router.navigateTo(
@@ -49,25 +51,25 @@ class WhatsappWebScreen extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: <Widget>[
-                Padding(
-                  padding: const EdgeInsets.only(left: 8.0, bottom: 8.0, top: 16.0),
-                  child: Text(
+                const Padding(
+padding: EdgeInsets.only(left: 8.0, bottom: 8.0, top: 16.0),
+child: Text(
                     'Logged in devices',
-                    style: TextStyle(
+style: TextStyle(
                       color: secondaryColor,
                       fontSize: 16.0,
                     ),
                   ),
                 ),
-                Divider(
+                const Divider(
                   height: 0.0,
                 ),
                 ListTile(
-                  leading: Icon(Icons.laptop_mac),
-                  title: Text(
+                  leading: const Icon(Icons.laptop_mac),
+                  title: const Text(
                     'Last active today at 18:05'
                   ),
-                  subtitle: Text(
+                  subtitle: const Text(
                     'Windows 10',
                   ),
                   onTap: (){
@@ -78,18 +80,18 @@ class WhatsappWebScreen extends StatelessWidget {
                     );
                   },
                 ),
-                Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 12.0),
+                const Padding(
+                  padding: EdgeInsets.symmetric(horizontal: 12.0),
                   child: Divider(
                     height: 0.0,
                   ),
                 ),
                 ListTile(
                   contentPadding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
-                  leading: Icon(Icons.exit_to_app),
-                  title: Text(
+                  leading: const Icon(Icons.exit_to_app),
+                  title: const Text(
                       'Log out from all devices',
-                    style: TextStyle(
+style: TextStyle(
                       color: blueCheckColor,
                     ),
                   ),
@@ -101,14 +103,14 @@ class WhatsappWebScreen extends StatelessWidget {
                     );
                   },
                 ),
-                SizedBox(
+                const SizedBox(
                   height: 4.0,
                 )
               ],
             ),
           ),
-          Padding(
-            padding: const EdgeInsets.all(20.0),
+          const Padding(
+            padding: EdgeInsets.all(20.0),
             child: Text(
               'Scan any QR code on your computer',
               textAlign: TextAlign.center,

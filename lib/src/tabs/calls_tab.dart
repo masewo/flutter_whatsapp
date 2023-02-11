@@ -12,13 +12,13 @@ class CallsTab extends StatelessWidget {
 
   final String searchKeyword;
   final AsyncMemoizer memoizer;
-  final refresh;
+  final VoidCallback refresh;
 
-  CallsTab({
+  const CallsTab({Key key,
     this.memoizer,
     this.searchKeyword,
     this.refresh,
-  });
+  }) : super(key: key);
 
   _getCallList() {
     return memoizer.runOnce(() {
@@ -33,16 +33,16 @@ class CallsTab extends StatelessWidget {
       builder: (context, snapshot) {
         switch (snapshot.connectionState) {
           case ConnectionState.none:
-            return Center(
-              child: CircularProgressIndicator(
-                valueColor: new AlwaysStoppedAnimation<Color>(Colors.grey),
+            return const Center(
+child: CircularProgressIndicator(
+valueColor: AlwaysStoppedAnimation<Color>(Colors.grey),
               ),
             );
           case ConnectionState.active:
           case ConnectionState.waiting:
-            return Center(
-              child: CircularProgressIndicator(
-                valueColor: new AlwaysStoppedAnimation<Color>(Colors.grey),
+            return const Center(
+child: CircularProgressIndicator(
+valueColor: AlwaysStoppedAnimation<Color>(Colors.grey),
               ),
             );
           case ConnectionState.done:
@@ -53,22 +53,22 @@ class CallsTab extends StatelessWidget {
                   children: <Widget>[
                     Text('Error: ${snapshot.error}', textAlign: TextAlign.center,),
                     RaisedButton(
-                      child: Text('Refresh'),
                       onPressed: refresh,
+                      child: const Text('Refresh'),
                     )
                   ]
               );
             }
             bool isFound = false;
-            CallList _callList = snapshot.data;
+            CallList callList = snapshot.data;
             return ListView.builder(
-              itemCount: _callList.calls.length,
+              itemCount: callList.calls.length,
               itemBuilder: (context, i) {
                 if (searchKeyword.isNotEmpty) {
-                  if (!_callList.calls[i].name
+                  if (!callList.calls[i].name
                       .toLowerCase()
                       .contains(searchKeyword.toLowerCase())) {
-                    if (!isFound && i >= _callList.calls.length - 1) {
+                    if (!isFound && i >= callList.calls.length - 1) {
                       return Padding(
                           padding: const EdgeInsets.all(16.0),
                           child: Center(
@@ -76,28 +76,28 @@ class CallsTab extends StatelessWidget {
                                 'No results found for \'$searchKeyword\''),
                           ));
                     }
-                    return SizedBox(
+                    return const SizedBox(
                       height: 0.0,
                     );
                   }
                 }
                 isFound = true;
                 return CallItem(
-                  call: _callList.calls[i],
+                  call: callList.calls[i],
                   searchKeyword: searchKeyword,
                   onTap: (){
                     Application.router.navigateTo(
                       context,
-                      "/call?id=${_callList.calls[i]}",
+                      "/call?id=${callList.calls[i]}",
                       transition: TransitionType.inFromRight,
                     );
                   },
                   onProfileTap: () {
                     Dialog profileDialog = DialogHelpers.getProfileDialog(
                       context: context,
-                      id: _callList.calls[i].id,
-                      imageUrl: _callList.calls[i].avatarUrl,
-                      name: _callList.calls[i].name,
+                      id: callList.calls[i].id,
+                      imageUrl: callList.calls[i].avatarUrl,
+                      name: callList.calls[i].name,
                     );
                     showDialog(
                         context: context,
@@ -106,7 +106,7 @@ class CallsTab extends StatelessWidget {
                   },
                   onLeadingTap: () {
                     ScaffoldMessenger.of(context).showSnackBar(
-                      new SnackBar(content: Text('Calling ${_callList.calls[i].name}...'))
+                      SnackBar(content: Text('Calling ${callList.calls[i].name}...'))
                     );
                   },
                 );

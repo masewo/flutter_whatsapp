@@ -15,14 +15,14 @@ class StatusItem extends StatelessWidget {
   final Function onTap;
   final String searchKeyword;
 
-  StatusItem({
+  const StatusItem({Key key,
     this.status,
     this.title,
     this.subtitle,
     this.thumbnail,
     this.onTap,
     this.searchKeyword,
-  });
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -31,55 +31,54 @@ class StatusItem extends StatelessWidget {
       leading: status != null
           ? _getThumbnail(status.isSeen, status.numImages)
           : Stack(
-        children: <Widget>[
-          CircleAvatar(
-            radius: 28.0,
-            backgroundImage: CachedNetworkImageProvider(thumbnail),
-          ),
-          Positioned(
-            bottom: 0.0,
-            right: 0.0,
-            child: Container(
-              decoration: BoxDecoration(
-                color: fabBgColor,
-                borderRadius: BorderRadius.all(Radius.circular(10))
-              ),
-              child: Icon(
-                Icons.add,
-                size: 20.0,
-                color: Colors.white,
-              ),
+              children: <Widget>[
+                CircleAvatar(
+                  radius: 28.0,
+                  backgroundImage: CachedNetworkImageProvider(thumbnail),
+                ),
+                Positioned(
+                  bottom: 0.0,
+                  right: 0.0,
+                  child: Container(
+                    decoration: const BoxDecoration(
+                        color: fabBgColor,
+                        borderRadius: BorderRadius.all(Radius.circular(10))),
+                    child: const Icon(
+                      Icons.add,
+                      size: 20.0,
+                      color: Colors.white,
+                    ),
+                  ),
+                )
+              ],
             ),
-          )
-        ],
-      ),
       title: status != null
           ? TextHelpers.getHighlightedText(
               status.name,
               searchKeyword,
-              TextStyle(
+              const TextStyle(
                 fontSize: 18.0,
                 fontWeight: FontWeight.bold,
                 color: Colors.black,
               ),
-              TextStyle(
+              const TextStyle(
                 fontSize: 18.0,
                 fontWeight: FontWeight.bold,
                 color: Colors.blue,
               ))
           : Text(
-          title,
-        style: TextStyle(
-          fontSize: 18.0,
-          fontWeight: FontWeight.bold,
-          color: Colors.black,
-        ),
-      ),
+              title,
+              style: const TextStyle(
+                fontSize: 18.0,
+                fontWeight: FontWeight.bold,
+                color: Colors.black,
+              ),
+            ),
       subtitle: Text(
         status != null
             ? DateFormat('dd/MM/yy, HH:mm').format(status.timestamp)
             : subtitle,
-        style: TextStyle(
+        style: const TextStyle(
           fontSize: 12.0,
           color: Colors.grey,
         ),
@@ -88,7 +87,7 @@ class StatusItem extends StatelessWidget {
   }
 
   Widget _getThumbnail(bool isSeen, int statusNum) {
-    return Container(
+    return SizedBox(
       width: 60.0,
       height: 60.0,
       child: CustomPaint(
@@ -100,8 +99,8 @@ class StatusItem extends StatelessWidget {
                 image: CachedNetworkImageProvider(status.thumbnailUrl),
                 fit: BoxFit.cover,
               ),
-              borderRadius: new BorderRadius.all(new Radius.circular(30.0)),
-              border: new Border.all(
+              borderRadius: const BorderRadius.all(Radius.circular(30.0)),
+              border: Border.all(
                 color: Colors.white,
                 width: 2.0,
               )),
@@ -116,7 +115,6 @@ degreeToRad(double degree) {
 }
 
 class StatusBorderPainter extends CustomPainter {
-
   bool isSeen;
   int statusNum;
 
@@ -124,7 +122,7 @@ class StatusBorderPainter extends CustomPainter {
 
   @override
   void paint(Canvas canvas, Size size) {
-    final Paint paint = new Paint()
+    final Paint paint = Paint()
       ..isAntiAlias = true
       ..strokeWidth = 4.0
       ..color = isSeen ? Colors.grey : statusThumbnailBorderColor
@@ -133,26 +131,15 @@ class StatusBorderPainter extends CustomPainter {
   }
 
   void drawArc(Canvas canvas, Paint paint, Size size, int count) {
-    if(count == 1) {
-      canvas.drawArc(
-          new Rect.fromLTWH(0.0, 0.0, size.width, size.height),
-          degreeToRad(0),
-          degreeToRad(360),
-          false,
-          paint
-      );
-    }
-    else {
+    if (count == 1) {
+      canvas.drawArc(Rect.fromLTWH(0.0, 0.0, size.width, size.height),
+          degreeToRad(0), degreeToRad(360), false, paint);
+    } else {
       double degree = -90;
       double arc = 360 / count;
-      for(int i = 0; i < count; i++) {
-        canvas.drawArc(
-            new Rect.fromLTWH(0.0, 0.0, size.width, size.height),
-            degreeToRad(degree+4),
-            degreeToRad(arc-8),
-            false,
-            paint
-        );
+      for (int i = 0; i < count; i++) {
+        canvas.drawArc(Rect.fromLTWH(0.0, 0.0, size.width, size.height),
+            degreeToRad(degree + 4), degreeToRad(arc - 8), false, paint);
         degree += arc;
       }
     }
@@ -162,5 +149,4 @@ class StatusBorderPainter extends CustomPainter {
   bool shouldRepaint(CustomPainter oldDelegate) {
     return true;
   }
-
 }

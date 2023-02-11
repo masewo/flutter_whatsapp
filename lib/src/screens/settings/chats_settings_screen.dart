@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:fluro/fluro.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_whatsapp/src/helpers/logger.dart';
 import 'package:flutter_whatsapp/src/config/application.dart';
 import 'package:flutter_whatsapp/src/config/routes.dart';
 import 'package:flutter_whatsapp/src/config/shared_preferences_helpers.dart';
@@ -23,8 +24,10 @@ var fontSizeOptionsList = [
 ];
 
 class ChatsSettingsScreen extends StatefulWidget {
+  const ChatsSettingsScreen({Key key}) : super(key: key);
+
   @override
-  _ChatsSettingsScreenState createState() => _ChatsSettingsScreenState();
+  State<ChatsSettingsScreen> createState() => _ChatsSettingsScreenState();
 }
 
 class _ChatsSettingsScreenState extends State<ChatsSettingsScreen> {
@@ -34,7 +37,7 @@ class _ChatsSettingsScreenState extends State<ChatsSettingsScreen> {
   Future<bool> _mediaVisibility;
   Future<FontSizeOptions> _fontSize;
 
-  Future<SharedPreferences> _prefs = SharedPreferences.getInstance();
+  final Future<SharedPreferences> _prefs = SharedPreferences.getInstance();
 
   @override
   void initState() {
@@ -56,15 +59,15 @@ class _ChatsSettingsScreenState extends State<ChatsSettingsScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Chats'),
+        title: const Text('Chats'),
       ),
       body: ListView(
         children: <Widget>[
           FutureBuilder(
             future: _enterIsSend,
-            key: Key('Enter_is_Send'),
+            key: const Key('Enter_is_Send'),
             builder: (context, snapshot) {
-              var onChanged;
+              Null Function(bool value) onChanged;
               bool enterIsSend = SharedPreferencesHelpers.defaultEnterIsSend;
               switch (snapshot.connectionState) {
                 case ConnectionState.none:
@@ -73,7 +76,7 @@ class _ChatsSettingsScreenState extends State<ChatsSettingsScreen> {
                   break;
                 case ConnectionState.done:
                   if (snapshot.hasError) {
-                    print(snapshot.error);
+                    logger.d(snapshot.error);
                   }
                   else {
                     enterIsSend = snapshot.data;
@@ -87,15 +90,15 @@ class _ChatsSettingsScreenState extends State<ChatsSettingsScreen> {
                 subtitle: 'Enter key will send your message',
                 onChanged: onChanged,
                 value: enterIsSend,
-                padding: EdgeInsets.only(right: 16.0, left: 70.0, top: 12.0, bottom: 12.0),
+                padding: const EdgeInsets.only(right: 16.0, left: 70.0, top: 12.0, bottom: 12.0),
               );
             },
           ),
           FutureBuilder(
             future: _mediaVisibility,
-            key: Key('Visibility'),
+            key: const Key('Visibility'),
             builder: (context, snapshot) {
-              var onChanged;
+              Null Function(bool value) onChanged;
               bool mediaVisibility = SharedPreferencesHelpers.defaultMediaVisibility;
               switch (snapshot.connectionState) {
                 case ConnectionState.none:
@@ -104,7 +107,7 @@ class _ChatsSettingsScreenState extends State<ChatsSettingsScreen> {
                   break;
                 case ConnectionState.done:
                   if (snapshot.hasError) {
-                    print(snapshot.error);
+                    logger.d(snapshot.error);
                   }
                   else {
                     mediaVisibility = snapshot.data;
@@ -118,7 +121,7 @@ class _ChatsSettingsScreenState extends State<ChatsSettingsScreen> {
                 subtitle: 'Show newly downloaded media in your phone\'s gallery',
                 onChanged: onChanged,
                 value: mediaVisibility,
-                padding: EdgeInsets.only(right: 16.0, left: 70.0, top: 12.0, bottom: 12.0),
+                padding: const EdgeInsets.only(right: 16.0, left: 70.0, top: 12.0, bottom: 12.0),
               );
             },
           ),
@@ -126,7 +129,7 @@ class _ChatsSettingsScreenState extends State<ChatsSettingsScreen> {
             future: _fontSize,
             builder: (context, snapshot) {
               String fontSize = '-';
-              var onTap;
+              Null Function() onTap;
               switch (snapshot.connectionState) {
                 case ConnectionState.none:
                 case ConnectionState.active:
@@ -136,7 +139,7 @@ class _ChatsSettingsScreenState extends State<ChatsSettingsScreen> {
                 case ConnectionState.done:
                   if (snapshot.hasError) {
                     fontSize = 'Error: ${snapshot.error}';
-                    print(snapshot.error);
+                    logger.d(snapshot.error);
                   }
                   else {
                     fontSize = _getFontSizeText(snapshot.data);
@@ -151,21 +154,21 @@ class _ChatsSettingsScreenState extends State<ChatsSettingsScreen> {
                   title: 'Font size',
                   subtitle: fontSize,
                   onTap: onTap,
-                padding: EdgeInsets.only(right: 16.0, left: 70.0,),
+                padding: const EdgeInsets.only(right: 16.0, left: 70.0,),
               );
             },
           ),
-          Divider(),
+          const Divider(),
           SettingItem(
             icon: Icons.wallpaper,
             title: 'Wallpaper',
-            padding: EdgeInsets.symmetric(horizontal: 16.0, vertical: 2.0),
+            padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 2.0),
             onTap: (){},
           ),
           SettingItem(
             icon: Icons.cloud_upload,
             title: 'Chat backup',
-            padding: EdgeInsets.symmetric(horizontal: 16.0, vertical: 2.0),
+            padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 2.0),
             onTap: (){
               Application.router.navigateTo(
                 context,
@@ -177,7 +180,7 @@ class _ChatsSettingsScreenState extends State<ChatsSettingsScreen> {
           SettingItem(
             icon: Icons.history,
             title: 'Chat history',
-            padding: EdgeInsets.symmetric(horizontal: 16.0, vertical: 2.0),
+            padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 2.0),
             onTap: (){
               Application.router.navigateTo(
                 context,

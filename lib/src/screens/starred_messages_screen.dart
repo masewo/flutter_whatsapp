@@ -5,8 +5,10 @@ enum StarredMessageOptions {
 }
 
 class StarredMessagesScreen extends StatefulWidget {
+  const StarredMessagesScreen({Key key}) : super(key: key);
+
   @override
-  _StarredMessagesScreenState createState() => _StarredMessagesScreenState();
+  State<StarredMessagesScreen> createState() => _StarredMessagesScreenState();
 }
 
 class _StarredMessagesScreenState extends State<StarredMessagesScreen> {
@@ -24,13 +26,13 @@ class _StarredMessagesScreenState extends State<StarredMessagesScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Starred messages'),
-        actions: messages.length <= 0
+        title: const Text('Starred messages'),
+        actions: messages.isEmpty
             ? []
             : <Widget>[
           IconButton(
             tooltip: 'Search',
-            icon: Icon(Icons.search),
+            icon: const Icon(Icons.search),
             onPressed: (){},
           ),
           PopupMenuButton<StarredMessageOptions>(
@@ -38,18 +40,18 @@ class _StarredMessagesScreenState extends State<StarredMessagesScreen> {
             onSelected: _selectOption,
             itemBuilder: (BuildContext context) {
               return [
-                PopupMenuItem<StarredMessageOptions>(
-                  child: Text('Unstar all'),
+                const PopupMenuItem<StarredMessageOptions>(
                   value: StarredMessageOptions.unstarAll,
+                  child: Text('Unstar all'),
                 ),
               ];
             },
           )
         ],
       ),
-      body: messages.length <= 0
+      body: messages.isEmpty
           ? _buildEmptyPage()
-          : Center(
+          : const Center(
         child: Text('TODO'),
       ),
     );
@@ -65,16 +67,16 @@ class _StarredMessagesScreenState extends State<StarredMessagesScreen> {
           height: 150.0,
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(75.0),
-            color: Color(0xff1dbea5),
+            color: const Color(0xff1dbea5),
           ),
-          child: Icon(
+          child: const Icon(
             Icons.star,
             color: Colors.white,
             size: 75.0,
           ),
         ),
-        Padding(
-          padding: const EdgeInsets.only(right: 80.0, left: 80.0, top: 32.0),
+        const Padding(
+          padding: EdgeInsets.only(right: 80.0, left: 80.0, top: 32.0),
           child: Text(
             'Tap and hold on any message in any chat to star it, so you can easily find it later.',
             textAlign: TextAlign.center,

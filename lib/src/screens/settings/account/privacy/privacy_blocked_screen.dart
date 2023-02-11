@@ -1,13 +1,15 @@
 import 'package:flutter/material.dart';
 
 class PrivacyBlockedScreen extends StatelessWidget {
+  const PrivacyBlockedScreen({Key key}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('TITLE'),
+        title: const Text('TITLE'),
       ),
-      body: Center(
+      body: const Center(
         child: Text('TODO'),
       ),
     );

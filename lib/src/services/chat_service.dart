@@ -8,7 +8,7 @@ String url = 'http://localhost/api/chats';
 
 class ChatService {
   static Future<ChatList> getChats() async {
-    final response = await http.get(Uri.parse('$url'));
+    final response = await http.get(Uri.parse(url));
     return chatListFromJson(response.body);
   }
 

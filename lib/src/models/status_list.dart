@@ -18,7 +18,7 @@ class StatusList {
     List<Status> statuses = <Status>[];
     statuses = json.map<Status>((i) => Status.fromJson(i)).toList();
 
-    return new StatusList(
+    return StatusList(
       statuses: statuses,
     );
   }

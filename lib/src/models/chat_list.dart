@@ -26,7 +26,7 @@ class ChatList {
     List<Chat> chats = <Chat>[];
     chats = json.map<Chat>((i) => Chat.fromJson(i)).toList();
 
-    return new ChatList(
+    return ChatList(
       chats: chats,
     );
   }

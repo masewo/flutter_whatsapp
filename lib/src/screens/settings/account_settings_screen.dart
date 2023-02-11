@@ -5,11 +5,13 @@ import 'package:flutter_whatsapp/src/config/routes.dart';
 import 'package:flutter_whatsapp/src/widgets/setting_item.dart';
 
 class AccountSettingsScreen extends StatelessWidget {
+  const AccountSettingsScreen({Key key}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Account'),
+        title: const Text('Account'),
       ),
       body: ListView(
         children: <Widget>[

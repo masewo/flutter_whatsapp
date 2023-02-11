@@ -1,14 +1,16 @@
 import 'package:flutter/material.dart';
 
 class NewChatGroupScreen extends StatelessWidget {
+  const NewChatGroupScreen({Key key}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('NewChatGroupScreen'),
+        title: const Text('NewChatGroupScreen'),
       ),
-      body: Center(
-        child: Text('TODO'),
+      body: const Center(
+child: Text('TODO'),
       ),
     );
   }

@@ -16,7 +16,7 @@ class Message {
   });
 
   factory Message.fromJson(Map<String, dynamic> json) {
-    return new Message(
+    return Message(
       content: json["content"],
       timestamp: DateTime.parse(json["timestamp"]),
       isYou: json["isYou"],
@@ -54,7 +54,7 @@ class Chat {
   });
 
   factory Chat.fromJson(Map<String, dynamic> json) {
-    return new Chat(
+    return Chat(
       id: json["id"],
       name: json["name"],
       avatarUrl: json["avatarPath"],
@@ -67,7 +67,7 @@ class Chat {
     List<Message> messages = <Message>[];
     messages = json["messages"].map<Message>((i) => Message.fromJson(i)).toList();
 
-    return new Chat(
+    return Chat(
       id: json["id"],
       name: json["name"],
       avatarUrl: json["avatarPath"],

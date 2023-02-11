@@ -30,12 +30,14 @@ enum HomeOptions {
 }
 
 class Home extends StatefulWidget {
+  const Home({Key key}) : super(key: key);
+
   @override
-  _HomeState createState() => _HomeState();
+  State<Home> createState() => _HomeState();
 }
 
 class _HomeState extends State<Home> with TickerProviderStateMixin {
-  final GlobalKey<ScaffoldState> _scaffoldKey = new GlobalKey<ScaffoldState>();
+  final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
   List<Widget> _actionButtons;
   List<List<PopupMenuItem<HomeOptions>>> _popupMenus;
 
@@ -48,7 +50,7 @@ class _HomeState extends State<Home> with TickerProviderStateMixin {
 
   List<Widget> _fabs;
 
-  static final TextStyle _textBold = const TextStyle(
+  static const TextStyle _textBold = TextStyle(
     fontWeight: FontWeight.bold,
   );
 
@@ -95,29 +97,29 @@ class _HomeState extends State<Home> with TickerProviderStateMixin {
 
     unreadChatsBadgeAnimationController = AnimationController(
       vsync: this,
-      duration: Duration(milliseconds: 1),
+      duration: const Duration(milliseconds: 1),
     );
     unreadChatsBadgeAnimation = Tween(
       begin: 1.0,
       end: 0.7,
     ).animate(unreadChatsBadgeAnimationController);
 
-    _searchBarController = new TextEditingController();
+    _searchBarController = TextEditingController();
     _searchBarController.addListener(() {
       setState(() {
         _searchKeyword = _searchBarController.text;
       });
     });
 
-    _searchBar = new TextField(
+    _searchBar = TextField(
       controller: _searchBarController,
       autofocus: true,
-      decoration: InputDecoration(
+      decoration: const InputDecoration(
         hintText: 'Search...',
         border: InputBorder.none,
       ),
     );
-    _tabController = new TabController(
+    _tabController = TabController(
       length: 4,
       initialIndex: _tabIndex,
       vsync: this,
@@ -152,7 +154,7 @@ class _HomeState extends State<Home> with TickerProviderStateMixin {
         },
       ),
       PopupMenuButton<HomeOptions>(
-        key: Key('moreOptions'),
+        key: const Key('moreOptions'),
         tooltip: "More options",
         onSelected: _selectOption,
         itemBuilder: (BuildContext context) {
@@ -164,68 +166,67 @@ class _HomeState extends State<Home> with TickerProviderStateMixin {
     _popupMenus = [
       null,
       [
-        PopupMenuItem<HomeOptions>(
-          child: Text("New group"),
+        const PopupMenuItem<HomeOptions>(
           value: HomeOptions.newGroup,
+          child: Text("New group"),
         ),
-        PopupMenuItem<HomeOptions>(
-          child: Text("New broadcast"),
+        const PopupMenuItem<HomeOptions>(
           value: HomeOptions.newBroadcast,
+          child: Text("New broadcast"),
         ),
-        PopupMenuItem<HomeOptions>(
-          child: Text("WhatzApp Web"),
+        const PopupMenuItem<HomeOptions>(
           key: Key('Web'),
           value: HomeOptions.whatsappWeb,
+          child: Text("WhatzApp Web"),
         ),
-        PopupMenuItem<HomeOptions>(
-          child: Text("Starred messages"),
+        const PopupMenuItem<HomeOptions>(
           key: Key('Starred'),
           value: HomeOptions.starredMessages,
+          child: Text("Starred messages"),
         ),
-        PopupMenuItem<HomeOptions>(
-          child: Text("Settings"),
+        const PopupMenuItem<HomeOptions>(
           key: Key('Settings'),
           value: HomeOptions.settings,
+          child: Text("Settings"),
         ),
-        PopupMenuItem<HomeOptions>(
-          child: Text("README", style: TextStyle(color: Colors.red)),
+        const PopupMenuItem<HomeOptions>(
           value: HomeOptions.readMe,
+          child: Text("README", style: TextStyle(color: Colors.red)),
         ),
       ],
       [
-        PopupMenuItem<HomeOptions>(
-          child: Text("Status privacy"),
+        const PopupMenuItem<HomeOptions>(
           value: HomeOptions.statusPrivacy,
+          child: Text("Status privacy"),
         ),
-        PopupMenuItem<HomeOptions>(
-          child: Text("Settings"),
+        const PopupMenuItem<HomeOptions>(
           value: HomeOptions.settings,
+          child: Text("Settings"),
         ),
-        PopupMenuItem<HomeOptions>(
-          child: Text("README", style: TextStyle(color: Colors.red)),
+        const PopupMenuItem<HomeOptions>(
           value: HomeOptions.readMe,
+          child: Text("README", style: TextStyle(color: Colors.red)),
         ),
       ],
       [
-        PopupMenuItem<HomeOptions>(
-          child: Text("Clear call log"),
+        const PopupMenuItem<HomeOptions>(
           value: HomeOptions.clearCallLog,
+          child: Text("Clear call log"),
         ),
-        PopupMenuItem<HomeOptions>(
-          child: Text("Settings"),
+        const PopupMenuItem<HomeOptions>(
           value: HomeOptions.settings,
+          child: Text("Settings"),
         ),
-        PopupMenuItem<HomeOptions>(
-          child: Text("README", style: TextStyle(color: Colors.red)),
+        const PopupMenuItem<HomeOptions>(
           value: HomeOptions.readMe,
+          child: Text("README", style: TextStyle(color: Colors.red)),
         ),
       ],
     ];
 
     _fabs = [
       null,
-      new FloatingActionButton(
-          child: Icon(Icons.message),
+      FloatingActionButton(
           backgroundColor: fabBgColor,
           foregroundColor: Colors.white,
           onPressed: () async {
@@ -234,17 +235,17 @@ class _HomeState extends State<Home> with TickerProviderStateMixin {
             } else {
               requestPermission();
             }
-          }),
-      Container(
+          },
+          child: const Icon(Icons.message)),
+      SizedBox(
         height: 150.0,
         child: Column(
           mainAxisAlignment: MainAxisAlignment.end,
           crossAxisAlignment: CrossAxisAlignment.center,
           children: <Widget>[
-            new FloatingActionButton(
+            FloatingActionButton(
                 heroTag: 'newTextStatus',
                 mini: true,
-                child: Icon(Icons.edit),
                 backgroundColor: Colors.white,
                 foregroundColor: fabBgSecondaryColor,
                 onPressed: () {
@@ -253,13 +254,13 @@ class _HomeState extends State<Home> with TickerProviderStateMixin {
                     Routes.newTextStatus,
                     transition: TransitionType.inFromRight,
                   );
-                }),
-            new SizedBox(
+                },
+                child: const Icon(Icons.edit)),
+            const SizedBox(
               height: 16.0,
             ),
-            new FloatingActionButton(
+            FloatingActionButton(
                 heroTag: 'newStatus',
-                child: Icon(Icons.camera_alt),
                 backgroundColor: fabBgColor,
                 foregroundColor: Colors.white,
                 onPressed: () {
@@ -268,12 +269,12 @@ class _HomeState extends State<Home> with TickerProviderStateMixin {
                     Routes.newStatus,
                     transition: TransitionType.inFromRight,
                   );
-                }),
+                },
+                child: const Icon(Icons.camera_alt)),
           ],
         ),
       ),
-      new FloatingActionButton(
-          child: Icon(Icons.add_call),
+      FloatingActionButton(
           backgroundColor: fabBgColor,
           foregroundColor: Colors.white,
           onPressed: () {
@@ -282,7 +283,8 @@ class _HomeState extends State<Home> with TickerProviderStateMixin {
               Routes.newCall,
               transition: TransitionType.inFromRight,
             );
-          }),
+          },
+          child: const Icon(Icons.add_call)),
     ];
   }
 
@@ -349,7 +351,7 @@ class _HomeState extends State<Home> with TickerProviderStateMixin {
                 backgroundColor: _isSearching ? Colors.white : null,
                 leading: _isSearching
                     ? IconButton(
-                        icon: Icon(Icons.arrow_back),
+                        icon: const Icon(Icons.arrow_back),
                         color: const Color(0xff075e54),
                         onPressed: () {
                           setState(() {
@@ -362,7 +364,7 @@ class _HomeState extends State<Home> with TickerProviderStateMixin {
                     : null,
                 title: _isSearching
                     ? _searchBar
-                    : Text(
+                    : const Text(
                         'WhatzApp',
                         style: _textBold,
                       ),
@@ -372,88 +374,87 @@ class _HomeState extends State<Home> with TickerProviderStateMixin {
                     : TabBar(
                         controller: _tabController,
                         tabs: <Widget>[
-                          Tab(
+                          const Tab(
                             icon: Icon(Icons.camera_alt),
                           ),
                           Tab(
-                            child: Container(
-                              child: Row(
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                children: <Widget>[
-                                  Text(
-                                    "CHATS",
-                                    style: _textBold,
-                                  ),
-                                  FutureBuilder(
-                                    future: _chatList,
-                                    builder: (context, snapshot) {
-                                      if (snapshot.data == null)
-                                        return Container();
-                                      if (snapshot.data.unreadMessages <= 0)
-                                        return Container();
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: <Widget>[
+                                const Text(
+                                  "CHATS",
+                                  style: _textBold,
+                                ),
+                                FutureBuilder(
+                                  future: _chatList,
+                                  builder: (context, snapshot) {
+                                    if (snapshot.data == null) {
+                                      return Container();
+                                    }
+                                    if (snapshot.data.unreadMessages <= 0) {
+                                      return Container();
+                                    }
 
-                                      return FadeTransition(
-                                        opacity: unreadChatsBadgeAnimation,
-                                        child: Container(
-                                          margin:
-                                              const EdgeInsets.only(left: 4.0),
-                                          decoration: BoxDecoration(
-                                              color: Colors.white,
-                                              borderRadius: BorderRadius.all(
-                                                  Radius.circular(9.0))),
-                                          alignment: Alignment.center,
-                                          height: 18.0,
-                                          width: 18.0,
-                                          child: Text(
-                                            '${snapshot.data.unreadMessages}',
-                                            style: TextStyle(
-                                              fontSize: 9.0,
-                                              fontWeight: FontWeight.bold,
-                                              color: primaryColor,
-                                            ),
-                                          ),
-                                        ),
-                                      );
-                                    },
-                                  ),
-                                ],
-                              ),
-                            ),
-                          ),
-                          Tab(
-                            child: Container(
-                              child: Row(
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                children: <Widget>[
-                                  Text(
-                                    "STATUS",
-                                    key: Key('Status'),
-                                    style: _textBold,
-                                  ),
-                                  FutureBuilder(
-                                    future: _statusList,
-                                    builder: (context, snapshot) {
-                                      if (snapshot.data == null)
-                                        return Container();
-                                      if (!isNewStatus) return Container();
-
-                                      return Padding(
-                                        padding:
+                                    return FadeTransition(
+                                      opacity: unreadChatsBadgeAnimation,
+                                      child: Container(
+                                        margin:
                                             const EdgeInsets.only(left: 4.0),
+                                        decoration: const BoxDecoration(
+                                            color: Colors.white,
+                                            borderRadius: BorderRadius.all(
+                                                Radius.circular(9.0))),
+                                        alignment: Alignment.center,
+                                        height: 18.0,
+                                        width: 18.0,
                                         child: Text(
-                                          '•',
-                                          style: TextStyle(
+                                          '${snapshot.data.unreadMessages}',
+                                          style: const TextStyle(
+                                            fontSize: 9.0,
                                             fontWeight: FontWeight.bold,
+                                            color: primaryColor,
                                           ),
                                         ),
-                                      );
-                                    },
-                                  ),
-                                ],
-                              ),
+                                      ),
+                                    );
+                                  },
+                                ),
+                              ],
                             ),
                           ),
                           Tab(
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: <Widget>[
+                                const Text(
+                                  "STATUS",
+                                  key: Key('Status'),
+                                  style: _textBold,
+                                ),
+                                FutureBuilder(
+                                  future: _statusList,
+                                  builder: (context, snapshot) {
+                                    if (snapshot.data == null) {
+                                      return Container();
+                                    }
+                                    if (!isNewStatus) return Container();
+
+                                    return const Padding(
+                                      padding:
+                                          EdgeInsets.only(left: 4.0),
+                                      child: Text(
+                                        '•',
+                                        style: TextStyle(
+                                          fontWeight: FontWeight.bold,
+                                        ),
+                                      ),
+                                    );
+                                  },
+                                ),
+                              ],
+                            ),
+                          ),
+                          const Tab(
                             child: Text(
                               "CALLS",
                               key: Key('Calls'),
@@ -461,20 +462,20 @@ class _HomeState extends State<Home> with TickerProviderStateMixin {
                             ),
                           ),
                         ],
-                        labelPadding: EdgeInsets.fromLTRB(0, 0, 0, 0),
+                        labelPadding: const EdgeInsets.fromLTRB(0, 0, 0, 0),
                       ),
               ),
         body: TabBarView(
           controller: _tabController,
           children: <Widget>[
-            CameraScreen(
+            const CameraScreen(
             ),
             ChatsTab(
                 searchKeyword: _searchKeyword,
                 chatList: _chatList,
                 refresh: () {
                   setState(() {
-                    _memoizerChats = new AsyncMemoizer();
+                    _memoizerChats = AsyncMemoizer();
                     _chatList = _getChatList();
                   });
                 }),
@@ -483,7 +484,7 @@ class _HomeState extends State<Home> with TickerProviderStateMixin {
                 statusList: _statusList,
                 refresh: () {
                   setState(() {
-                    _memoizerStatus = new AsyncMemoizer();
+                    _memoizerStatus = AsyncMemoizer();
                     _statusList = _getStatusList();
                   });
                 }),
@@ -492,7 +493,7 @@ class _HomeState extends State<Home> with TickerProviderStateMixin {
                 memoizer: _memoizerCalls,
                 refresh: () {
                   setState(() {
-                    _memoizerCalls = new AsyncMemoizer();
+                    _memoizerCalls = AsyncMemoizer();
                   });
                 }),
           ],
@@ -576,8 +577,9 @@ class _HomeState extends State<Home> with TickerProviderStateMixin {
       // Either the permission was already granted before or the user just granted it.
       goToNewChatScreen();
     } else {
+      if (!mounted) return;
       ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(
+        const SnackBar(
           content: Text('Permission not granted'),
           duration: Duration(seconds: 1),
         ),

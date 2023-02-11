@@ -7,16 +7,16 @@ class SwitchSettingItem extends StatelessWidget {
   final String title;
   final String subtitle;
   final Function onChanged;
-  final value;
-  final padding;
+  final bool value;
+  final EdgeInsets padding;
 
-  SwitchSettingItem({this.icon, this.title, this.subtitle, this.onChanged, this.value, this.padding});
+  const SwitchSettingItem({Key key, this.icon, this.title, this.subtitle, this.onChanged, this.value, this.padding}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     if(subtitle == null) {
       ListTileTheme(
-        contentPadding: padding ?? EdgeInsets.symmetric(vertical: 16.0, horizontal: 24.0),
+        contentPadding: padding ?? const EdgeInsets.symmetric(vertical: 16.0, horizontal: 24.0),
         child: SwitchListTile(
           title: Padding(
             padding: const EdgeInsets.only(bottom: 0.0),
@@ -31,7 +31,7 @@ class SwitchSettingItem extends StatelessWidget {
       );
     }
     return ListTileTheme(
-      contentPadding: padding ?? EdgeInsets.symmetric(vertical: 16.0, horizontal: 24.0),
+      contentPadding: padding ?? const EdgeInsets.symmetric(vertical: 16.0, horizontal: 24.0),
       child: SwitchListTile(
         title: Padding(
           padding: const EdgeInsets.only(bottom: 0.0),

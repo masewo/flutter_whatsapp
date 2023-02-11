@@ -1,5 +1,6 @@
 import 'package:fluro/fluro.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_whatsapp/src/helpers/logger.dart';
 import 'package:flutter_whatsapp/src/home.dart';
 import 'package:flutter_whatsapp/src/screens/camera_screen.dart';
 import 'package:flutter_whatsapp/src/screens/chat_media_screen.dart';
@@ -41,109 +42,109 @@ import 'package:flutter_whatsapp/src/screens/whatsapp_web_screen.dart';
 import 'package:flutter_whatsapp/src/values/colors.dart';
 import 'package:flutter_whatsapp/src/widgets/deprecated/flat_button.dart';
 
-var rootHandler = new Handler(
+var rootHandler = Handler(
   handlerFunc: (BuildContext context, Map<String, List<String>> params) {
-    return new Home();
+    return const Home();
   }
 );
 
-var chatDetailHandler = new Handler(
+var chatDetailHandler = Handler(
     handlerFunc: (BuildContext context, Map<String, List<String>> params) {
-      int profileId = int.tryParse(params['profileId']?.first) ?? null;
+      int profileId = int.tryParse(params['profileId']?.first);
 
-      return new DetailChatScreen(
+      return DetailChatScreen(
         id: profileId,
       );
     }
 );
 
-var newChatHandler = new Handler(
+var newChatHandler = Handler(
     handlerFunc: (BuildContext context, Map<String, List<String>> params) {
-      return new NewChatScreen();
+      return const NewChatScreen();
     }
 );
 
-var newChatGroupHandler = new Handler(
+var newChatGroupHandler = Handler(
     handlerFunc: (BuildContext context, Map<String, List<String>> params) {
-      return new NewChatGroupScreen();
+      return const NewChatGroupScreen();
     }
 );
 
-var newChatBroadcastHandler = new Handler(
+var newChatBroadcastHandler = Handler(
     handlerFunc: (BuildContext context, Map<String, List<String>> params) {
-      return new NewChatBroadcastScreen();
+      return const NewChatBroadcastScreen();
     }
 );
 
-var whatsappWebHandler = new Handler(
+var whatsappWebHandler = Handler(
     handlerFunc: (BuildContext context, Map<String, List<String>> params) {
-      return new WhatsappWebScreen();
+      return const WhatsappWebScreen();
     }
 );
 
-var starredMessagesHandler = new Handler(
+var starredMessagesHandler = Handler(
     handlerFunc: (BuildContext context, Map<String, List<String>> params) {
-      return new StarredMessagesScreen();
+      return const StarredMessagesScreen();
     }
 );
 
-var settingsHandler = new Handler(
+var settingsHandler = Handler(
     handlerFunc: (BuildContext context, Map<String, List<String>> params) {
-      return new SettingsScreen();
+      return const SettingsScreen();
     }
 );
 
-var statusDetailHandler = new Handler(
+var statusDetailHandler = Handler(
     handlerFunc: (BuildContext context, Map<String, List<String>> params) {
-      int id = int.tryParse(params['id']?.first) ?? null;
+      int id = int.tryParse(params['id']?.first);
 
-      return new DetailStatusScreen(
+      return DetailStatusScreen(
         id: id,
       );
     }
 );
 
-var newStatusHandler = new Handler(
+var newStatusHandler = Handler(
     handlerFunc: (BuildContext context, Map<String, List<String>> params) {
-      return new CameraScreen();
+      return const CameraScreen();
     }
 );
 
-var newTextStatusHandler = new Handler(
+var newTextStatusHandler = Handler(
     handlerFunc: (BuildContext context, Map<String, List<String>> params) {
-      return new NewTextStatusScreen();
+      return const NewTextStatusScreen();
     }
 );
 
-var statusPrivacyHandler = new Handler(
+var statusPrivacyHandler = Handler(
     handlerFunc: (BuildContext context, Map<String, List<String>> params) {
-      return new StatusPrivacyScreen();
+      return const StatusPrivacyScreen();
     }
 );
 
-var callDetailHandler = new Handler(
+var callDetailHandler = Handler(
     handlerFunc: (BuildContext context, Map<String, List<String>> params) {
-      int id = int.tryParse(params['id']?.first) ?? null;
+      int id = int.tryParse(params['id']?.first);
 
-      return new DetailCallScreen(
+      return DetailCallScreen(
         id: id,
       );
     }
 );
 
-var newCallHandler = new Handler(
+var newCallHandler = Handler(
     handlerFunc: (BuildContext context, Map<String, List<String>> params) {
-      return new NewCallScreen();
+      return const NewCallScreen();
     }
 );
 
-var clearCallLogHandler = new Handler(
+var clearCallLogHandler = Handler(
     type: HandlerType.function,
     handlerFunc: (BuildContext context, Map<String, List<String>> params) {
       showDialog(
         context: context,
         builder: (context) {
-          return OKCancelDialog(
+          return const OKCancelDialog(
             title: 'Do you want to clear your entire call log?',
             ok: 'OK',
             cancel: 'CANCEL',
@@ -154,13 +155,13 @@ var clearCallLogHandler = new Handler(
     }
 );
 
-var logoutDeviceHandler = new Handler(
+var logoutDeviceHandler = Handler(
     type: HandlerType.function,
     handlerFunc: (BuildContext context, Map<String, List<String>> params) {
       showDialog(
           context: context,
           builder: (context) {
-            return OKCancelDialog(
+            return const OKCancelDialog(
               title: 'Log out from this device?',
               ok: 'LOG OUT',
               cancel: 'CANCEL',
@@ -171,27 +172,27 @@ var logoutDeviceHandler = new Handler(
     }
 );
 
-var editImageHandler = new Handler(
+var editImageHandler = Handler(
     handlerFunc: (BuildContext context, Map<String, List<String>> params) {
       String id = params['id']?.first;
       String resource = params['resource']?.first;
 
-      print('!!!!!!!!!!!!!!!!! $id : $resource');
+      logger.d('!!!!!!!!!!!!!!!!! $id : $resource');
 
-      return new EditImageScreen(
+      return EditImageScreen(
         id: id,
         resource: Uri.decodeComponent(resource),
       );
     }
 );
 
-var logoutAllDevicesHandler = new Handler(
+var logoutAllDevicesHandler = Handler(
     type: HandlerType.function,
     handlerFunc: (BuildContext context, Map<String, List<String>> params) {
       showDialog(
           context: context,
           builder: (context) {
-            return OKCancelDialog(
+            return const OKCancelDialog(
               title: 'Are you sure you want to log out from all devices?',
               ok: 'LOG OUT',
               cancel: 'CANCEL',
@@ -202,135 +203,135 @@ var logoutAllDevicesHandler = new Handler(
     }
 );
 
-var contactsHelpHandler  = new Handler(
+var contactsHelpHandler  = Handler(
     handlerFunc: (BuildContext context, Map<String, List<String>> params) {
-      return new ContactsHelpScreen();
+      return const ContactsHelpScreen();
     }
 );
 
-var profileHandler = new Handler(
+var profileHandler = Handler(
     handlerFunc: (BuildContext context, Map<String, List<String>> params) {
       // int id = int.tryParse(params['id']?.first) ?? null;
 
-      return new ProfileScreen(
+      return const ProfileScreen(
       );
     }
 );
 
-var yourProfileHandler = new Handler(
+var yourProfileHandler = Handler(
     handlerFunc: (BuildContext context, Map<String, List<String>> params) {
 
-      return new YourProfileScreen(
+      return const YourProfileScreen(
       );
     }
 );
 
-var chatMediaHandler = new Handler(
+var chatMediaHandler = Handler(
     handlerFunc: (BuildContext context, Map<String, List<String>> params) {
       // int id = int.tryParse(params['id']?.first) ?? null;
 
-      return new ChatMediaScreen();
+      return const ChatMediaScreen();
     }
 );
 
-var accountSettingsHandler  = new Handler(
+var accountSettingsHandler  = Handler(
     handlerFunc: (BuildContext context, Map<String, List<String>> params) {
-      return new AccountSettingsScreen();
+      return const AccountSettingsScreen();
     }
 );
-var chatsSettingsHandler  = new Handler(
+var chatsSettingsHandler  = Handler(
     handlerFunc: (BuildContext context, Map<String, List<String>> params) {
-      return new ChatsSettingsScreen();
+      return const ChatsSettingsScreen();
     }
 );
-var notificationsSettingsHandler  = new Handler(
+var notificationsSettingsHandler  = Handler(
     handlerFunc: (BuildContext context, Map<String, List<String>> params) {
-      return new NotificationsSettingsScreen();
+      return const NotificationsSettingsScreen();
     }
 );
-var dataSettingsHandler  = new Handler(
+var dataSettingsHandler  = Handler(
     handlerFunc: (BuildContext context, Map<String, List<String>> params) {
-      return new DataSettingsScreen();
+      return const DataSettingsScreen();
     }
 );
-var helpSettingsHandler  = new Handler(
+var helpSettingsHandler  = Handler(
     handlerFunc: (BuildContext context, Map<String, List<String>> params) {
-      return new HelpSettingsScreen();
+      return const HelpSettingsScreen();
     }
 );
-var helpContactSettingsHandler = new Handler(
+var helpContactSettingsHandler = Handler(
     handlerFunc: (BuildContext context, Map<String, List<String>> params) {
-      return new HelpContactSettingsScreen();
+      return const HelpContactSettingsScreen();
     }
 );
-var helpAppInfoSettingsHandler = new Handler(
+var helpAppInfoSettingsHandler = Handler(
     handlerFunc: (BuildContext context, Map<String, List<String>> params) {
-      return new HelpAppInfoSettingsScreen();
+      return const HelpAppInfoSettingsScreen();
     }
 );
-var accountPrivacySettingsHandler = new Handler(
+var accountPrivacySettingsHandler = Handler(
     handlerFunc: (BuildContext context, Map<String, List<String>> params) {
-      return new AccountPrivacySettingsScreen();
+      return const AccountPrivacySettingsScreen();
     }
 );
-var accountSecuritySettingsHandler = new Handler(
+var accountSecuritySettingsHandler = Handler(
     handlerFunc: (BuildContext context, Map<String, List<String>> params) {
-      return new AccountSecuritySettingsScreen();
+      return const AccountSecuritySettingsScreen();
     }
 );
-var accountTwoStepSettingsHandler = new Handler(
+var accountTwoStepSettingsHandler = Handler(
     handlerFunc: (BuildContext context, Map<String, List<String>> params) {
-      return new AccountTwoStepSettingsScreen();
+      return const AccountTwoStepSettingsScreen();
     }
 );
-var accountEnableTwoStepSettingsHandler = new Handler(
+var accountEnableTwoStepSettingsHandler = Handler(
     handlerFunc: (BuildContext context, Map<String, List<String>> params) {
-      return new AccountEnableTwoStepSettingsScreen();
+      return const AccountEnableTwoStepSettingsScreen();
     }
 );
-var accountChangeNumSettingsHandler = new Handler(
+var accountChangeNumSettingsHandler = Handler(
     handlerFunc: (BuildContext context, Map<String, List<String>> params) {
-      return new AccountChangeNumSettingsScreen();
+      return const AccountChangeNumSettingsScreen();
     }
 );
-var accountRequestSettingsHandler = new Handler(
+var accountRequestSettingsHandler = Handler(
     handlerFunc: (BuildContext context, Map<String, List<String>> params) {
-      return new AccountRequestSettingsScreen();
+      return const AccountRequestSettingsScreen();
     }
 );
-var accountDeleteSettingsHandler = new Handler(
+var accountDeleteSettingsHandler = Handler(
     handlerFunc: (BuildContext context, Map<String, List<String>> params) {
-      return new AccountDeleteSettingsScreen();
-    }
-);
-
-var licensesHandler = new Handler(
-    handlerFunc: (BuildContext context, Map<String, List<String>> params) {
-      return new LicensesScreen();
+      return const AccountDeleteSettingsScreen();
     }
 );
 
-var futureTodoHandler = new Handler(
+var licensesHandler = Handler(
     handlerFunc: (BuildContext context, Map<String, List<String>> params) {
-      return new FutureTodoScreen();
+      return const LicensesScreen();
     }
 );
 
-var whatsappWebScanHandler = new Handler(
+var futureTodoHandler = Handler(
     handlerFunc: (BuildContext context, Map<String, List<String>> params) {
-      return new WhatsappWebScanScreen();
+      return const FutureTodoScreen();
     }
 );
 
-var privacyLiveLocationHandler = new Handler(
+var whatsappWebScanHandler = Handler(
     handlerFunc: (BuildContext context, Map<String, List<String>> params) {
-      return new PrivacyLiveLocationScreen();
+      return const WhatsappWebScanScreen();
     }
 );
 
-var privacyBlockedHandler = new Handler(
+var privacyLiveLocationHandler = Handler(
     handlerFunc: (BuildContext context, Map<String, List<String>> params) {
-      return new PrivacyBlockedScreen();
+      return const PrivacyLiveLocationScreen();
+    }
+);
+
+var privacyBlockedHandler = Handler(
+    handlerFunc: (BuildContext context, Map<String, List<String>> params) {
+      return const PrivacyBlockedScreen();
     }
 );
 
@@ -340,14 +341,14 @@ class OKCancelDialog extends StatelessWidget {
   final String ok;
   final String cancel;
 
-  OKCancelDialog({this.title, this.ok, this.cancel});
+  const OKCancelDialog({Key key, this.title, this.ok, this.cancel}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return new AlertDialog(
+    return AlertDialog(
       title: Text(
         title,
-        style: TextStyle(
+        style: const TextStyle(
           fontSize: 16.0,
         ),
       ),
@@ -356,7 +357,7 @@ class OKCancelDialog extends StatelessWidget {
           child: FlatButton(
             child: Text(
               cancel,
-              style: TextStyle(
+              style: const TextStyle(
                 color: secondaryColor,
                 fontWeight: FontWeight.bold,
               ),
@@ -369,7 +370,7 @@ class OKCancelDialog extends StatelessWidget {
         FlatButton(
           child: Text(
             ok,
-            style: TextStyle(
+            style: const TextStyle(
               color: secondaryColor,
               fontWeight: FontWeight.bold,
             ),

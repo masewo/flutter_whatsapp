@@ -4,19 +4,19 @@ import 'package:flutter_whatsapp/src/values/colors.dart';
 class SettingItemHeader extends StatelessWidget {
   final String title;
   final String subtitle;
-  final padding;
+  final EdgeInsets padding;
 
-  SettingItemHeader({this.title, this.subtitle, this.padding});
+  const SettingItemHeader({Key key, this.title, this.subtitle, this.padding}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     if(subtitle != null) {
       return ListTile(
         title: Padding(
-          padding: EdgeInsets.only(bottom: 8.0),
+          padding: const EdgeInsets.only(bottom: 8.0),
           child: Text(
             title,
-            style: TextStyle(
+            style: const TextStyle(
               fontSize: 14.0,
               color: secondaryColor,
               fontWeight: FontWeight.bold,
@@ -33,7 +33,7 @@ class SettingItemHeader extends StatelessWidget {
         padding: padding,
         child: Text(
           title,
-          style: TextStyle(
+          style: const TextStyle(
             fontSize: 14.0,
             color: secondaryColor,
             fontWeight: FontWeight.bold,

@@ -1,5 +1,6 @@
 import 'package:fluro/fluro.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_whatsapp/src/helpers/logger.dart';
 import 'package:flutter_whatsapp/src/config/route_handlers.dart';
 
 class Routes {
@@ -55,9 +56,9 @@ class Routes {
   static String futureTodo = '/future';
 
   static void configureRoutes(FluroRouter router) {
-    router.notFoundHandler = new Handler(
+    router.notFoundHandler = Handler(
         handlerFunc: (BuildContext context, Map<String, List<String>> params) {
-      print('Route was not found.');
+      logger.d('Route was not found.');
       return null;
     });
     router.define(root, handler: rootHandler);

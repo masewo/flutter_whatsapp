@@ -30,7 +30,7 @@ class Status {
   });
 
   factory Status.fromJson(Map<String, dynamic> json) {
-    return new Status(
+    return Status(
       id: json["id"],
       name: json["name"],
       timestamp: DateTime.parse(json["timestamp"]),
@@ -46,7 +46,7 @@ class Status {
       imagesUrl.add(img["path"]);
     }
 
-    return new Status(
+    return Status(
       id: jsonData["id"],
       name: jsonData["name"],
       timestamp: DateTime.parse(jsonData["timestamp"]),

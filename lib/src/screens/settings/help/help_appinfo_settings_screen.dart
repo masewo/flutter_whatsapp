@@ -6,13 +6,15 @@ import 'package:flutter_whatsapp/src/values/colors.dart';
 import 'package:flutter_whatsapp/src/widgets/deprecated/flat_button.dart';
 
 class HelpAppInfoSettingsScreen extends StatelessWidget {
+  const HelpAppInfoSettingsScreen({Key key}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.transparent,
       body: Container(
-        decoration: BoxDecoration(
-          gradient: LinearGradient(colors: [darkColor, primaryColor], begin: Alignment.topCenter, end: Alignment.bottomCenter)
+        decoration: const BoxDecoration(
+gradient: LinearGradient(colors: [darkColor, primaryColor], begin: Alignment.topCenter, end: Alignment.bottomCenter)
         ),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.center,
@@ -22,15 +24,15 @@ class HelpAppInfoSettingsScreen extends StatelessWidget {
               mainAxisSize: MainAxisSize.max,
               mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget>[
-                Text(
+                const Text(
                   'WhatzApp Messenger',
                   style: TextStyle(
                     color: Colors.white,
                     fontSize: 22.0,
                   ),
                 ),
-                Padding(
-                  padding: const EdgeInsets.only(top: 4.0),
+                const Padding(
+                  padding: EdgeInsets.only(top: 4.0),
                   child: Text(
                     'Version 2.19.98',
                     style: TextStyle(
@@ -52,8 +54,8 @@ class HelpAppInfoSettingsScreen extends StatelessWidget {
                     )
                   ),
                 ),
-                Padding(
-                  padding: const EdgeInsets.only(top: 24.0),
+                const Padding(
+                  padding: EdgeInsets.only(top: 24.0),
                   child: Text(
                     '© 2010-2019 WhatzApp Inc.',
                     style: TextStyle(
@@ -73,7 +75,7 @@ class HelpAppInfoSettingsScreen extends StatelessWidget {
                           transition: TransitionType.inFromRight,
                         );
                       },
-                      child: Text(
+                      child: const Text(
                         'LICENSES',
                         style: TextStyle(
                           color: Color(0xff44c6ee),

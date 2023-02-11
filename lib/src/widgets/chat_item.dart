@@ -13,19 +13,19 @@ class ChatItem extends StatelessWidget {
   final Function onTapProfile;
   final Function onTap;
 
-  ChatItem(
-      {this.chat,
+  const ChatItem(
+      {Key key, this.chat,
       this.searchKeyword,
       this.iconSubtitle,
       this.onTapProfile,
-      this.onTap});
+      this.onTap}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return CustomPaint(
       painter: LinePainter(),
       child: ListTile(
-        contentPadding: EdgeInsets.symmetric(vertical: 2.0, horizontal: 16.0),
+        contentPadding: const EdgeInsets.symmetric(vertical: 2.0, horizontal: 16.0),
         leading: GestureDetector(
           onTap: () {
             onTapProfile();
@@ -39,7 +39,7 @@ class ChatItem extends StatelessWidget {
             ? Text(
                 chat.name,
                 maxLines: 1,
-                style: TextStyle(
+                style: const TextStyle(
                   fontSize: 18.0,
                   fontWeight: FontWeight.bold,
                 ),
@@ -47,12 +47,12 @@ class ChatItem extends StatelessWidget {
             : TextHelpers.getHighlightedText(
                 chat.name,
                 searchKeyword,
-                TextStyle(
+                const TextStyle(
                   fontSize: 18.0,
                   fontWeight: FontWeight.bold,
                   color: Colors.black,
                 ),
-                TextStyle(
+                const TextStyle(
                   fontSize: 18.0,
                   fontWeight: FontWeight.bold,
                   color: Colors.blue,
@@ -62,7 +62,7 @@ class ChatItem extends StatelessWidget {
             iconSubtitle == null
                 ? Container()
                 : Padding(
-                    padding: EdgeInsets.only(right: 2.0), child: iconSubtitle),
+                    padding: const EdgeInsets.only(right: 2.0), child: iconSubtitle),
             Flexible(
               child: Text(
                 chat.lastMessage.content,
@@ -78,7 +78,7 @@ class ChatItem extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.end,
           children: <Widget>[
             Text(
-              new DateFormat('dd/MM/yy').format(chat.lastMessage.timestamp),
+              DateFormat('dd/MM/yy').format(chat.lastMessage.timestamp),
               style: TextStyle(
                 fontSize: 12.0,
                 color: chat.unreadMessages > 0
@@ -88,20 +88,20 @@ class ChatItem extends StatelessWidget {
             ),
             chat.unreadMessages > 0
                 ? Container(
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.all(Radius.circular(12.0)),
+                    decoration: const BoxDecoration(
+borderRadius: BorderRadius.all(Radius.circular(12.0)),
                       color: notificationBadgeColor,
                     ),
                     width: 24.0,
                     height: 24.0,
                     alignment: Alignment.center,
-                    margin: EdgeInsets.only(right: 4.0, top: 4.0),
+                    margin: const EdgeInsets.only(right: 4.0, top: 4.0),
                     child: Text(
                       '${chat.unreadMessages}',
-                      style: TextStyle(color: Colors.white),
+                      style: const TextStyle(color: Colors.white),
                     ),
                   )
-                : Text(''),
+                : const Text(''),
           ],
         ),
         onTap: onTap,

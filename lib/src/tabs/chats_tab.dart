@@ -11,25 +11,25 @@ import 'package:flutter_whatsapp/src/widgets/deprecated/raised_button.dart';
 class ChatsTab extends StatelessWidget {
   final String searchKeyword;
   final Future<dynamic> chatList;
-  final refresh;
+  final VoidCallback refresh;
 
-  ChatsTab({
+  const ChatsTab({Key key,
     this.chatList,
     this.searchKeyword,
     this.refresh,
-  });
+  }) : super(key: key);
 
   Icon _getIconSubtitle(Chat chat) {
     if (!chat.lastMessage.isYou) return null;
 
     if (chat.lastMessage.isRead) {
-      return new Icon(
+      return const Icon(
         Icons.done_all,
         color: blueCheckColor,
         size: 16.0,
       );
     } else {
-      return new Icon(
+      return const Icon(
         Icons.done_all,
         color: Colors.grey,
         size: 16.0,
@@ -56,10 +56,10 @@ class ChatsTab extends StatelessWidget {
         context: context, builder: (BuildContext context) => profileDialog);
   }
 
-  Widget _buildChatItem(BuildContext context, _searchKeyword, Chat chat) {
+  Widget _buildChatItem(BuildContext context, searchKeyword, Chat chat) {
     return ChatItem(
         chat: chat,
-        searchKeyword: _searchKeyword,
+        searchKeyword: searchKeyword,
         iconSubtitle: _getIconSubtitle(chat),
         onTapProfile: () => onTapProfileChatItem(context, chat),
         onTap: () => onTapChatItem(context, chat));
@@ -72,16 +72,16 @@ class ChatsTab extends StatelessWidget {
       builder: (context, snapshot) {
         switch (snapshot.connectionState) {
           case ConnectionState.none:
-            return Center(
-              child: CircularProgressIndicator(
-                valueColor: new AlwaysStoppedAnimation<Color>(Colors.grey),
+            return const Center(
+child: CircularProgressIndicator(
+valueColor: AlwaysStoppedAnimation<Color>(Colors.grey),
               ),
             );
           case ConnectionState.active:
           case ConnectionState.waiting:
-            return Center(
-              child: CircularProgressIndicator(
-                valueColor: new AlwaysStoppedAnimation<Color>(Colors.grey),
+            return const Center(
+child: CircularProgressIndicator(
+valueColor: AlwaysStoppedAnimation<Color>(Colors.grey),
               ),
             );
           case ConnectionState.done:
@@ -92,22 +92,22 @@ class ChatsTab extends StatelessWidget {
                 children: <Widget>[
                   Text('Error: ${snapshot.error}', textAlign: TextAlign.center,),
                   RaisedButton(
-                    child: Text('Refresh'),
                     onPressed: refresh,
+                    child: const Text('Refresh'),
                   )
                 ]
               );
             }
-            ChatList _shownChatList = snapshot.data;
+            ChatList shownChatList = snapshot.data;
             bool isFound = false;
             return ListView.builder(
-                itemCount: _shownChatList.chats.length,
+                itemCount: shownChatList.chats.length,
                 itemBuilder: (context, i) {
                   if (searchKeyword.isNotEmpty) {
-                    if (!_shownChatList.chats[i].name
+                    if (!shownChatList.chats[i].name
                         .toLowerCase()
                         .contains(searchKeyword.toLowerCase())) {
-                      if (!isFound && i >= _shownChatList.chats.length - 1) {
+                      if (!isFound && i >= shownChatList.chats.length - 1) {
                         return Padding(
                             padding: const EdgeInsets.all(16.0),
                             child: Center(
@@ -115,14 +115,14 @@ class ChatsTab extends StatelessWidget {
                                   'No results found for \'$searchKeyword\''),
                             ));
                       }
-                      return SizedBox(
+                      return const SizedBox(
                         height: 0.0,
                       );
                     }
                   }
                   isFound = true;
                   return _buildChatItem(
-                      context, searchKeyword, _shownChatList.chats[i]);
+                      context, searchKeyword, shownChatList.chats[i]);
                 });
         }
         return null; // unreachable

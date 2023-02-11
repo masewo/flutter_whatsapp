@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 
 class AccountChangeNumSettingsScreen extends StatelessWidget {
+  const AccountChangeNumSettingsScreen({Key key}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     // final String text1 = 'Changing your phone number will migrate '
@@ -14,10 +16,10 @@ class AccountChangeNumSettingsScreen extends StatelessWidget {
 
     return Scaffold(
       appBar: AppBar(
-        title: Text('Change number'),
+        title: const Text('Change number'),
       ),
       body: Column(
-        children: <Widget>[
+        children: const <Widget>[
 //          Flexible(
 //            child: Column(
 //              children: <Widget>[

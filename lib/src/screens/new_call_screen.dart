@@ -1,14 +1,16 @@
 import 'package:flutter/material.dart';
 
 class NewCallScreen extends StatelessWidget {
+  const NewCallScreen({Key key}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('NewCallScreen'),
+        title: const Text('NewCallScreen'),
       ),
-      body: Center(
-        child: Text('TODO'),
+      body: const Center(
+child: Text('TODO'),
       ),
     );
   }

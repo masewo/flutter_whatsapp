@@ -4,7 +4,7 @@ import 'package:flutter_whatsapp/src/app.dart';
 
 void main() {
   testWidgets('test app bar', (WidgetTester tester)async {
-    await tester.pumpWidget(FlutteredApp());
+    await tester.pumpWidget(const FlutteredApp());
     var appbar = find.byType(AppBar);
     expect(appbar,findsOneWidget);
   });

@@ -19,81 +19,77 @@ class DialogHelpers {
     Widget image = imageUrl == null
         ? SizedBox(
         child: Container(
-          decoration: BoxDecoration(
+          decoration: const BoxDecoration(
             color: profileDialogBgColor,
           ),
           height: 250.0,
-          child: Center(
-            child: Icon(Icons.account_circle, color: profileDialogIconColor, size: 120.0,),
+          child: const Center(
+child: Icon(Icons.account_circle, color: profileDialogIconColor, size: 120.0,),
           ),
         )
     )
         : Image(
       image: CachedNetworkImageProvider(imageUrl),
     );
-    return new Dialog(
-      shape: RoundedRectangleBorder(),
-      child: Container(
-        child: Container(
-          child: Column(
-            mainAxisSize: MainAxisSize.min,
-            children: <Widget>[
-              SizedBox(
-                child: Stack(
-                  children: <Widget>[
-                    image,
-                    Container(
-                      decoration: BoxDecoration(
-                        color: Colors.black.withOpacity(0.2),
-                      ),
-                      child: Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: Row(
-                          mainAxisSize: MainAxisSize.max,
-                          children: <Widget>[
-                            Text(
-                              name,
-                              style: TextStyle(
-                                color: Colors.white,
-                                fontSize: 18.0,
-                              ),
-                            ),
-                          ],
+    return Dialog(
+      shape: const RoundedRectangleBorder(),
+      child: Column(
+        mainAxisSize: MainAxisSize.min,
+        children: <Widget>[
+          SizedBox(
+            child: Stack(
+              children: <Widget>[
+                image,
+                Container(
+                  decoration: BoxDecoration(
+                    color: Colors.black.withOpacity(0.2),
+                  ),
+                  child: Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Row(
+                      mainAxisSize: MainAxisSize.max,
+                      children: <Widget>[
+                        Text(
+                          name,
+                          style: const TextStyle(
+                            color: Colors.white,
+                            fontSize: 18.0,
+                          ),
                         ),
-                      ),
+                      ],
                     ),
-                  ],
+                  ),
                 ),
-              ),
-              Row(
-                mainAxisSize: MainAxisSize.max,
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                children: <Widget>[
-                  IconButton(
-                    icon: Icon(Icons.message),
-                    onPressed: onTapMessage ?? () => _defOnTapMessage(context, id),
-                    color: secondaryColor,
-                  ),
-                  IconButton(
-                    icon: Icon(Icons.call),
-                    onPressed: onTapCall ?? () => _defOnTapCall(context),
-                    color: secondaryColor,
-                  ),
-                  IconButton(
-                    icon: Icon(Icons.videocam),
-                    onPressed: onTapVideoCall ?? () => _defOnTapVideoCall(context),
-                    color: secondaryColor,
-                  ),
-                  IconButton(
-                    icon: Icon(Icons.info_outline),
-                    onPressed: onTapInfo ?? () => _defOnTapInfo(context, id),
-                    color: secondaryColor,
-                  ),
-                ],
-              )
-            ],
+              ],
+            ),
           ),
-        ),
+          Row(
+            mainAxisSize: MainAxisSize.max,
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            children: <Widget>[
+              IconButton(
+                icon: const Icon(Icons.message),
+                onPressed: onTapMessage ?? () => _defOnTapMessage(context, id),
+                color: secondaryColor,
+              ),
+              IconButton(
+                icon: const Icon(Icons.call),
+                onPressed: onTapCall ?? () => _defOnTapCall(context),
+                color: secondaryColor,
+              ),
+              IconButton(
+                icon: const Icon(Icons.videocam),
+                onPressed: onTapVideoCall ?? () => _defOnTapVideoCall(context),
+                color: secondaryColor,
+              ),
+              IconButton(
+                icon: const Icon(Icons.info_outline),
+                onPressed: onTapInfo ?? () => _defOnTapInfo(context, id),
+                color: secondaryColor,
+              ),
+            ],
+          )
+        ],
       ),
     );
   }
@@ -107,10 +103,10 @@ class DialogHelpers {
           for(dynamic opt in allOptions) {
             widgets.add(
               ListTileTheme(
-                contentPadding: EdgeInsets.symmetric(horizontal: 16.0),
+                contentPadding: const EdgeInsets.symmetric(horizontal: 16.0),
                 child: RadioListTile(
                   value: opt,
-                  title: Text(getText(opt), style: TextStyle(fontSize: 18.0),),
+                  title: Text(getText(opt), style: const TextStyle(fontSize: 18.0),),
                   groupValue: option,
                   onChanged: (value) {
                     onChanged(value);
@@ -123,10 +119,10 @@ class DialogHelpers {
           }
 
           return AlertDialog(
-            contentPadding: EdgeInsets.only(bottom: 8.0),
+            contentPadding: const EdgeInsets.only(bottom: 8.0),
             title: Padding(
-              padding: EdgeInsets.only(bottom: 8.0),
-              child: Text(title, style: TextStyle(fontWeight: FontWeight.w600),),
+              padding: const EdgeInsets.only(bottom: 8.0),
+              child: Text(title, style: const TextStyle(fontWeight: FontWeight.w600),),
             ),
             content: Column(
               mainAxisSize: MainAxisSize.min,
@@ -143,11 +139,11 @@ class DialogHelpers {
             ),
             actions: !isActions ? null : <Widget>[
               InkWell(
-                child: Padding(
-                  padding: const EdgeInsets.symmetric(vertical: 16.0, horizontal: 24.0),
-                  child: Text(
+                child: const Padding(
+padding: EdgeInsets.symmetric(vertical: 16.0, horizontal: 24.0),
+child: Text(
                     'CANCEL',
-                    style: TextStyle(
+style: TextStyle(
                       color: secondaryColor,
                       fontWeight: FontWeight.bold,
                     ),
@@ -158,11 +154,11 @@ class DialogHelpers {
                 },
               ),
               InkWell(
-                child: Padding(
-                  padding: const EdgeInsets.symmetric(vertical: 16.0, horizontal: 24.0),
-                  child: Text(
+                child: const Padding(
+padding: EdgeInsets.symmetric(vertical: 16.0, horizontal: 24.0),
+child: Text(
                     'OK',
-                    style: TextStyle(
+style: TextStyle(
                       color: secondaryColor,
                       fontWeight: FontWeight.bold,
                     ),
@@ -190,7 +186,7 @@ class DialogHelpers {
 
   static _defOnTapCall(BuildContext context) {
     ScaffoldMessenger.of(context).showSnackBar(
-      SnackBar(
+      const SnackBar(
           content: Text('Call Button tapped'),
         duration: Duration(seconds: 1),
       ),
@@ -199,7 +195,7 @@ class DialogHelpers {
 
   static _defOnTapVideoCall(BuildContext context) {
     ScaffoldMessenger.of(context).showSnackBar(
-      SnackBar(
+      const SnackBar(
           content: Text('Video Call Button tapped'),
           duration: Duration(seconds: 1),
       ),

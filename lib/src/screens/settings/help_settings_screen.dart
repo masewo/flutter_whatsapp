@@ -6,11 +6,13 @@ import 'package:flutter_whatsapp/src/widgets/setting_item.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class HelpSettingsScreen extends StatelessWidget {
+  const HelpSettingsScreen({Key key}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Help'),
+        title: const Text('Help'),
       ),
       body: ListView(
         children: <Widget>[

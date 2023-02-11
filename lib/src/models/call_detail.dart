@@ -10,7 +10,7 @@ class CallDetail {
   });
 
   factory CallDetail.fromJson(Map<String, dynamic> json) {
-    return new CallDetail(
+    return CallDetail(
       isIncoming: json['isIncoming'],
       isMissed: json['isMissed'],
       timestamp: DateTime.parse(json['timestamp']),

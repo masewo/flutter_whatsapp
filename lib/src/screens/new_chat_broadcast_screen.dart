@@ -1,14 +1,16 @@
 import 'package:flutter/material.dart';
 
 class NewChatBroadcastScreen extends StatelessWidget {
+  const NewChatBroadcastScreen({Key key}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('NewChatBroadcastScreen'),
+        title: const Text('NewChatBroadcastScreen'),
       ),
-      body: Center(
-        child: Text('TODO'),
+      body: const Center(
+child: Text('TODO'),
       ),
     );
   }

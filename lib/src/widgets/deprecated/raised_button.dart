@@ -17,8 +17,8 @@ class RaisedButton extends StatelessWidget {
     final ButtonStyle raisedButtonStyle = ElevatedButton.styleFrom(
       foregroundColor: Colors.black87,
       backgroundColor: color ?? Colors.grey[300],
-      minimumSize: Size(88, 36),
-      padding: EdgeInsets.symmetric(horizontal: 16),
+      minimumSize: const Size(88, 36),
+      padding: const EdgeInsets.symmetric(horizontal: 16),
       shape: const RoundedRectangleBorder(
         borderRadius: BorderRadius.all(Radius.circular(2)),
       ),

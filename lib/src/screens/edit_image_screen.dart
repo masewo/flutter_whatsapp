@@ -8,13 +8,13 @@ class EditImageScreen extends StatefulWidget {
   final String id;
   final String resource;
 
-  EditImageScreen({
+  const EditImageScreen({Key key,
     this.id,
     this.resource,
-  });
+  }) : super(key: key);
 
   @override
-  _EditImageScreenState createState() => _EditImageScreenState();
+  State<EditImageScreen> createState() => _EditImageScreenState();
 }
 
 class _EditImageScreenState extends State<EditImageScreen> {
@@ -29,19 +29,19 @@ class _EditImageScreenState extends State<EditImageScreen> {
         elevation: 0.0,
         actions: <Widget>[
           IconButton(
-            icon: Icon(Icons.crop_rotate),
+            icon: const Icon(Icons.crop_rotate),
             onPressed: () {},
           ),
           IconButton(
-            icon: Icon(Icons.insert_emoticon),
+            icon: const Icon(Icons.insert_emoticon),
             onPressed: () {},
           ),
           IconButton(
-            icon: Icon(Icons.text_fields),
+            icon: const Icon(Icons.text_fields),
             onPressed: () {},
           ),
           IconButton(
-            icon: Icon(Icons.edit),
+            icon: const Icon(Icons.edit),
             onPressed: () {},
           ),
         ],
@@ -51,18 +51,18 @@ class _EditImageScreenState extends State<EditImageScreen> {
         maxHeight: 200.0,
         parallaxEnabled: true,
         parallaxOffset: .1,
-        color: Color.fromRGBO(0, 0, 0, 0),
+        color: const Color.fromRGBO(0, 0, 0, 0),
         boxShadow: null,
         body: Column(
           children: <Widget>[
-            SizedBox(
+            const SizedBox(
               height: 20.0,
             ),
-            Container(
+            SizedBox(
               height: MediaQuery.of(context).size.height - 220.0,
               child: Hero(
                 tag: widget.id,
-                child: Image.file(new File(widget.resource)),
+                child: Image.file(File(widget.resource)),
               ),
             )
           ],
@@ -71,7 +71,7 @@ class _EditImageScreenState extends State<EditImageScreen> {
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: <Widget>[
             Column(
-              children: <Widget>[
+              children: const <Widget>[
                 Icon(
                   Icons.keyboard_arrow_up,
                   color: Colors.white,
@@ -88,13 +88,13 @@ class _EditImageScreenState extends State<EditImageScreen> {
                 crossAxisAlignment: CrossAxisAlignment.end,
                 children: <Widget>[
                   IconButton(
-                    icon: Icon(
+                    icon: const Icon(
                       Icons.add_photo_alternate,
                       color: Colors.white,
                     ),
                     onPressed: () {},
                   ),
-                  Expanded(
+                  const Expanded(
                     child: TextField(
                       decoration: InputDecoration(
                           border: InputBorder.none,
@@ -109,7 +109,7 @@ class _EditImageScreenState extends State<EditImageScreen> {
                       onPressed: () {},
                       backgroundColor: primaryColor,
                       foregroundColor: Colors.white,
-                      child: Icon(
+                      child: const Icon(
                         Icons.check,
                         size: 24.0,
                       ),
@@ -120,7 +120,7 @@ class _EditImageScreenState extends State<EditImageScreen> {
             )
           ],
         ),
-        panel: Container(
+        panel: SizedBox(
           height: 50.0,
           child: Opacity(
               opacity: _opacity,
@@ -132,30 +132,30 @@ class _EditImageScreenState extends State<EditImageScreen> {
                   ),
                   Container(
                     height: 100,
-                    color: Color.fromRGBO(255, 255, 255, 0.1),
+                    color: const Color.fromRGBO(255, 255, 255, 0.1),
                     child: ListView(
-                      padding: EdgeInsets.all(2.0),
+                      padding: const EdgeInsets.all(2.0),
                       scrollDirection: Axis.horizontal,
                       children: <Widget>[
                         Container(
                           width: 60,
                           color: Colors.yellow,
-                          margin: EdgeInsets.all(2.0),
+                          margin: const EdgeInsets.all(2.0),
                         ),
                         Container(
                           width: 60,
                           color: Colors.yellow,
-                          margin: EdgeInsets.all(2.0),
+                          margin: const EdgeInsets.all(2.0),
                         ),
                         Container(
                           width: 60,
                           color: Colors.yellow,
-                          margin: EdgeInsets.all(2.0),
+                          margin: const EdgeInsets.all(2.0),
                         ),
                         Container(
                           width: 60,
                           color: Colors.yellow,
-                          margin: EdgeInsets.all(2.0),
+                          margin: const EdgeInsets.all(2.0),
                         ),
                       ],
                     ),

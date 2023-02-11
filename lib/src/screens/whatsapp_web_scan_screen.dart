@@ -4,27 +4,29 @@ import 'package:flutter/material.dart';
 // List<CameraDescription> qrCameras;
 
 class WhatsappWebScanScreen extends StatefulWidget {
+  const WhatsappWebScanScreen({Key key}) : super(key: key);
+
   @override
-  _WhatsappWebScanScreenState createState() => _WhatsappWebScanScreenState();
+  State<WhatsappWebScanScreen> createState() => _WhatsappWebScanScreenState();
 }
 
 class _WhatsappWebScanScreenState extends State<WhatsappWebScanScreen>
     with SingleTickerProviderStateMixin {
   // QRReaderController controller;
-  final GlobalKey<ScaffoldState> _scaffoldKey = new GlobalKey<ScaffoldState>();
+  final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
   AnimationController animationController;
 
   @override
   void initState() {
     super.initState();
 
-    animationController = new AnimationController(
+    animationController = AnimationController(
       vsync: this,
-      duration: new Duration(seconds: 3),
+      duration: const Duration(seconds: 3),
     );
 
     animationController.addListener(() {
-      this.setState(() {});
+      setState(() {});
     });
     animationController.forward();
     verticalPosition = Tween<double>(begin: 0.0, end: 260.0).animate(
@@ -51,13 +53,13 @@ class _WhatsappWebScanScreenState extends State<WhatsappWebScanScreen>
 
   @override
   Widget build(BuildContext context) {
-    double _fontSize = 19.0;
+    double fontSize = 19.0;
 
     return Scaffold(
       key: _scaffoldKey,
       backgroundColor: Colors.black,
       appBar: AppBar(
-        title: Text('Scan code'),
+        title: const Text('Scan code'),
       ),
       body: Column(
         mainAxisSize: MainAxisSize.max,
@@ -73,19 +75,19 @@ class _WhatsappWebScanScreenState extends State<WhatsappWebScanScreen>
                       text: 'Visit ',
                       style: TextStyle(
                         color: Colors.grey,
-                        fontSize: _fontSize,
+                        fontSize: fontSize,
                       )),
                   TextSpan(
                       text: 'web.whatsapp.com ',
                       style: TextStyle(
                         color: Colors.black,
-                        fontSize: _fontSize,
+                        fontSize: fontSize,
                       )),
                   TextSpan(
                       text: 'on your computer and scan the QR code',
                       style: TextStyle(
                         color: Colors.grey,
-                        fontSize: _fontSize,
+                        fontSize: fontSize,
                       )),
                 ])),
           ),
@@ -93,12 +95,10 @@ class _WhatsappWebScanScreenState extends State<WhatsappWebScanScreen>
             child: Stack(
               alignment: Alignment.center,
               children: <Widget>[
-                new Container(
-                  child: new Padding(
-                    padding: const EdgeInsets.all(0.0),
-                    child: new Center(
-                      child: _cameraPreviewWidget(),
-                    ),
+                Padding(
+                  padding: const EdgeInsets.all(0.0),
+                  child: Center(
+                    child: _cameraPreviewWidget(),
                   ),
                 ),
                 Center(
@@ -112,7 +112,7 @@ class _WhatsappWebScanScreenState extends State<WhatsappWebScanScreen>
                         child: Container(
                           decoration: BoxDecoration(
                               border: Border.all(
-                                  color: Color.fromRGBO(255, 255, 255, 0.4),
+                                  color: const Color.fromRGBO(255, 255, 255, 0.4),
                                   width: 2.0)),
                         ),
                       ),
@@ -140,16 +140,16 @@ class _WhatsappWebScanScreenState extends State<WhatsappWebScanScreen>
     // if (controller == null || !controller.value.isInitialized) {
     return const Text(
       'No camera selected',
-      style: const TextStyle(
+      style: TextStyle(
         color: Colors.white,
         fontSize: 24.0,
         fontWeight: FontWeight.w900,
       ),
     );
     // } else {
-    //   return new AspectRatio(
+    //   return AspectRatio(
     //     aspectRatio: controller.value.aspectRatio,
-    //     child: new QRReaderPreview(controller),
+    //     child: QRReaderPreview(controller),
     //   );
     // }
   }
@@ -166,7 +166,7 @@ class _WhatsappWebScanScreenState extends State<WhatsappWebScanScreen>
     // if (controller != null) {
     //   await controller.dispose();
     // }
-    // controller = new QRReaderController(qrCameras[index], ResolutionPreset.low,
+    // controller = QRReaderController(qrCameras[index], ResolutionPreset.low,
     //     [CodeFormat.qr, CodeFormat.pdf417], onCodeRead);
 
     // // If the controller is updated then update the UI.
@@ -180,7 +180,7 @@ class _WhatsappWebScanScreenState extends State<WhatsappWebScanScreen>
     // try {
     //   await controller.initialize();
     // } on QRReaderException catch (e) {
-    //   print('${e.code}, ${e.description}');
+    //   logger.d('${e.code}, ${e.description}');
     //   showInSnackBar('Error: ${e.code}\n${e.description}');
     // }
 
@@ -192,15 +192,15 @@ class _WhatsappWebScanScreenState extends State<WhatsappWebScanScreen>
 
   void showInSnackBar(String message) {
     ScaffoldMessenger.of(context)
-        .showSnackBar(new SnackBar(content: new Text(message)));
+        .showSnackBar(SnackBar(content: Text(message)));
   }
 }
 
 class Test extends CustomPainter {
   @override
   void paint(Canvas canvas, Size size) {
-    Paint paint = new Paint()
-      ..color = Color.fromRGBO(255, 255, 255, 0.4)
+    Paint paint = Paint()
+      ..color = const Color.fromRGBO(255, 255, 255, 0.4)
       ..strokeWidth = 2
       ..style = PaintingStyle.stroke;
 

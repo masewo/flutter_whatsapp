@@ -7,7 +7,7 @@ String url = 'http://localhost/api/calls';
 
 class CallService {
   static Future<CallList> getCalls() async {
-    final response = await http.get(Uri.parse('$url'));
+    final response = await http.get(Uri.parse(url));
     return callListFromJson(response.body);
   }
 }

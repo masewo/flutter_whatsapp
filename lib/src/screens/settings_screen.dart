@@ -7,18 +7,20 @@ import 'package:flutter_whatsapp/src/screens/settings/help/android_intent_helper
 import 'package:flutter_whatsapp/src/widgets/setting_item.dart';
 
 class SettingsScreen extends StatelessWidget {
+  const SettingsScreen({Key key}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-          title: Text('Settings'),
+          title: const Text('Settings'),
         ),
         body: ListView(
           children: <Widget>[
             ListTile(
               contentPadding:
                   const EdgeInsets.symmetric(vertical: 16.0, horizontal: 16.0),
-              leading: Hero(
+              leading: const Hero(
                 tag: 'profile-pic',
                 child: CircleAvatar(
                   radius: 32.0,
@@ -26,14 +28,14 @@ class SettingsScreen extends StatelessWidget {
                       'http://placekitten.com/g/150/150'),
                 ),
               ),
-              title: Text(
+              title: const Text(
                 'NAME',
                 style: TextStyle(
                   fontSize: 20.0,
                   fontWeight: FontWeight.w500,
                 ),
               ),
-              subtitle: Text(
+              subtitle: const Text(
                 'STATUS',
                 style: TextStyle(
                   fontSize: 12.0,
@@ -47,7 +49,7 @@ class SettingsScreen extends StatelessWidget {
                 );
               },
             ),
-            Divider(
+            const Divider(
               height: 0.0,
             ),
             SettingItem(
@@ -106,7 +108,7 @@ class SettingsScreen extends StatelessWidget {
                     transition: TransitionType.inFromRight,
                   );
                 }),
-            Divider(
+            const Divider(
               indent: 72.0,
               height: 0.0,
             ),

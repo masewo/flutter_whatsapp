@@ -16,21 +16,25 @@ enum NewChatOptions {
 }
 
 class NewChatScreen extends StatelessWidget {
+  const NewChatScreen({Key key}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
-    return SelectContact();
+    return const SelectContact();
   }
 }
 
 class SelectContact extends StatefulWidget {
+  const SelectContact({Key key}) : super(key: key);
+
   @override
-  _SelectContact createState() => _SelectContact();
+  State<SelectContact> createState() => _SelectContact();
 }
 
 class _SelectContact extends State<SelectContact> {
 
   Future<Iterable<Contact>> _contacts;
-  var numContacts;
+  int numContacts;
 
   Future<int> _getNumContacts() async {
     Iterable<Contact> contacts = await ContactsService.getContacts();
@@ -41,7 +45,7 @@ class _SelectContact extends State<SelectContact> {
   void initState() {
     super.initState();
     _contacts = _getContacts();
-    _getNumContacts().then((num) {
+    _getNumContacts().then((int num) {
       setState(() {
         numContacts = num;
       });
@@ -61,8 +65,8 @@ class _SelectContact extends State<SelectContact> {
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
-            Padding(
-              padding: const EdgeInsets.only(bottom: 2.0),
+            const Padding(
+              padding: EdgeInsets.only(bottom: 2.0),
               child: Text(
                   'Select contact',
                 style: TextStyle(
@@ -75,7 +79,7 @@ class _SelectContact extends State<SelectContact> {
                ? null
               : Text(
                   '$numContacts contacts',
-                style: TextStyle(
+                style: const TextStyle(
                   fontSize: 12.0,
                 ),
               ),
@@ -85,7 +89,7 @@ class _SelectContact extends State<SelectContact> {
         actions: <Widget>[
           IconButton(
             tooltip: 'Search',
-            icon: Icon(Icons.search),
+            icon: const Icon(Icons.search),
             onPressed: () {},
           ),
           PopupMenuButton<NewChatOptions>(
@@ -93,21 +97,21 @@ class _SelectContact extends State<SelectContact> {
             onSelected: _onSelectOption,
             itemBuilder: (BuildContext context) {
               return [
-                PopupMenuItem<NewChatOptions>(
-                  child: Text("Invite a friend"),
+                const PopupMenuItem<NewChatOptions>(
                   value: NewChatOptions.inviteAFriend,
+                  child: Text("Invite a friend"),
                 ),
-                PopupMenuItem<NewChatOptions>(
-                  child: Text("Contacts"),
+                const PopupMenuItem<NewChatOptions>(
                   value: NewChatOptions.contacts,
+                  child: Text("Contacts"),
                 ),
-                PopupMenuItem(
-                  child: Text("Refresh"),
+                const PopupMenuItem(
                   value: NewChatOptions.refresh,
+                  child: Text("Refresh"),
                 ),
-                PopupMenuItem(
-                  child: Text("Help"),
+                const PopupMenuItem(
                   value: NewChatOptions.help,
+                  child: Text("Help"),
                 ),
               ];
             },
@@ -119,16 +123,16 @@ class _SelectContact extends State<SelectContact> {
         builder: (context, snapshot) {
           switch (snapshot.connectionState) {
             case ConnectionState.none:
-              return Center(
-                child: CircularProgressIndicator(
-                  valueColor: new AlwaysStoppedAnimation<Color>(Colors.grey),
+              return const Center(
+child: CircularProgressIndicator(
+valueColor: AlwaysStoppedAnimation<Color>(Colors.grey),
                 ),
               );
             case ConnectionState.active:
             case ConnectionState.waiting:
-              return Center(
-                child: CircularProgressIndicator(
-                  valueColor: new AlwaysStoppedAnimation<Color>(Colors.grey),
+              return const Center(
+child: CircularProgressIndicator(
+valueColor: AlwaysStoppedAnimation<Color>(Colors.grey),
                 ),
               );
             case ConnectionState.done:
@@ -145,13 +149,13 @@ class _SelectContact extends State<SelectContact> {
                     borderRadius: BorderRadius.circular(20),
                   ),
                   padding: const EdgeInsets.all(4.0),
-                  child: Icon(
+                  child: const Icon(
                     Icons.group,
                     size: 32.0,
                     color: Colors.white,
                   ),
                 ),
-                title: Text('New group',
+                title: const Text('New group',
                     style: TextStyle(
                       fontSize: 18.0,
                       fontWeight: FontWeight.bold,
@@ -172,13 +176,13 @@ class _SelectContact extends State<SelectContact> {
                     borderRadius: BorderRadius.circular(20),
                   ),
                   padding: const EdgeInsets.all(8.0),
-                  child: Icon(
+                  child: const Icon(
                     Icons.person_add,
                     size: 24.0,
                     color: Colors.white,
                   ),
                 ),
-                title: Text('New contact',
+                title: const Text('New contact',
                     style: TextStyle(
                       fontSize: 18.0,
                       fontWeight: FontWeight.bold,
@@ -191,9 +195,9 @@ class _SelectContact extends State<SelectContact> {
               data.add(ListTile(
                 leading: Container(
                   padding: const EdgeInsets.all(8.0),
-                  child: Icon(Icons.share),
+                  child: const Icon(Icons.share),
                 ),
-                title: Text('Invite friends',
+                title: const Text('Invite friends',
                     style: TextStyle(
                       fontSize: 18.0,
                       fontWeight: FontWeight.bold,
@@ -205,9 +209,9 @@ class _SelectContact extends State<SelectContact> {
               data.add(ListTile(
                 leading: Container(
                   padding: const EdgeInsets.all(8.0),
-                  child: Icon(Icons.help),
+                  child: const Icon(Icons.help),
                 ),
-                title: Text('Contacts help',
+                title: const Text('Contacts help',
                     style: TextStyle(
                       fontSize: 18.0,
                       fontWeight: FontWeight.bold,
