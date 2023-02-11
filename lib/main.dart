@@ -17,7 +17,7 @@ Future<void> main() async {
     cameras = await availableCameras();
     // qrCameras = await qr.availableCameras();
   } on CameraException catch (e) {
-    print(e.code+'\n'+ e.description);
+    print('CameraException:\n' + e.code + '\n' + e.description);
   } 
   // on qr.QRReaderException catch(e) {
   //   print(e.code+'\n'+ e.description);

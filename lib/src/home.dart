@@ -1,5 +1,6 @@
 import 'package:async/async.dart';
 import 'package:fluro/fluro.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_whatsapp/src/config/application.dart';
 import 'package:flutter_whatsapp/src/config/routes.dart';
@@ -302,12 +303,15 @@ class _HomeState extends State<Home> with TickerProviderStateMixin {
   }
 
   updateAppBadge(int count) async {
-    bool appBadgeSupported;
-    try {
-      bool res = await FlutterAppBadger.isAppBadgeSupported();
-      appBadgeSupported = res;
-    } on PlatformException {
-      appBadgeSupported = false;
+    bool appBadgeSupported = false;
+
+    if (!kIsWeb) {
+      try {
+        bool res = await FlutterAppBadger.isAppBadgeSupported();
+        appBadgeSupported = res;
+      } on PlatformException {
+        appBadgeSupported = false;
+      }
     }
 
     // If the widget was removed from the tree while the asynchronous platform

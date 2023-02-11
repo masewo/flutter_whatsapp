@@ -3,6 +3,7 @@ import 'dart:io';
 import 'package:camera/camera.dart';
 import 'package:external_path/external_path.dart';
 import 'package:fluro/fluro.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_whatsapp/src/config/application.dart';
@@ -67,6 +68,7 @@ class _CameraHomeState extends State<CameraHome> {
   }
 
   Future<bool> allPermissionsGranted() async {
+    if (kIsWeb) return true;
     bool resVideo = await Permission.camera.isGranted;
     bool resAudio = await Permission.microphone.isGranted;
     return resVideo && resAudio;
@@ -96,6 +98,11 @@ class _CameraHomeState extends State<CameraHome> {
   }
 
   void _getGalleryImages() async {
+    if (kIsWeb) {
+      _images = Future<List<String>>.value(<String>[]);
+      return;
+    }
+
     _images =
         ExternalPath.getExternalStoragePublicDirectory(ExternalPath.DIRECTORY_DCIM)
             .then((path) {

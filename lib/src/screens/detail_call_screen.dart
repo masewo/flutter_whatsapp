@@ -26,7 +26,7 @@ class _DetailCallScreen extends State<DetailCallScreen> {
   Widget build(BuildContext context) {
     Call call = new Call(
       name: 'NAME',
-      avatarUrl: 'https://via.placeholder.com/100x100',
+      avatarUrl: 'https://dummyimage.com/100x100',
       callDetails: <CallDetail>[
         new CallDetail(
           timestamp: DateTime.now(),
