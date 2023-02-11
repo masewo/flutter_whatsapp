@@ -371,65 +371,67 @@ class _CameraHomeState extends State<CameraHome> {
           SnackBar(content: Text('Error: camera is not initialized')));
     }
 //    final Directory extDir = await getApplicationDocumentsDirectory();
-    final String dirPath = await ExtStorage.getExternalStoragePublicDirectory(
-        ExtStorage.DIRECTORY_DCIM);
+//     final String dirPath = await ExtStorage.getExternalStoragePublicDirectory(
+//         ExtStorage.DIRECTORY_DCIM);
     //await Directory(dirPath).create(recursive: true);
-    final String filePath = '$dirPath/${timestamp()}.jpg';
+    XFile file;
 
     if (controller.value.isTakingPicture) {
       return null;
     }
 
     try {
-      await controller.takePicture(filePath);
+      file = await controller.takePicture();
     } on CameraException catch (e) {
       // TODO: Can't use this here.
       ScaffoldMessenger.of(context)
           .showSnackBar(SnackBar(content: Text('Error: ${e.description}')));
     }
-    return filePath;
+    return file.path;
   }
 
-  Future<String> startVideoRecording() async {
+  Future<void> startVideoRecording() async {
     if (!controller.value.isInitialized) {
       ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(content: Text('Error: camera is not initialized')));
       return null;
     }
 
-    final String dirPath = await ExtStorage.getExternalStoragePublicDirectory(
-        ExtStorage.DIRECTORY_DCIM);
+    // final String dirPath = await ExtStorage.getExternalStoragePublicDirectory(
+    //     ExtStorage.DIRECTORY_DCIM);
     //await Directory(dirPath).create(recursive: true);
-    final String filePath = '$dirPath/${timestamp()}.mp4';
+    //final String filePath = '$dirPath/${timestamp()}.mp4';
 
     if (controller.value.isRecordingVideo) {
       return null;
     }
 
     try {
-      videoPath = filePath;
-      await controller.startVideoRecording(filePath);
+      await controller.startVideoRecording();
     } on CameraException catch (e) {
       ScaffoldMessenger.of(context)
           .showSnackBar(SnackBar(content: Text('Error: ${e.description}')));
       return null;
     }
-    return filePath;
   }
 
-  Future<void> stopVideoRecording() async {
+  Future<String> stopVideoRecording() async {
     if (!controller.value.isRecordingVideo) {
       return null;
     }
 
+    XFile file;
+
     try {
-      await controller.stopVideoRecording();
+      file = await controller.stopVideoRecording();
     } on CameraException catch (e) {
       ScaffoldMessenger.of(context)
           .showSnackBar(SnackBar(content: Text('Error: ${e.description}')));
       return null;
     }
 
+    videoPath = file.path;
+    return file.path;
     // await _startVideoPlayer();
   }
 
@@ -447,20 +449,20 @@ class _CameraHomeState extends State<CameraHome> {
   }
 
   void onVideoRecordButtonPressed() {
-    startVideoRecording().then((String filePath) {
+    startVideoRecording().then((_) {
       if (mounted) {
         setState(() {});
-      }
-      if (filePath != null) {
-        refreshGallery();
       }
     });
   }
 
   void onStopButtonPressed() {
-    stopVideoRecording().then((_) {
+    stopVideoRecording().then((String filePath) {
       if (mounted) {
         setState(() {});
+      }
+      if (filePath != null) {
+        refreshGallery();
       }
       ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(content: Text('Video recorded to $videoPath')));

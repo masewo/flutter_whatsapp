@@ -7,7 +7,7 @@ String url = 'https://hanmajid.com/api/calls';
 
 class CallService {
   static Future<CallList> getCalls() async {
-    final response = await http.get('$url');
+    final response = await http.get(Uri.parse('$url'));
     return callListFromJson(response.body);
   }
 }

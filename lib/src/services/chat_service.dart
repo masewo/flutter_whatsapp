@@ -8,17 +8,17 @@ String url = 'https://hanmajid.com/api/chats';
 
 class ChatService {
   static Future<ChatList> getChats() async {
-    final response = await http.get('$url');
+    final response = await http.get(Uri.parse('$url'));
     return chatListFromJson(response.body);
   }
 
   static Future<Chat> getChat(int id) async {
-    final response = await http.get('$url/$id');
+    final response = await http.get(Uri.parse('$url/$id'));
     return chatFromJsonFull(response.body);
   }
 
   static Future<Chat> updateChat(int id, String message) async {
-    final response = await http.post('$url/$id', body: {'message': message});
+    final response = await http.post(Uri.parse('$url/$id'), body: {'message': message});
     return chatFromJsonFull(response.body);
   }
 }

@@ -8,12 +8,12 @@ String url = 'https://hanmajid.com/api/statuses';
 
 class StatusService {
   static Future<StatusList> getStatuses() async {
-    final response = await http.get('$url');
+    final response = await http.get(Uri.parse('$url'));
     return statusListFromJson(response.body);
   }
 
   static Future<Status> getStatus(int id) async {
-    final response = await http.get('$url/$id');
+    final response = await http.get(Uri.parse('$url/$id'));
     return statusFromJsonFull(response.body);
   }
 }
