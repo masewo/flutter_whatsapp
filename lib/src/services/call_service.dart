@@ -3,7 +3,7 @@ import 'dart:async';
 import 'package:flutter_whatsapp/src/models/call_list.dart';
 import 'package:http/http.dart' as http;
 
-String url = 'https://hanmajid.com/api/calls';
+String url = 'http://localhost/api/calls';
 
 class CallService {
   static Future<CallList> getCalls() async {

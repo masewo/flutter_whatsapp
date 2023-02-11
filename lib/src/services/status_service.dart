@@ -4,7 +4,7 @@ import 'package:flutter_whatsapp/src/models/status.dart';
 import 'package:flutter_whatsapp/src/models/status_list.dart';
 import 'package:http/http.dart' as http;
 
-String url = 'https://hanmajid.com/api/statuses';
+String url = 'http://localhost/api/status';
 
 class StatusService {
   static Future<StatusList> getStatuses() async {
