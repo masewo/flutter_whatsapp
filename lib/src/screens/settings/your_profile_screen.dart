@@ -24,7 +24,7 @@ class YourProfileScreen extends StatelessWidget {
                   child: CircleAvatar(
                     radius: 70.0,
                     backgroundImage:
-                        NetworkImage('http://placekitten.com/g/150/150'),
+                        NetworkImage('https://placekitten.com/g/150/150'),
                   ),
                 ),
                 Positioned(

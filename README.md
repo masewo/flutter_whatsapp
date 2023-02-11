@@ -61,4 +61,6 @@ Integration testing in action (Credit to [@karinamuraya](https://github.com/kari
 
 ```shell
 flutter build web --base-href "/flutter_whatsapp/" --dart-define=API_ENDPOINT=/flutter_whatsapp
+rm -r docs/*
+cp -r build/web/* docs
 ```

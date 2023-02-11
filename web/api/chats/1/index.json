@@ -1,7 +1,7 @@
 {
   "id": 1,
   "name": "Chris",
-  "avatarPath": "http:\/\/placekitten.com\/g\/200\/200",
+  "avatarPath": "https:\/\/placekitten.com\/g\/200\/200",
   "unreadMessages": 1,
   "messages": [
     {
@@ -1157,7 +1157,7 @@
       "isRead": false
     },
     {
-      "content": "http:\/\/from.flipboard.com\/topic\/research?url=https%3A%2F%2Fwww.post-gazette.com%2Fnews%2Fhealth%2F20",
+      "content": "https:\/\/from.flipboard.com\/topic\/research?url=https%3A%2F%2Fwww.post-gazette.com%2Fnews%2Fhealth%2F20",
       "timestamp": "2020-06-10T14:56:26Z",
       "isYou": true,
       "isRead": false

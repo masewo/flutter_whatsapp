@@ -58,7 +58,7 @@ valueColor: AlwaysStoppedAnimation<Color>(Colors.grey),
             data.add(StatusItem(
               title: 'My Status',
               subtitle: 'Tap to add status update',
-              thumbnail: 'http://placekitten.com/g/150/150',
+              thumbnail: 'https://placekitten.com/g/150/150',
               onTap: () {
                 Application.router.navigateTo(
                   context,

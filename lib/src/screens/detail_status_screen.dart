@@ -120,7 +120,7 @@ valueColor: AlwaysStoppedAnimation<Color>(
                       CircleAvatar(
                         radius: 15.0,
                         backgroundImage:
-                            NetworkImage('http://placekitten.com/g/150/150'),
+                            NetworkImage('https://placekitten.com/g/150/150'),
                       ),
                     ],
                   ),

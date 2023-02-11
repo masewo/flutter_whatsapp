@@ -25,7 +25,7 @@ class SettingsScreen extends StatelessWidget {
                 child: CircleAvatar(
                   radius: 32.0,
                   backgroundImage: CachedNetworkImageProvider(
-                      'http://placekitten.com/g/150/150'),
+                      'https://placekitten.com/g/150/150'),
                 ),
               ),
               title: const Text(
