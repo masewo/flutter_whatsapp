@@ -1,7 +1,7 @@
 import 'dart:io';
 
 import 'package:camera/camera.dart';
-import 'package:ext_storage/ext_storage.dart';
+import 'package:external_path/external_path.dart';
 import 'package:fluro/fluro.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -97,7 +97,7 @@ class _CameraHomeState extends State<CameraHome> {
 
   void _getGalleryImages() async {
     _images =
-        ExtStorage.getExternalStoragePublicDirectory(ExtStorage.DIRECTORY_DCIM)
+        ExternalPath.getExternalStoragePublicDirectory(ExternalPath.DIRECTORY_DCIM)
             .then((path) {
       List<String> paths = <String>[];
       Directory dir2 = new Directory(path);
